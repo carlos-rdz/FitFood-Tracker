@@ -1,6 +1,8 @@
 let fitDisplay = document.querySelector("[data-displayInfo]")
 
 
+// function that fetched data and runs the promise chain
+
 function fetchdata(){
 
 let date = '2018-10-23'
@@ -25,7 +27,7 @@ fetch(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
 
 
 
-
+// strips the data to indivisual componenets
 
 function extractData(info){
     let calorieData = info["summary"]["activityCalories"]
@@ -37,6 +39,9 @@ function extractData(info){
     let stepMessage = `Steps: ${stepData}`
     return [calorieMessage,distanceMessage,stepMessage]
 }
+
+
+// writes data to the document
 
 function writeData(message){
 
