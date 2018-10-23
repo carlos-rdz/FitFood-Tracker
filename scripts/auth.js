@@ -1,6 +1,6 @@
 function getToken(){
 
-let hash = window.location.hash
+let hash = window.location.hash;
 let parts = hash.split("&");
 let token = parts[0].split('=');
 let ourtoken = token[1];
@@ -18,3 +18,5 @@ function saveToLocalStorage(){
 
 
 saveToLocalStorage()
+
+window.location = "/display.html";
