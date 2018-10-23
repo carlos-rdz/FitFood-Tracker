@@ -10,36 +10,37 @@
 const FOOD_CHOICES = ['pizza', 'hamburger', 'iceCream', 'fries', 'celery', 'chips', 'candyBar', 'beer', 'taco', 'cupCake']
 // Will replace with html form selection
 const USER_FOOD = FOOD_CHOICES[Math.floor(Math.random() * FOOD_CHOICES.length)];
-const foodResult = {};
 // const returnServings = {};
 
 function requestFood(caloriesBurned) {
-    fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${USER_FOOD}&detailed=true&branded=false`,
+    console.log(caloriesBurned);
+    return fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${USER_FOOD}&detailed=true&branded=false`,
     {
         headers: {
-        'x-app-key': '51c9ea63eedf0df881f39c24017f15db',
-        'x-app-id': '2ce385c3',
-        'x-remote-user-id': '0',
+            'x-app-key': '51c9ea63eedf0df881f39c24017f15db',
+            'x-app-id': '2ce385c3',
+            'x-remote-user-id': '0',
         }
     })
     .then(convertToJSON)
     // .then(extractFood)
     // .then(drawFood)
-    .then(j => {
-        console.log(j.common[0].food_name, j.common[0].full_nutrients[4].value);
-        const foodCalories = j.common[0].full_nutrients[4].value;
-        const servings = convertCalToNumServings(foodCalories, caloriesBurned);
-        foodResult.name = j.common[0].food_name;
-        foodResult.servings = servings;
-        // console.log(`${servings} of ${foodResult.name}`);
-    });
-    return foodResult;
+    .then(extractFood)
 }
 
 function convertToJSON(r) {
     return r.json();
 }
-
+function extractFood(j) {
+    const foodResult = {};
+    console.log(j.common[0].food_name, j.common[0].full_nutrients[4].value);
+    const foodCalories = j.common[0].full_nutrients[4].value;
+    const servings = convertCalToNumServings(foodCalories, caloriesBurned);
+    foodResult.name = j.common[0].food_name;
+    foodResult.servings = servings;
+    // console.log(`${servings} of ${foodResult.name}`);
+    return foodResult;
+}
 // function extractFood(j) {
 //     const result = j.common[0];
 //     const nutrients = result.full_nutrients;

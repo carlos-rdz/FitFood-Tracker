@@ -29,12 +29,7 @@ fetch(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
 .then(extractData)
 .then(writeData)
 // .then(console.log)
-.then(displayData)
-
-}
-
-
-function displayData(calories) {
+// .then(displayData)
 
 }
 
@@ -42,7 +37,9 @@ function displayData(calories) {
 
 function extractData(info){
     let calorieData = info["summary"]["activityCalories"]
-    addFood(requestFood(calorieData));
+
+    requestFood(calorieData).then(addFood);
+
     let distanceData = info["summary"]["distances"][0]
     ["distance"]
     let stepData = info["summary"]["steps"]
@@ -81,8 +78,8 @@ function addPizza() {
 
 function addFood(foodObject) {
     // prints mulitple pizza icons within a range
+    console.log('adding pizza' + foodObject);
     for (let i = 0; i < foodObject.servings; i ++) {
-        console.log('adding pizza');
         addPizza();
     }
 }
