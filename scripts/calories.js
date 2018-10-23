@@ -28,6 +28,7 @@ function requestFood(caloriesBurned) {
     // .then(extractFood)
     // .then(drawFood)
     .then(extractFood)
+    .catch(() => console.log("Could not receive food."));
 }
 
 function convertToJSON(r) {
