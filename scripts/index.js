@@ -57,8 +57,6 @@ function writeData(message){
 fetchdata()
 
 
-.then(console.log)
-
 
 const theBody = document.querySelector("body");
 function addPizza() {
