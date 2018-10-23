@@ -38,8 +38,9 @@ fetch(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
 function extractData(info){
     let calorieData = info["summary"]["activityCalories"]
 
-    requestFood(calorieData).then(addFood);
-
+    // sub in calorieData here
+    requestFood(2000).then(addFood);
+    
     let distanceData = info["summary"]["distances"][0]
     ["distance"]
     let stepData = info["summary"]["steps"]
@@ -53,13 +54,13 @@ function extractData(info){
 // writes data to the document
 
 function writeData(message){
-
+    
     message.forEach(element => {
         elementDisplay = document.createElement('div')
         elementDisplay.textContent = element
         fitDisplay.appendChild(elementDisplay)
     });
-
+    
 }
 
 fetchdata()
@@ -67,27 +68,26 @@ fetchdata()
 
 
 const theBody = document.querySelector("body");
-function addPizza() {
+function addPizza(name) {
     // creates new images element
     const newImg = document.createElement("img");
     // adds the pizza icon
-    const newPizza = document.createAttribute("src");
-    newImg.src = "https://png.icons8.com/color/50/000000/pizza.png";
+    newImg.src = `${foodDict[name]}`;
     theBody.appendChild(newImg);
 };
 
 function addFood(foodObject) {
+    console.log(`Adding food object ${foodObject.name} ${foodObject.servings} times.`);
     // prints mulitple pizza icons within a range
-    console.log('adding pizza' + foodObject);
     for (let i = 0; i < foodObject.servings; i ++) {
-        addPizza();
+        addPizza(foodObject.name);
     }
 }
-    // creates food dictionary
+// creates food dictionary
 const foodDict = {
     pizza: "https://png.icons8.com/color/50/000000/pizza.png",
     hamburger:"https://png.icons8.com/color/40/000000/hamburger.png",
-    iceCream: "https://png.icons8.com/color/40/000000/banana-split.png",
+    icecream: "https://png.icons8.com/color/40/000000/banana-split.png",
     fries: "https://png.icons8.com/color/40/000000/french-fries.png",
     celery: "https://png.icons8.com/color/40/000000/celery.png",
     chips: "https://png.icons8.com/color/40/000000/nachos.png",

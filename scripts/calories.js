@@ -10,10 +10,12 @@
 const FOOD_CHOICES = ['pizza', 'hamburger', 'iceCream', 'fries', 'celery', 'chips', 'candyBar', 'beer', 'taco', 'cupCake']
 // Will replace with html form selection
 const USER_FOOD = FOOD_CHOICES[Math.floor(Math.random() * FOOD_CHOICES.length)];
+let userCaloriesBurned = 0;
 // const returnServings = {};
 
 function requestFood(caloriesBurned) {
-    console.log(caloriesBurned);
+    userCaloriesBurned = caloriesBurned;
+    console.log(`User logged ${userCaloriesBurned} calories burned.`);
     return fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${USER_FOOD}&detailed=true&branded=false`,
     {
         headers: {
@@ -25,20 +27,21 @@ function requestFood(caloriesBurned) {
     .then(convertToJSON)
     // .then(extractFood)
     // .then(drawFood)
-    .then(j => {
-        const foodResult = {};
-        console.log(j.common[0].food_name, j.common[0].full_nutrients[4].value);
-        const foodCalories = j.common[0].full_nutrients[4].value;
-        const servings = convertCalToNumServings(foodCalories, caloriesBurned);
-        foodResult.name = j.common[0].food_name;
-        foodResult.servings = servings;
-        console.log(`${servings} of ${foodResult.name}`);
-        return foodResult;
-    });
+    .then(extractFood)
 }
 
 function convertToJSON(r) {
     return r.json();
+}
+
+function extractFood(resultsList) {
+    const foodResult = {};
+    console.log('Food result received. Name: ' + resultsList.common[0].food_name + ' Calories: ' + resultsList.common[0].full_nutrients[4].value);
+    const foodCalories = resultsList.common[0].full_nutrients[4].value;
+    foodResult.name = resultsList.common[0].food_name;
+    foodResult.servings = convertCalToNumServings(foodCalories, userCaloriesBurned);
+    console.log(`Burned equivalent of ${foodResult.servings} of ${foodResult.name}`);
+    return foodResult;
 }
 
 // function extractFood(j) {
