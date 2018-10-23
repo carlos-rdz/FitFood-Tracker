@@ -1,3 +1,11 @@
+// have user input workout or load fitbit activity and select type of food
+// to display how much he should eat
+// original idea was to show user over time how much ice cream they burned off
+// to reward them for working hard
+// and to display their results over time
+// display results in "pizza", "ice cream", etc., or "mix"
+// 
+
 let fitDisplay = document.querySelector("[data-displayInfo]")
 
 
@@ -84,6 +92,5 @@ const foodDict = {
     beer: "https://png.icons8.com/color/40/000000/beer.png",
     taco: "https://png.icons8.com/color/40/000000/taco.png",
     cupCake: "https://png.icons8.com/color/40/000000/cupcake.png"
-
 }
 

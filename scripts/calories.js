@@ -7,7 +7,8 @@ const foodPhoto = document.getElementById("food_photo");
 
 // create variables to store food terms and result from API call
 const CALORIES_BURNED = 500;
-const USER_FOOD = "hot sauce";
+const FOOD_CHOICES = ['pizza', 'hamburger', 'iceCream', 'fries', 'celery', 'chips', 'candyBar', 'beer', 'taco', 'cupCake']
+const USER_FOOD = FOOD_CHOICES[Math.floor(Math.random() * FOOD_CHOICES.length)];
 const foodResult = {};
 const returnServings = {};
 
@@ -22,7 +23,7 @@ function requestFood(calories) {
     })
     .then(convertToJSON)
     .then(extractFood)
-    .then(drawFood)
+    // .then(drawFood)
     .then(() => {
         const servings = convertCalToNumServings(calories);
         returnServings.name = foodResult.name;
@@ -54,14 +55,14 @@ function extractFood(j) {
     foodResult.pic = pic;
 }
 
-function drawFood() {
-    foodName.textContent = foodResult.name;
-    console.log(foodResult.name);
-    servingSize.textContent += foodResult.size;
-    servingAmount.textContent += foodResult.amount;
-    caloriesCount.textContent += foodResult.calories;
-    foodPhoto.src = foodResult.pic;
-}
+// function drawFood() {
+//     foodName.textContent = foodResult.name;
+//     console.log(foodResult.name);
+//     servingSize.textContent += foodResult.size;
+//     servingAmount.textContent += foodResult.amount;
+//     caloriesCount.textContent += foodResult.calories;
+//     foodPhoto.src = foodResult.pic;
+// }
 
 function convertCalToNumServings(calories) {
     let servings = 0;
