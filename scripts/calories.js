@@ -25,22 +25,22 @@ function requestFood(caloriesBurned) {
     .then(convertToJSON)
     // .then(extractFood)
     // .then(drawFood)
-    .then(extractFood)
+    .then(j => {
+        const foodResult = {};
+        console.log(j.common[0].food_name, j.common[0].full_nutrients[4].value);
+        const foodCalories = j.common[0].full_nutrients[4].value;
+        const servings = convertCalToNumServings(foodCalories, caloriesBurned);
+        foodResult.name = j.common[0].food_name;
+        foodResult.servings = servings;
+        console.log(`${servings} of ${foodResult.name}`);
+        return foodResult;
+    });
 }
 
 function convertToJSON(r) {
     return r.json();
 }
-function extractFood(j) {
-    const foodResult = {};
-    console.log(j.common[0].food_name, j.common[0].full_nutrients[4].value);
-    const foodCalories = j.common[0].full_nutrients[4].value;
-    const servings = convertCalToNumServings(foodCalories, caloriesBurned);
-    foodResult.name = j.common[0].food_name;
-    foodResult.servings = servings;
-    // console.log(`${servings} of ${foodResult.name}`);
-    return foodResult;
-}
+
 // function extractFood(j) {
 //     const result = j.common[0];
 //     const nutrients = result.full_nutrients;
