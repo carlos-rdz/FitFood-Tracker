@@ -6,14 +6,14 @@
 // const foodPhoto = document.getElementById("food_photo");
 
 // create variables to store food terms and result from API call
-const CALORIES_BURNED = 500;
+// const CALORIES_BURNED = 500;
 const FOOD_CHOICES = ['pizza', 'hamburger', 'iceCream', 'fries', 'celery', 'chips', 'candyBar', 'beer', 'taco', 'cupCake']
 // Will replace with html form selection
 const USER_FOOD = FOOD_CHOICES[Math.floor(Math.random() * FOOD_CHOICES.length)];
 const foodResult = {};
 // const returnServings = {};
 
-function requestFood(calories) {
+function requestFood(caloriesBurned) {
     fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${USER_FOOD}&detailed=true&branded=false`,
     {
         headers: {
@@ -26,9 +26,9 @@ function requestFood(calories) {
     // .then(extractFood)
     // .then(drawFood)
     .then(j => {
-        console.log("calories = " + j.common[0].full_nutrients[4].value);
-        const calories = j.common[0].full_nutrients[4].value;
-        const servings = convertCalToNumServings(calories);
+        console.log(j.common[0].food_name, j.common[0].full_nutrients[4].value);
+        const foodCalories = j.common[0].full_nutrients[4].value;
+        const servings = convertCalToNumServings(foodCalories, caloriesBurned);
         foodResult.name = j.common[0].food_name;
         foodResult.servings = servings;
         // console.log(`${servings} of ${foodResult.name}`);
@@ -67,12 +67,12 @@ function convertToJSON(r) {
 //     foodPhoto.src = foodResult.pic;
 // }
 
-function convertCalToNumServings(calories) {
+function convertCalToNumServings(foodCalories, caloriesBurned) {
     let servings = 0;
-    while (calories * servings < CALORIES_BURNED) {
+    while (foodCalories * servings < caloriesBurned) {
         servings++;
     }
     return servings;
 }
 
-console.log(requestFood(CALORIES_BURNED));
+// console.log(requestFood(CALORIES_BURNED));

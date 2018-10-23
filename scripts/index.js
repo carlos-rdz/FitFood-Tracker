@@ -28,17 +28,21 @@ fetch(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
 .then(j => j.json())
 .then(extractData)
 .then(writeData)
-.then(console.log)
-// .then(displayData)
+// .then(console.log)
+.then(displayData)
 
 }
 
 
+function displayData(calories) {
+
+}
 
 // strips the data to indivisual componenets
 
 function extractData(info){
     let calorieData = info["summary"]["activityCalories"]
+    addFood(requestFood(calorieData));
     let distanceData = info["summary"]["distances"][0]
     ["distance"]
     let stepData = info["summary"]["steps"]
@@ -58,7 +62,6 @@ function writeData(message){
         elementDisplay.textContent = element
         fitDisplay.appendChild(elementDisplay)
     });
-    
 
 }
 
@@ -75,11 +78,14 @@ function addPizza() {
     newImg.src = "https://png.icons8.com/color/50/000000/pizza.png";
     theBody.appendChild(newImg);
 };
+
+function addFood(foodObject) {
     // prints mulitple pizza icons within a range
-    for (let i = 0; i < 10; i ++) {
+    for (let i = 0; i < foodObject.servings; i ++) {
+        console.log('adding pizza');
         addPizza();
     }
-
+}
     // creates food dictionary
 const foodDict = {
     pizza: "https://png.icons8.com/color/50/000000/pizza.png",
