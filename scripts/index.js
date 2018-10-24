@@ -1,23 +1,13 @@
-// have user input workout or load fitbit activity and select type of food
-// to display how much he should eat
-// original idea was to show user over time how much ice cream they burned off
-// to reward them for working hard
-// and to display their results over time
-// display results in "pizza", "ice cream", etc., or "mix"
-// 
+let fitDisplay = document.querySelector("[data-displayInfo]");
+let profileHeader = document.querySelector("[data-profileHeader]");
+// =============================================
+// function that fetches excercise data and 
+// runs the promise chain
+// =============================================
 
-let fitDisplay = document.querySelector("[data-displayInfo]")
+function fetchProfileData(){
 
-
-// function that fetched data and runs the promise chain
-
-function fetchdata(){
-
-let date = '2018-10-23'
-
-fetch(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
-// fetch(`https://api.fitbit.com/1/user/-/activities.json`,
-
+fetch('https://api.fitbit.com/1/user/-/profile.json',
 {
     headers: {
         "Authorization": `Bearer ${localStorage.getItem("ourtoken")}`
@@ -26,44 +16,77 @@ fetch(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
 }
 )
 .then(j => j.json())
-.then(extractData)
-.then(writeData)
-// .then(console.log)
-// .then(displayData)
+.then(getUserInfo)
+.then(writeUserInfo)
 
 }
 
-// strips the data to indivisual componenets
+function getUserInfo(info){
 
-function extractData(info){
-    let calorieData = info["summary"]["activityCalories"]
+return ` Welcome ${info['user']["fullName"]}`
 
-    // sub in calorieData here
-    requestFood(2000).then(addFood);
-    
-    let distanceData = info["summary"]["distances"][0]
-    ["distance"]
-    let stepData = info["summary"]["steps"]
-    let calorieMessage = `Calories: ${calorieData}`
-    let distanceMessage = `Distance: ${distanceData}`
-    let stepMessage = `Steps: ${stepData}`
-    return [calorieMessage,distanceMessage,stepMessage]
+}
+
+function writeUserInfo(name){
+
+    profileDisplay = document.createElement('div');
+    profileDisplay.textContent = name;
+    profileHeader.appendChild(profileDisplay);
 }
 
 
-// writes data to the document
+function fetchExcerciseData(){
+let date = '2018-10-24';
 
-function writeData(message){
+fetch(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
+{
+    headers: {
+        "Authorization": `Bearer ${localStorage.getItem("ourtoken")}`
+
+    }
+}
+)
+.then(j => j.json())
+.then(extractExerciseData)
+.then(console.log)
+}
+// =============================================
+// strips the data to individual componenets and
+// returns the # of calories burnt as an integer
+// =============================================
+
+function extractExerciseData(info){
+    let calorieData = info["summary"]["activityCalories"];
+    let distanceData = info["summary"]["distances"][3]
+    ["distance"];
+    // let stepData = info["summary"]["steps"];
+    let calorieMessage = `Calories: ${calorieData}`;
+    let distanceMessage = `Distance: ${distanceData}km`;
+    // let stepMessage = `Steps: ${stepData}`;
+    let displayData = [calorieMessage,distanceMessage];
     
+    writeExerciseData(displayData)
+
+    return calorieData
+}
+// =============================================
+// helper function that writes data to the 
+// document
+// =============================================
+function writeExerciseData(message){
+   
     message.forEach(element => {
-        elementDisplay = document.createElement('div')
-        elementDisplay.textContent = element
-        fitDisplay.appendChild(elementDisplay)
+        elementDisplay = document.createElement('div');
+        elementDisplay.textContent = element;
+        fitDisplay.appendChild(elementDisplay);
+
     });
-    
 }
 
-fetchdata()
+fetchProfileData();
+fetchExcerciseData();
+
+// =====================================================================================================================================================================================================
 
 
 
