@@ -102,8 +102,10 @@ function creatDropDown(foodDict) {
     dropDown.addEventListener('change',e => {
         console.log(e.target.selectedIndex)
       const foodImages = document.querySelectorAll('img')
-      foodImages.src = foodDict[e.target.selectedIndex].src
-        
+      foodImages.forEach((foodImage) => {
+          foodImage.src = foodDict[e.target.selectedIndex].src
+        // console.log(foodImages)
+      })
         
 })
  
