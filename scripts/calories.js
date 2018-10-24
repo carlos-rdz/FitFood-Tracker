@@ -49,16 +49,18 @@ function convertToJSON(r) {
 }
 
 function extractFood(resultsList) {
+    let foodResult = foodDict[0]
     const foodName = resultsList.common[0].food_name;
     const foodCalories = resultsList.common[0].full_nutrients[4].value;
     console.log('Food result received. Name: ' + foodName + ' Calories: ' + foodCalories);
     foodServings = convertCalToNumServings(foodCalories, userCaloriesBurned);
     for (let food of foodDict) {
-        if (food.name == foodName) {
-            const foodResult = food
+        if (food.name === foodName) {
+            foodResult = food
             break
         }
     }
+    foodResult.servings = foodServings
     console.log(`Burned equivalent of ${foodResult.servings} of ${foodResult.name}`);
     return foodResult;
 }
