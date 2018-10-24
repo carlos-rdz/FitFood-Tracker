@@ -48,7 +48,8 @@ fetch(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
 )
 .then(j => j.json())
 .then(extractExerciseData)
-.then(console.log)
+.then(requestFood)
+.then(servingImageDisplay)
 }
 // =============================================
 // strips the data to individual componenets and
@@ -115,7 +116,7 @@ function creatDropDown(foodDict) {
 
 const theBody = document.querySelector("body");
 
-let foodImage = "https://png.icons8.com/color/50/000000/pizza.png"
+// let foodImage = "https://png.icons8.com/color/50/000000/pizza.png"
 function addPizza() {
     // creates new images element
     const newImg = document.createElement("img");
@@ -125,8 +126,13 @@ function addPizza() {
     theBody.appendChild(newImg);
 };
 // prints mulitple pizza icons within a range
-for (let i = 0; i < 10; i ++) {
-    addPizza();
+
+function servingImageDisplay(foodObj){
+
+    for (let i = 0; i < foodObj.servings; i ++) {
+        addPizza();
+
+}
 }
 // creates food dictionary
 const foodDict = [
