@@ -120,7 +120,7 @@ function creatDropDown(foodDict) {
     })
 
     dropDown.addEventListener('change', e => {
-        console.log(e.target.selectedIndex)
+        console.log(foodDict[e.target.selectedIndex].name + ' selected.')
         // const foodImages = document.querySelectorAll('img')
         // foodImages.forEach(foodImage => {
         // foodImage.src = foodDict[e.target.selectedIndex].src
@@ -133,24 +133,30 @@ function creatDropDown(foodDict) {
 };
 
 const theBody = document.querySelector("body");
+const theFood = document.getElementById('foodResult')
 
 // let foodImage = "https://png.icons8.com/color/50/000000/pizza.png"
 function addPizza(foodImageSrc) {
     // creates new images element
     const newImg = document.createElement("img");
     // adds the pizza icon
-    const newPizza = document.createAttribute("src");
     newImg.src = foodImageSrc;
-    theBody.appendChild(newImg);
+    theFood.appendChild(newImg);
 };
 // prints mulitple pizza icons within a range
 
 function servingImageDisplay(foodObj){
     console.log('Serving image received: ' + foodObj.name)
     foodSelector.selectedIndex = foodDict.indexOf(foodObj)
+    // clear old foodImages
+    // debugger
+    while (theFood.childNodes.length > 0) {
+        theFood.childNodes[0].remove()
+    }
     for (let i = 0; i < foodObj.servings; i ++) {
         addPizza(foodObj.src);
     }
+    console.log('Image served.')
 }
 
 const foodSelector = creatDropDown(foodDict);
