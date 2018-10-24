@@ -29,29 +29,10 @@ dateSlider.addEventListener("click", e => {
     
 })
 
-<<<<<<< HEAD
-    }
-}
-)
-.then(j => {
-    if (!j.ok) {
-        throw new Error('network response not ok');
-    }
-    return j.json()
-})
-.catch(returnStubData)
-.then(getUserInfo)
-.then(writeUserInfo)
-=======
->>>>>>> dateSlidercr
 
 }
 takeDateRange();
 
-<<<<<<< HEAD
-function getUserInfo(info){
-return ` Welcome ${info['user']["fullName"]}`
-=======
 
 // =============================================
 // function that fetches Profle data and 
@@ -67,12 +48,17 @@ function fetchProfileData(){
         }
     }
     )
-    .then(j => j.json())
+    .then(j => {
+        if (!j.ok) {
+            throw new Error('network response not ok');
+        }
+        return j.json()
+    })
+    .catch(returnStubData)
     .then(getUserInfo)
     .then(writeUserInfo)
     
 }
->>>>>>> dateSlidercr
 
 function getUserInfo(info){
     
@@ -87,7 +73,6 @@ function writeUserInfo(name){
     profileHeader.appendChild(profileDisplay);
 }
 
-<<<<<<< HEAD
 function returnStubData() {
     console.log('Returning stub data')
     const data =  {user: {fullName: 'Stub User'}, activityCalories: 2000,
@@ -96,12 +81,10 @@ function returnStubData() {
     return data
 }
 
-=======
 // =============================================
 // function that fetches excercise data and 
 // runs the promise chain
 // =============================================
->>>>>>> dateSlidercr
 
 function fetchExcerciseData(date1,date2){
     
@@ -147,11 +130,7 @@ function extractExerciseData(info){
     
     writeExerciseData(displayData)
 
-<<<<<<< HEAD
-    return 1000
-=======
     return totalCalories
->>>>>>> dateSlidercr
 }
 // =============================================
 // helper function that writes data to the 
@@ -201,13 +180,8 @@ function creatDropDown(foodDict) {
 const theBody = document.querySelector("body");
 const theFood = document.getElementById('foodResult')
 
-<<<<<<< HEAD
 // let foodImage = "https://png.icons8.com/color/50/000000/pizza.png"
 function addPizza(foodImageSrc) {
-=======
-let foodImage = "https://png.icons8.com/color/50/000000/pizza.png"
-function addPizza() {
->>>>>>> dateSlidercr
     // creates new images element
     const newImg = document.createElement("img");
     // adds the pizza icon
