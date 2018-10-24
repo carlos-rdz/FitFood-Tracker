@@ -22,14 +22,14 @@ const foodDict = [
     { name:'taco', src: "https://png.icons8.com/color/40/000000/taco.png"},
     { name:'cupCake', src: "https://png.icons8.com/color/40/000000/cupcake.png"}   
 ]
-const USER_FOOD = foodDict[Math.floor(Math.random() * foodDict.length)];
+let userFood = foodDict[Math.floor(Math.random() * foodDict.length)];
 let userCaloriesBurned = 0;
 // const returnServings = {};
 
 function requestFood(caloriesBurned) {
     userCaloriesBurned = caloriesBurned;
     console.log(`User logged ${userCaloriesBurned} calories burned.`);
-    return fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${USER_FOOD.name}&detailed=true&branded=false`,
+    return fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${userFood.name}&detailed=true&branded=false`,
     {
         headers: {
             'x-app-key': '51c9ea63eedf0df881f39c24017f15db',
@@ -65,33 +65,6 @@ function extractFood(resultsList) {
     return foodResult;
 }
 
-// function extractFood(j) {
-//     const result = j.common[0];
-//     const nutrients = result.full_nutrients;
-//     const size = result.serving_unit;
-//     const amount = result.serving_qty;
-//     const pic = result.photo.thumb;
-    
-//     foodResult.name = result.food_name;
-//     nutrients.forEach(nutrient => {
-//         if (nutrient.attr_id == '208') { // 208 is code for kCal
-//             foodResult.calories = nutrient.value;
-//         }
-//     });
-//     foodResult.size = size;
-//     foodResult.amount = amount;
-//     foodResult.pic = pic;
-// }
-
-// function drawFood() {
-//     foodName.textContent = foodResult.name;
-//     console.log(foodResult.name);
-//     servingSize.textContent += foodResult.size;
-//     servingAmount.textContent += foodResult.amount;
-//     caloriesCount.textContent += foodResult.calories;
-//     foodPhoto.src = foodResult.pic;
-// }
-
 function convertCalToNumServings(foodCalories, caloriesBurned) {
     console.log('Converting calories to servings...')
     let servings = 0;
@@ -100,5 +73,3 @@ function convertCalToNumServings(foodCalories, caloriesBurned) {
     }
     return servings;
 }
-
-// console.log(requestFood(CALORIES_BURNED));

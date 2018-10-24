@@ -125,10 +125,11 @@ function creatDropDown(foodDict) {
         // foodImages.forEach(foodImage => {
         // foodImage.src = foodDict[e.target.selectedIndex].src
         // console.log(foodImages)
-        USER_FOOD = foodDict[e.target.selectedIndex];
+        userFood = foodDict[e.target.selectedIndex];
         requestFood(userCaloriesBurned).then(servingImageDisplay)
       })
     theBody.appendChild(dropDown)   
+    return dropDown
 };
 
 const theBody = document.querySelector("body");
@@ -146,9 +147,10 @@ function addPizza(foodImageSrc) {
 
 function servingImageDisplay(foodObj){
     console.log('Serving image received: ' + foodObj.name)
+    foodSelector.selectedIndex = foodDict.indexOf(foodObj)
     for (let i = 0; i < foodObj.servings; i ++) {
         addPizza(foodObj.src);
     }
 }
 
-creatDropDown(foodDict);
+const foodSelector = creatDropDown(foodDict);
