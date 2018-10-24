@@ -1,17 +1,35 @@
 let fitDisplay = document.querySelector("[data-displayInfo]");
 let profileHeader = document.querySelector("[data-profileHeader]");
+let dateSlider = document.querySelector("[data-slider]")
+
 // =============================================
-// function that fetches excercise data and 
-// runs the promise chain
+// function that adds an event listener to 
+// determine date range
 // =============================================
 
-function fetchProfileData(){
+function takeDateRange(){
 
-fetch('https://api.fitbit.com/1/user/-/profile.json',
-{
-    headers: {
-        "Authorization": `Bearer ${localStorage.getItem("ourtoken")}`
+dateSlider.addEventListener("click", e => {
+    
+    console.log(e.target.value)
 
+    let todaysDate = new Date()
+    let parsedDate = `${todaysDate.getFullYear()}-${('0' + (todaysDate.getMonth()+1)).slice(-2)}-${('0' + todaysDate.getDate()).slice(-2)}`;
+    
+    let endDate = new Date()
+    endDate.setDate(endDate.getDate()-e.target.value)
+
+    let parsedEndDate = `${endDate.getFullYear()}-${('0' + (endDate.getMonth()+1)).slice(-2)}-${('0' + endDate.getDate()).slice(-2)}`;
+
+
+    console.log(parsedDate);
+    console.log(parsedEndDate);
+
+    fetchExcerciseData(parsedEndDate,parsedDate);
+    
+})
+
+<<<<<<< HEAD
     }
 }
 )
@@ -24,21 +42,52 @@ fetch('https://api.fitbit.com/1/user/-/profile.json',
 .catch(returnStubData)
 .then(getUserInfo)
 .then(writeUserInfo)
+=======
+>>>>>>> dateSlidercr
 
 }
+takeDateRange();
 
+<<<<<<< HEAD
 function getUserInfo(info){
 return ` Welcome ${info['user']["fullName"]}`
+=======
 
+// =============================================
+// function that fetches Profle data and 
+// runs the promise chain
+// =============================================
+function fetchProfileData(){
+    
+    fetch('https://api.fitbit.com/1/user/-/profile.json',
+    {
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem("ourtoken")}`
+            
+        }
+    }
+    )
+    .then(j => j.json())
+    .then(getUserInfo)
+    .then(writeUserInfo)
+    
+}
+>>>>>>> dateSlidercr
+
+function getUserInfo(info){
+    
+    return ` Welcome ${info['user']["fullName"]}`
+    
 }
 
 function writeUserInfo(name){
-
+    
     profileDisplay = document.createElement('div');
     profileDisplay.textContent = name;
     profileHeader.appendChild(profileDisplay);
 }
 
+<<<<<<< HEAD
 function returnStubData() {
     console.log('Returning stub data')
     const data =  {user: {fullName: 'Stub User'}, activityCalories: 2000,
@@ -47,16 +96,24 @@ function returnStubData() {
     return data
 }
 
+=======
+// =============================================
+// function that fetches excercise data and 
+// runs the promise chain
+// =============================================
+>>>>>>> dateSlidercr
 
-function fetchExcerciseData(){
-let date = '2018-10-24';
+function fetchExcerciseData(date1,date2){
+    
 
-fetch(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
-{
-    headers: {
-        "Authorization": `Bearer ${localStorage.getItem("ourtoken")}`
+
+    fetch(`https://api.fitbit.com/1/user/-/activities/tracker/activityCalories/date/${date2}/${date1}.json`,
+    {
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem("ourtoken")}`
 
     }
+
 }
 )
 .then(j => {
@@ -76,18 +133,25 @@ fetch(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
 // =============================================
 
 function extractExerciseData(info){
-    let calorieData = info["summary"]["activityCalories"];
-    let distanceData = info["summary"]["distances"][3]
-    ["distance"];
-    // let stepData = info["summary"]["steps"];
-    let calorieMessage = `Calories: ${calorieData}`;
-    let distanceMessage = `Distance: ${distanceData}km`;
-    // let stepMessage = `Steps: ${stepData}`;
-    let displayData = [calorieMessage,distanceMessage];
+    let calorieDataArray = info['activities-tracker-activityCalories']
+    
+    let totalCalories = 0
+
+    calorieDataArray.forEach(function(element){
+
+        totalCalories += parseInt(element["value"])
+    });
+    
+    let calorieMessage = `Calories: ${totalCalories}`;
+    let displayData = [calorieMessage];
     
     writeExerciseData(displayData)
 
+<<<<<<< HEAD
     return 1000
+=======
+    return totalCalories
+>>>>>>> dateSlidercr
 }
 // =============================================
 // helper function that writes data to the 
@@ -96,15 +160,16 @@ function extractExerciseData(info){
 function writeExerciseData(message){
    
     message.forEach(element => {
-        elementDisplay = document.createElement('div');
-        elementDisplay.textContent = element;
-        fitDisplay.appendChild(elementDisplay);
+        // elementDisplay = document.createElement('div');
+        fitDisplay.textContent = element;
+        // fitDisplay.appendChild(elementDisplay);
 
     });
 }
 
 fetchProfileData();
-fetchExcerciseData();
+takeDateRange();
+// fetchExcerciseData();
 
 // =====================================================================================================================================================================================================
 
@@ -136,8 +201,13 @@ function creatDropDown(foodDict) {
 const theBody = document.querySelector("body");
 const theFood = document.getElementById('foodResult')
 
+<<<<<<< HEAD
 // let foodImage = "https://png.icons8.com/color/50/000000/pizza.png"
 function addPizza(foodImageSrc) {
+=======
+let foodImage = "https://png.icons8.com/color/50/000000/pizza.png"
+function addPizza() {
+>>>>>>> dateSlidercr
     // creates new images element
     const newImg = document.createElement("img");
     // adds the pizza icon
