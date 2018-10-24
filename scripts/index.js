@@ -15,14 +15,19 @@ fetch('https://api.fitbit.com/1/user/-/profile.json',
     }
 }
 )
-.then(j => j.json())
+.then(j => {
+    if (!j.ok) {
+        throw new Error('network response not ok');
+    }
+    return j.json()
+})
+.catch(returnStubData)
 .then(getUserInfo)
 .then(writeUserInfo)
 
 }
 
 function getUserInfo(info){
-
 return ` Welcome ${info['user']["fullName"]}`
 
 }
@@ -32,6 +37,14 @@ function writeUserInfo(name){
     profileDisplay = document.createElement('div');
     profileDisplay.textContent = name;
     profileHeader.appendChild(profileDisplay);
+}
+
+function returnStubData() {
+    console.log('Returning stub data')
+    const data =  {user: {fullName: 'Collin Argo'}, activityCalories: 2000,
+            summary: {activityCalories: 2000, distances: [, , , {distance: 25}]}}
+    console.log(data)
+    return data
 }
 
 
@@ -46,7 +59,13 @@ fetch(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
     }
 }
 )
-.then(j => j.json())
+.then(j => {
+    if (!j.ok) {
+        throw new Error('network response not ok');
+    }
+    return j.json()
+})
+.catch(returnStubData)
 .then(extractExerciseData)
 .then(requestFood)
 .then(servingImageDisplay)
@@ -101,53 +120,44 @@ function creatDropDown(foodDict) {
     console.log(option.value)
     })
 
-    dropDown.addEventListener('change',e => {
-        console.log(e.target.selectedIndex)
-      const foodImages = document.querySelectorAll('img')
-      foodImages.forEach((foodImage) => {
-          foodImage.src = foodDict[e.target.selectedIndex].src
+    dropDown.addEventListener('change', e => {
+        console.log(foodDict[e.target.selectedIndex].name + ' selected.')
+        // const foodImages = document.querySelectorAll('img')
+        // foodImages.forEach(foodImage => {
+        // foodImage.src = foodDict[e.target.selectedIndex].src
         // console.log(foodImages)
+        userFood = foodDict[e.target.selectedIndex];
+        requestFood(userCaloriesBurned).then(servingImageDisplay)
       })
-        
-})
- 
-
     theBody.appendChild(dropDown)   
+    return dropDown
 };
 
 const theBody = document.querySelector("body");
+const theFood = document.getElementById('foodResult')
 
-let foodImage = "https://png.icons8.com/color/50/000000/pizza.png"
-function addPizza() {
+// let foodImage = "https://png.icons8.com/color/50/000000/pizza.png"
+function addPizza(foodImageSrc) {
     // creates new images element
     const newImg = document.createElement("img");
     // adds the pizza icon
-    const newPizza = document.createAttribute("src");
-    newImg.src = foodImage;
-    theBody.appendChild(newImg);
+    newImg.src = foodImageSrc;
+    theFood.appendChild(newImg);
 };
 // prints mulitple pizza icons within a range
 
 function servingImageDisplay(foodObj){
-
+    console.log('Serving image received: ' + foodObj.name)
+    foodSelector.selectedIndex = foodDict.indexOf(foodObj)
+    // clear old foodImages
+    // debugger
+    while (theFood.childNodes.length > 0) {
+        theFood.childNodes[0].remove()
+    }
     for (let i = 0; i < foodObj.servings; i ++) {
-        addPizza();
-
+        addPizza(foodObj.src);
+    }
+    console.log('Image served.')
 }
-}
-// creates food dictionary
-const foodDict = [
-    {name:'pizza', src: "https://png.icons8.com/color/50/000000/pizza.png"},
-    {name:'hamburger',src:"https://png.icons8.com/color/40/000000/hamburger.png"},
-    {name:'iceCream',src:"https://png.icons8.com/color/40/000000/banana-split.png"},
-    {name:'fries', src: "https://png.icons8.com/color/40/000000/french-fries.png"},
-    {name:'celery', src: "https://png.icons8.com/color/40/000000/celery.png"},
-    {name:'chips', src: "https://png.icons8.com/color/40/000000/nachos.png"},
-    {name:'candyBar', src: "https://png.icons8.com/color/40/000000/chocolate-bar.png"},
-    {name:'beer', src: "https://png.icons8.com/color/40/000000/beer.png"},
-    {name:'taco', src: "https://png.icons8.com/color/40/000000/taco.png"},
-    {name:'cupCake', src: "https://png.icons8.com/color/40/000000/cupcake.png"}
-    
-]
 
-creatDropDown(foodDict);
+const foodSelector = creatDropDown(foodDict);
