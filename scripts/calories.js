@@ -32,8 +32,8 @@ function requestFood(caloriesBurned) {
     return fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${userFood.name}&detailed=true&branded=false`,
     {
         headers: {
-            'x-app-key': '51c9ea63eedf0df881f39c24017f15db',
-            'x-app-id': '2ce385c3',
+            'x-app-key': '537d92da8786ace37bbf7c591100dfdc',
+            'x-app-id': '39f9cd3c',
             'x-remote-user-id': '0',
         }
     })

@@ -15,10 +15,37 @@
 
 }
 
-.foodSelector > img {
-    display: flex;
-    flex-direction: column;
-    outline: 1px solid red;
+.foodSelector {
+    size: 5;
+    width: 100%;
+    text-align: center;
+    /* background-color: red; */
+    
 
     
+}
+.foodSelector option {
+align-items: center;
+justify-content: center;
+text-align: center;
+
+
+
+
+}
+
+
+
+
+#foodResult {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    
+}
+
+#foodResult img {
+    
+    margin: auto;
 }
