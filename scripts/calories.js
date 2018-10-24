@@ -13,7 +13,7 @@
 const foodDict = [
     { name:'pizza', src: "https://png.icons8.com/color/50/000000/pizza.png"},
     { name:'hamburger',src:"https://png.icons8.com/color/40/000000/hamburger.png"},
-    { name:'iceCream',src:"https://png.icons8.com/color/40/000000/banana-split.png"},
+    { name:'ice cream',src:"https://png.icons8.com/color/40/000000/banana-split.png"},
     { name:'fries', src: "https://png.icons8.com/color/40/000000/french-fries.png"},
     { name:'celery', src: "https://png.icons8.com/color/40/000000/celery.png"},
     { name:'chips', src: "https://png.icons8.com/color/40/000000/nachos.png"},
