@@ -24,7 +24,7 @@ const foodDict = [
 ]
 let userFood = foodDict[Math.floor(Math.random() * foodDict.length)];
 let userCaloriesBurned = 0;
-// const returnServings = {};
+// const returnServin  gs = {};
 
 function requestFood(caloriesBurned) {
     userCaloriesBurned = caloriesBurned;
