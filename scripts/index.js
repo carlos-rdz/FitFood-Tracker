@@ -41,7 +41,7 @@ function writeUserInfo(name){
 
 function returnStubData() {
     console.log('Returning stub data')
-    const data =  {user: {fullName: 'Collin Argo'}, activityCalories: 2000,
+    const data =  {user: {fullName: 'Stub User'}, activityCalories: 2000,
             summary: {activityCalories: 2000, distances: [, , , {distance: 25}]}}
     console.log(data)
     return data
