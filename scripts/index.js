@@ -88,35 +88,57 @@ fetchExcerciseData();
 
 // =====================================================================================================================================================================================================
 
+function creatDropDown(foodDict) {
 
+        let dropDown = document.createElement('select');
+        foodDict.forEach(foodItem => {
+        let option = document.createElement("option");
+        option.value = foodItem['name']
+        option.textContent =  foodItem['name']
+        dropDown.appendChild(option);
+    console.log(option.value)
+    })
+
+    dropDown.addEventListener('change',e => {
+        console.log(e.target.selectedIndex)
+      const foodImages = document.querySelectorAll('img')
+      foodImages.src = foodDict[e.target.selectedIndex].src
+        
+        
+})
+ 
+
+    theBody.appendChild(dropDown)   
+};
 
 const theBody = document.querySelector("body");
-function addPizza(name) {
+
+let foodImage = "https://png.icons8.com/color/50/000000/pizza.png"
+function addPizza() {
     // creates new images element
     const newImg = document.createElement("img");
     // adds the pizza icon
-    newImg.src = `${foodDict[name]}`;
+    const newPizza = document.createAttribute("src");
+    newImg.src = foodImage;
     theBody.appendChild(newImg);
 };
-
-function addFood(foodObject) {
-    console.log(`Adding food object ${foodObject.name} ${foodObject.servings} times.`);
-    // prints mulitple pizza icons within a range
-    for (let i = 0; i < foodObject.servings; i ++) {
-        addPizza(foodObject.name);
-    }
+// prints mulitple pizza icons within a range
+for (let i = 0; i < 10; i ++) {
+    addPizza();
 }
 // creates food dictionary
-const foodDict = {
-    pizza: "https://png.icons8.com/color/50/000000/pizza.png",
-    hamburger:"https://png.icons8.com/color/40/000000/hamburger.png",
-    icecream: "https://png.icons8.com/color/40/000000/banana-split.png",
-    fries: "https://png.icons8.com/color/40/000000/french-fries.png",
-    celery: "https://png.icons8.com/color/40/000000/celery.png",
-    chips: "https://png.icons8.com/color/40/000000/nachos.png",
-    candyBar: "https://png.icons8.com/color/40/000000/chocolate-bar.png",
-    beer: "https://png.icons8.com/color/40/000000/beer.png",
-    taco: "https://png.icons8.com/color/40/000000/taco.png",
-    cupCake: "https://png.icons8.com/color/40/000000/cupcake.png"
-}
+const foodDict = [
+    {name:'pizza', src: "https://png.icons8.com/color/50/000000/pizza.png"},
+    {name:'hamburger',src:"https://png.icons8.com/color/40/000000/hamburger.png"},
+    {name:'iceCream',src:"https://png.icons8.com/color/40/000000/banana-split.png"},
+    {name:'fries', src: "https://png.icons8.com/color/40/000000/french-fries.png"},
+    {name:'celery', src: "https://png.icons8.com/color/40/000000/celery.png"},
+    {name:'chips', src: "https://png.icons8.com/color/40/000000/nachos.png"},
+    {name:'candyBar', src: "https://png.icons8.com/color/40/000000/chocolate-bar.png"},
+    {name:'beer', src: "https://png.icons8.com/color/40/000000/beer.png"},
+    {name:'taco', src: "https://png.icons8.com/color/40/000000/taco.png"},
+    {name:'cupCake', src: "https://png.icons8.com/color/40/000000/cupcake.png"}
+    
+]
 
+creatDropDown(foodDict);
