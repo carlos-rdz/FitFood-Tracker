@@ -28,7 +28,6 @@ fetch('https://api.fitbit.com/1/user/-/profile.json',
 }
 
 function getUserInfo(info){
-console.log(info)
 return ` Welcome ${info['user']["fullName"]}`
 
 }
@@ -42,7 +41,10 @@ function writeUserInfo(name){
 
 function returnStubData() {
     console.log('Returning stub data')
-    return {user: {fullName: 'Collin Argo'}, activityCalories: 20}
+    const data =  {user: {fullName: 'Collin Argo'}, activityCalories: 2000,
+            summary: {activityCalories: 2000, distances: [, , , {distance: 25}]}}
+    console.log(data)
+    return data
 }
 
 
@@ -57,7 +59,13 @@ fetch(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
     }
 }
 )
-.then(j => j.json())
+.then(j => {
+    if (!j.ok) {
+        throw new Error('network response not ok');
+    }
+    return j.json()
+})
+.catch(returnStubData)
 .then(extractExerciseData)
 .then(requestFood)
 .then(servingImageDisplay)
@@ -113,15 +121,13 @@ function creatDropDown(foodDict) {
 
     dropDown.addEventListener('change', e => {
         console.log(e.target.selectedIndex)
-        const foodImages = document.querySelectorAll('img')
-        foodImages.forEach(foodImage => {
-            foodImage.src = foodDict[e.target.selectedIndex].src
+        // const foodImages = document.querySelectorAll('img')
+        // foodImages.forEach(foodImage => {
+        // foodImage.src = foodDict[e.target.selectedIndex].src
         // console.log(foodImages)
+        USER_FOOD = foodDict[e.target.selectedIndex];
+        requestFood(userCaloriesBurned).then(servingImageDisplay)
       })
-        
-})
- 
-
     theBody.appendChild(dropDown)   
 };
 
@@ -139,24 +145,10 @@ function addPizza(foodImageSrc) {
 // prints mulitple pizza icons within a range
 
 function servingImageDisplay(foodObj){
-
+    console.log('Serving image received: ' + foodObj.name)
     for (let i = 0; i < foodObj.servings; i ++) {
         addPizza(foodObj.src);
     }
 }
-// creates food dictionary
-const foodDict = [
-    {name:'pizza', src: "https://png.icons8.com/color/50/000000/pizza.png"},
-    {name:'hamburger',src:"https://png.icons8.com/color/40/000000/hamburger.png"},
-    {name:'iceCream',src:"https://png.icons8.com/color/40/000000/banana-split.png"},
-    {name:'fries', src: "https://png.icons8.com/color/40/000000/french-fries.png"},
-    {name:'celery', src: "https://png.icons8.com/color/40/000000/celery.png"},
-    {name:'chips', src: "https://png.icons8.com/color/40/000000/nachos.png"},
-    {name:'candyBar', src: "https://png.icons8.com/color/40/000000/chocolate-bar.png"},
-    {name:'beer', src: "https://png.icons8.com/color/40/000000/beer.png"},
-    {name:'taco', src: "https://png.icons8.com/color/40/000000/taco.png"},
-    {name:'cupCake', src: "https://png.icons8.com/color/40/000000/cupcake.png"}
-    
-]
 
 creatDropDown(foodDict);
