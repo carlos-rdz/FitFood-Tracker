@@ -157,7 +157,7 @@ function servingImageDisplay(foodObj){
     for (let i = 0; i < foodObj.servings; i ++) {
         addPizza(foodObj.src);
     }
-    console.log('Image served.')
+    console.log('Food served.')
 }
 
 const foodSelector = creatDropDown(foodDict);
