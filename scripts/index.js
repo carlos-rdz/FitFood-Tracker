@@ -68,7 +68,7 @@ function extractExerciseData(info){
     
     writeExerciseData(displayData)
 
-    return calorieData
+    return 1000
 }
 // =============================================
 // helper function that writes data to the 
@@ -92,6 +92,7 @@ fetchExcerciseData();
 function creatDropDown(foodDict) {
 
         let dropDown = document.createElement('select');
+        dropDown.classList.add('foodSelector')
         foodDict.forEach(foodItem => {
         let option = document.createElement("option");
         option.value = foodItem['name']
@@ -116,7 +117,7 @@ function creatDropDown(foodDict) {
 
 const theBody = document.querySelector("body");
 
-// let foodImage = "https://png.icons8.com/color/50/000000/pizza.png"
+let foodImage = "https://png.icons8.com/color/50/000000/pizza.png"
 function addPizza() {
     // creates new images element
     const newImg = document.createElement("img");

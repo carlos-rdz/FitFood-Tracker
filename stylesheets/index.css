@@ -1,0 +1,24 @@
+
+.topcontainer{
+    display: flex;
+    flex-direction: column;
+   outline: 3px dotted black;
+   font-family: 'Londrina Solid', cursive;
+   font-size: 20px;
+}
+
+
+
+
+.fitbit {
+    
+
+}
+
+.foodSelector > img {
+    display: flex;
+    flex-direction: column;
+    outline: 1px solid red;
+
+    
+}
