@@ -15,14 +15,20 @@ fetch('https://api.fitbit.com/1/user/-/profile.json',
     }
 }
 )
-.then(j => j.json())
+.then(j => {
+    if (!j.ok) {
+        throw new Error('network response not ok');
+    }
+    return j.json()
+})
+.catch(returnStubData)
 .then(getUserInfo)
 .then(writeUserInfo)
 
 }
 
 function getUserInfo(info){
-
+console.log(info)
 return ` Welcome ${info['user']["fullName"]}`
 
 }
@@ -32,6 +38,11 @@ function writeUserInfo(name){
     profileDisplay = document.createElement('div');
     profileDisplay.textContent = name;
     profileHeader.appendChild(profileDisplay);
+}
+
+function returnStubData() {
+    console.log('Returning stub data')
+    return {user: {fullName: 'Collin Argo'}, activityCalories: 20}
 }
 
 
@@ -68,7 +79,7 @@ function extractExerciseData(info){
     
     writeExerciseData(displayData)
 
-    return calorieData
+    return 1000
 }
 // =============================================
 // helper function that writes data to the 
@@ -100,11 +111,11 @@ function creatDropDown(foodDict) {
     console.log(option.value)
     })
 
-    dropDown.addEventListener('change',e => {
+    dropDown.addEventListener('change', e => {
         console.log(e.target.selectedIndex)
-      const foodImages = document.querySelectorAll('img')
-      foodImages.forEach((foodImage) => {
-          foodImage.src = foodDict[e.target.selectedIndex].src
+        const foodImages = document.querySelectorAll('img')
+        foodImages.forEach(foodImage => {
+            foodImage.src = foodDict[e.target.selectedIndex].src
         // console.log(foodImages)
       })
         
@@ -117,12 +128,12 @@ function creatDropDown(foodDict) {
 const theBody = document.querySelector("body");
 
 // let foodImage = "https://png.icons8.com/color/50/000000/pizza.png"
-function addPizza() {
+function addPizza(foodImageSrc) {
     // creates new images element
     const newImg = document.createElement("img");
     // adds the pizza icon
     const newPizza = document.createAttribute("src");
-    newImg.src = foodImage;
+    newImg.src = foodImageSrc;
     theBody.appendChild(newImg);
 };
 // prints mulitple pizza icons within a range
@@ -130,9 +141,8 @@ function addPizza() {
 function servingImageDisplay(foodObj){
 
     for (let i = 0; i < foodObj.servings; i ++) {
-        addPizza();
-
-}
+        addPizza(foodObj.src);
+    }
 }
 // creates food dictionary
 const foodDict = [
