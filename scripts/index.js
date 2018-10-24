@@ -1,15 +1,13 @@
-let fitDisplay = document.querySelector("[data-displayInfo]")
+let fitDisplay = document.querySelector("[data-displayInfo]");
+let profileHeader = document.querySelector("[data-profileHeader]");
+// =============================================
+// function that fetches excercise data and 
+// runs the promise chain
+// =============================================
 
+function fetchProfileData(){
 
-// function that fetched data and runs the promise chain
-
-function fetchdata(){
-
-let date = '2018-10-23'
-
-fetch(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
-// fetch(`https://api.fitbit.com/1/user/-/activities.json`,
-
+fetch('https://api.fitbit.com/1/user/-/profile.json',
 {
     headers: {
         "Authorization": `Bearer ${localStorage.getItem("ourtoken")}`
@@ -18,43 +16,77 @@ fetch(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
 }
 )
 .then(j => j.json())
-.then(extractData)
-.then(writeData)
+.then(getUserInfo)
+.then(writeUserInfo)
+
+}
+
+function getUserInfo(info){
+
+return ` Welcome ${info['user']["fullName"]}`
+
+}
+
+function writeUserInfo(name){
+
+    profileDisplay = document.createElement('div');
+    profileDisplay.textContent = name;
+    profileHeader.appendChild(profileDisplay);
+}
+
+
+function fetchExcerciseData(){
+let date = '2018-10-24';
+
+fetch(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
+{
+    headers: {
+        "Authorization": `Bearer ${localStorage.getItem("ourtoken")}`
+
+    }
+}
+)
+.then(j => j.json())
+.then(extractExerciseData)
 .then(console.log)
-// .then(displayData)
-
 }
+// =============================================
+// strips the data to individual componenets and
+// returns the # of calories burnt as an integer
+// =============================================
 
-
-
-// strips the data to indivisual componenets
-
-function extractData(info){
-    let calorieData = info["summary"]["activityCalories"]
-    let distanceData = info["summary"]["distances"][0]
-    ["distance"]
-    let stepData = info["summary"]["steps"]
-    let calorieMessage = `Calories: ${calorieData}`
-    let distanceMessage = `Distance: ${distanceData}`
-    let stepMessage = `Steps: ${stepData}`
-    return [calorieMessage,distanceMessage,stepMessage]
-}
-
-
-// writes data to the document
-
-function writeData(message){
-
-    message.forEach(element => {
-        elementDisplay = document.createElement('div')
-        elementDisplay.textContent = element
-        fitDisplay.appendChild(elementDisplay)
-    });
+function extractExerciseData(info){
+    let calorieData = info["summary"]["activityCalories"];
+    let distanceData = info["summary"]["distances"][3]
+    ["distance"];
+    // let stepData = info["summary"]["steps"];
+    let calorieMessage = `Calories: ${calorieData}`;
+    let distanceMessage = `Distance: ${distanceData}km`;
+    // let stepMessage = `Steps: ${stepData}`;
+    let displayData = [calorieMessage,distanceMessage];
     
+    writeExerciseData(displayData)
 
+    return calorieData
+}
+// =============================================
+// helper function that writes data to the 
+// document
+// =============================================
+function writeExerciseData(message){
+   
+    message.forEach(element => {
+        elementDisplay = document.createElement('div');
+        elementDisplay.textContent = element;
+        fitDisplay.appendChild(elementDisplay);
+
+    });
 }
 
-fetchdata()
+fetchProfileData();
+fetchExcerciseData();
+
+// =====================================================================================================================================================================================================
 
 
 
