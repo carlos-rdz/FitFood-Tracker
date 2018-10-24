@@ -17,10 +17,10 @@ const foodDict = [
     { name:'fries', src: "https://png.icons8.com/color/40/000000/french-fries.png"},
     { name:'celery', src: "https://png.icons8.com/color/40/000000/celery.png"},
     { name:'chips', src: "https://png.icons8.com/color/40/000000/nachos.png"},
-    { name:'candyBar', src: "https://png.icons8.com/color/40/000000/chocolate-bar.png"},
+    { name:'candy bar', src: "https://png.icons8.com/color/40/000000/chocolate-bar.png"},
     { name:'beer', src: "https://png.icons8.com/color/40/000000/beer.png"},
     { name:'taco', src: "https://png.icons8.com/color/40/000000/taco.png"},
-    { name:'cupCake', src: "https://png.icons8.com/color/40/000000/cupcake.png"}   
+    { name:'cupcake', src: "https://png.icons8.com/color/40/000000/cupcake.png"}   
 ]
 let userFood = foodDict[Math.floor(Math.random() * foodDict.length)];
 let userCaloriesBurned = 0;
