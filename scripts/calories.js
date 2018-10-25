@@ -32,6 +32,7 @@ let userCaloriesBurned = 0;
 // const returnServin  gs = {};
 
 function requestFood(caloriesBurned) {
+    console.log(userCaloriesBurned, caloriesBurned)
     userCaloriesBurned = caloriesBurned;
     console.log(`User logged ${userCaloriesBurned} calories burned.`);
     let foodPromises = []
@@ -46,10 +47,8 @@ function requestFood(caloriesBurned) {
                                 }
                             })
                             .then(convertToJSON)
-                            // .then(extractFood)
-                            // .then(drawFood)
+                            .catch(returnStubFood)
                             .then(extractFood)
-                            .catch(reason => console.log("Could not receive food because" + reason))
         foodPromises.push(foodPromise)
     })
     // create array of fetch promises for each userFood
@@ -61,7 +60,23 @@ function requestFood(caloriesBurned) {
 }
 
 function convertToJSON(r) {
-    return r.json();
+    if (r.ok) {
+        return r.json()
+    }
+    throw new Error('Food request not ok')
+}
+
+function returnStubFood() {
+    console.log('Returning stub food')
+    const stubFood = {
+        common: [
+            {food_name: 'pizza', 
+            full_nutrients: [
+                , , , , {value: 250}
+            ]}
+        ]
+    }
+    return stubFood
 }
 
 function extractFood(resultsList) {
@@ -95,7 +110,7 @@ function convertCalToNumServings(foodArray) {
     foodArray.sort((foodItem1, foodItem2) => foodItem1.calories < foodItem2.calories)
     // add servings
     foodArray.forEach(foodItem => {
-        while (foodItem.calories < userCalories) {
+        while (foodItem.calories <= userCalories) {
             console.log(foodItem.calories, userCalories)
             console.log(`Adding serving of ${foodItem.name}`)
             servings.push(foodItem);

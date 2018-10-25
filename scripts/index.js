@@ -25,6 +25,7 @@ let submitButton = document.getElementById('submitButton')
 // =============================================
 // dateSlider.addEventListener("click", getDateRange)
 submitButton.addEventListener('click', () => {
+    console.log('Input submitted')
     getDateRange(dateSlider)
     getFoodChoices(foodSelector)
 })
@@ -47,7 +48,7 @@ function getDateRange(dateSlider) {
     // let activities = ['activityCalories','distance']
 
     // fetchExcerciseData(activities[0],parsedEndDate,parsedDate);
-    fetchExcerciseData(parsedEndDate,parsedDate);
+    fetchExerciseData(parsedEndDate,parsedDate);
     
 }
 
@@ -98,7 +99,7 @@ function returnStubData(reason) {
 // runs the promise chain
 // =============================================
 // only called when slider is clicked
-function fetchExcerciseData(date1,date2){
+function fetchExerciseData(date1,date2){
     
     fetch(`https://api.fitbit.com/1/user/-/activities/tracker/activityCalories/date/${date2}/${date1}.json`,
     {
@@ -133,18 +134,18 @@ function extractExerciseData(info){
     // if (info[0] === 'activityCalories') {
     console.log(info)
     let calorieDataArray = info["activities-tracker-activityCalories"]
-    let totalCalories = 0
+    let totalCalories = 1000
 
-    calorieDataArray.forEach(function(element){
+    // calorieDataArray.forEach(function(element){
 
-        totalCalories += parseInt(element["value"])
-    });
+    //     totalCalories += parseInt(element["value"])
+    // });
     
     let calorieMessage = `Calories: ${totalCalories}`;
     let displayData = [calorieMessage];
     writeExerciseData(displayData)
     // return stub data for testing
-    return 1000
+    return totalCalories
 }
 // =============================================
 // helper function that writes data to the 
@@ -152,7 +153,6 @@ function extractExerciseData(info){
 // =============================================
 function writeExerciseData(message) {
     message.forEach(element => {
-        console.log(sliderDisplay)
         // elementDisplay = document.createElement('div');
         sliderDisplay.textContent = element;
         // fitDisplay.appendChild(elementDisplay);
@@ -220,7 +220,7 @@ function getFoodChoices(foodSelector) {
         userFood.push(foodDict[option.value])
         console.log('Selecting ' + option.value)
     }
-    requestFood(userCaloriesBurned).then(servingImageDisplay)
+    // requestFood(userCaloriesBurned).then(servingImageDisplay)
 }
 
 const theBody = document.querySelector("body");
