@@ -152,8 +152,9 @@ function extractExerciseData(info){
 // =============================================
 function writeExerciseData(message) {
     message.forEach(element => {
+        console.log(sliderDisplay)
         // elementDisplay = document.createElement('div');
-        fitDisplay.textContent = message;
+        sliderDisplay.textContent = element;
         // fitDisplay.appendChild(elementDisplay);
 
    
@@ -205,7 +206,6 @@ function creatDropDown(foodDict) {
         option.value = foodItem
         option.textContent =  foodDict[foodItem]['name']
         dropDown.appendChild(option);
-        console.log(option.value)
     }
 
     topContainer.appendChild(dropDown)   
@@ -218,7 +218,7 @@ function getFoodChoices(foodSelector) {
     // take selected indexes and add corresponding foodDict to userFood
     for (let option of selectedOptions) {
         userFood.push(foodDict[option.value])
-        console.log('Selecting' + option.value)
+        console.log('Selecting ' + option.value)
     }
     requestFood(userCaloriesBurned).then(servingImageDisplay)
 }
