@@ -2,14 +2,14 @@
 const foodDict = {
     pizza: {name:'pizza', src: "https://png.icons8.com/color/50/000000/pizza.png"},
     hamburger: {name:'hamburger',src:"https://png.icons8.com/color/40/000000/hamburger.png"},
-    iceCream: {name:'ice cream',src:"https://png.icons8.com/color/40/000000/banana-split.png"},
+    // iceCream: {name:'ice cream',src:"https://png.icons8.com/color/40/000000/banana-split.png"},
     fries: {name:'fries', src: "https://png.icons8.com/color/40/000000/french-fries.png"},
     celery: {name:'celery', src: "https://png.icons8.com/color/40/000000/celery.png"},
-    chips: {name:'chips', src: "https://png.icons8.com/color/40/000000/nachos.png"},
-    candyBar: {name:'candy bar', src: "https://png.icons8.com/color/40/000000/chocolate-bar.png"},
+    // chips: {name:'chips', src: "https://png.icons8.com/color/40/000000/nachos.png"},
+    // candyBar: {name:'candy bar', src: "https://png.icons8.com/color/40/000000/chocolate-bar.png"},
     beer: {name:'beer', src: "https://png.icons8.com/color/40/000000/beer.png"},
     taco: {name:'taco', src: "https://png.icons8.com/color/40/000000/taco.png"},
-    cupCake: {name:'cupcake', src: "https://png.icons8.com/color/40/000000/cupcake.png"}   
+    // cupCake: {name:'cupcake', src: "https://png.icons8.com/color/40/000000/cupcake.png"}   
 }
 
 // create and return a random food choice 
@@ -112,8 +112,8 @@ function drawUserCalData(foodArray) {
     userCaloriesArray.forEach( calorieData => {
         let servings = convertCalToNumServings(foodArray, calorieData.value)
         drawFoodImages(servings)
-        const br = document.createElement('br')
-        theFood.appendChild(br)
+        // const br = document.createElement('br')
+        // theFood.appendChild(br)
     })
 }
 function convertCalToNumServings(foodArray, userCaloriesBurned) {
@@ -124,7 +124,7 @@ function convertCalToNumServings(foodArray, userCaloriesBurned) {
     foodArray.sort((foodItem1, foodItem2) => foodItem1.calories < foodItem2.calories)
     // add servings
     foodArray.forEach(foodItem => {
-        console.log(foodItem.calories, userCalories)
+        console.log(foodItem.name, foodItem.calories, userCalories)
         while (foodItem.calories <= userCalories) {
             console.log(foodItem.calories, userCalories)
             console.log(`Adding serving of ${foodItem.name}`)
@@ -134,7 +134,7 @@ function convertCalToNumServings(foodArray, userCaloriesBurned) {
         console.log(userCalories + ' user calories remaining.')
     })
     console.log(servings)
-    console.log(`Returning servings ${servings.join(', ')}`)
+    console.log(`Returning servings ${servings.map(item => item.name).join(', ')}`)
     // return array with number of servings of food object in it
     return servings;
 }

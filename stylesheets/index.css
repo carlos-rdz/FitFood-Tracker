@@ -43,6 +43,11 @@ option {
     text-align: center;
 }
 
+#foodResult {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
 #wrapper {
     background: white;
     width: 90%;
