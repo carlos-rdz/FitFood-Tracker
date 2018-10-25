@@ -156,29 +156,42 @@ takeDateRange();
 // =====================================================================================================================================================================================================
 
 function creatDropDown(foodDict) {
-
-        let dropDown = document.createElement('select');
-        dropDown.classList.add('foodSelector')
-        foodDict.forEach(foodItem => {
+    // create dropdown element
+    let dropDown = document.createElement('select');
+    // add options
+    for (let foodItem in foodDict) {
         let option = document.createElement("option");
-        option.value = foodItem['name']
-        option.textContent =  foodItem['name']
+        option.value = foodDict[foodItem]['name']
+        option.textContent =  foodDict[foodItem]['name']
         dropDown.appendChild(option);
-    console.log(option.value)
-    })
-
-    dropDown.addEventListener('change', e => {
-        console.log(foodDict[e.target.selectedIndex].name + ' selected.')
-        // const foodImages = document.querySelectorAll('img')
-        // foodImages.forEach(foodImage => {
-        // foodImage.src = foodDict[e.target.selectedIndex].src
-        // console.log(foodImages)
-        userFood = foodDict[e.target.selectedIndex];
-        requestFood(userCaloriesBurned).then(servingImageDisplay)
-      })
+        console.log(option.value)
+    }
+    // modify dropdown
+    dropDown.classList.add('foodSelector')
+    dropDown.multiple = true
+    dropDown.addEventListener('change', selectFoodTypes)
+    // append to body
     theBody.appendChild(dropDown)   
+    // return reference to dropdown for later use
     return dropDown
 };
+
+function selectFoodTypes(e) {
+    // reset userFood value
+    userFood = []
+    const selectedOptions = e.target.selectedOptions
+    // take selected indexes and add corresponding foodDict to userFood
+    for (let option of selectedOptions) {
+        userFood.push(foodDict[option.value])
+        console.log(option.value + ' selected.')
+    }
+    // for (let i = 0; i < selectedOptions.length; i++) {
+    //     let option = selectedOptions[i].text
+    //     userFood.push(foodDict[])
+    // }
+    console.log(userFood)
+    requestFood(userCaloriesBurned).then(servingImageDisplay)
+}
 
 const theBody = document.querySelector("body");
 const theFood = document.getElementById('foodResult')
