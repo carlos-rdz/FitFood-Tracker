@@ -26,8 +26,9 @@ let submitButton = document.getElementById('submitButton')
 // dateSlider.addEventListener("click", getDateRange)
 submitButton.addEventListener('click', () => {
     console.log('Input submitted')
-    getDateRange(dateSlider)
+    
     getFoodChoices(foodSelector)
+    getDateRange(dateSlider)
 })
 
 function getDateRange(dateSlider) {
