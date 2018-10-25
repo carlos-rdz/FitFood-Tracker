@@ -1,47 +1,63 @@
-// get references to html elements for displaying food data
-// const foodName = document.getElementById("food_name");
-// const servingSize = document.getElementById("serving_size");
-// const servingAmount = document.getElementById("serving_amount");
-// const caloriesCount = document.getElementById("calories_count");
-// const foodPhoto = document.getElementById("food_photo");
+// creates food dictionary of foodObjects
+const foodDict = {
+    pizza: {name:'pizza', src: "https://png.icons8.com/color/50/000000/pizza.png"},
+    hamburger: {name:'hamburger',src:"https://png.icons8.com/color/40/000000/hamburger.png"},
+    iceCream: {name:'ice cream',src:"https://png.icons8.com/color/40/000000/banana-split.png"},
+    fries: {name:'fries', src: "https://png.icons8.com/color/40/000000/french-fries.png"},
+    celery: {name:'celery', src: "https://png.icons8.com/color/40/000000/celery.png"},
+    chips: {name:'chips', src: "https://png.icons8.com/color/40/000000/nachos.png"},
+    candyBar: {name:'candy bar', src: "https://png.icons8.com/color/40/000000/chocolate-bar.png"},
+    beer: {name:'beer', src: "https://png.icons8.com/color/40/000000/beer.png"},
+    taco: {name:'taco', src: "https://png.icons8.com/color/40/000000/taco.png"},
+    cupCake: {name:'cupcake', src: "https://png.icons8.com/color/40/000000/cupcake.png"}   
+}
 
-// create variables to store food terms and result from API call
-// const CALORIES_BURNED = 500;
-// const FOOD_CHOICES = ['pizza', 'hamburger', 'iceCream', 'fries', 'celery', 'chips', 'candyBar', 'beer', 'taco', 'cupCake']
-// Will replace with html form selection
-// creates food dictionary
-const foodDict = [
-    { name:'pizza', src: "https://png.icons8.com/color/50/000000/pizza.png"},
-    { name:'hamburger',src:"https://png.icons8.com/color/40/000000/hamburger.png"},
-    { name:'ice cream',src:"https://png.icons8.com/color/40/000000/banana-split.png"},
-    { name:'fries', src: "https://png.icons8.com/color/40/000000/french-fries.png"},
-    { name:'celery', src: "https://png.icons8.com/color/40/000000/celery.png"},
-    { name:'chips', src: "https://png.icons8.com/color/40/000000/nachos.png"},
-    { name:'candy bar', src: "https://png.icons8.com/color/40/000000/chocolate-bar.png"},
-    { name:'beer', src: "https://png.icons8.com/color/40/000000/beer.png"},
-    { name:'taco', src: "https://png.icons8.com/color/40/000000/taco.png"},
-    { name:'cupcake', src: "https://png.icons8.com/color/40/000000/cupcake.png"}   
-]
-let userFood = foodDict[Math.floor(Math.random() * foodDict.length)];
+// create and return a random food choice 
+function randomFoodChoice() {
+    const randomNumber = Math.floor(Math.random() * Object.keys(foodDict).length)
+    let i = 0
+    for (let foodItem in foodDict) {
+        if (i == randomNumber) {
+            return foodDict[foodItem]
+        }
+        i++
+    }
+}
+// store user's food choices here
+// two random food choices
+let userFood = [randomFoodChoice(), randomFoodChoice()]
+// store user's calories burned here
+// could use array like food choices
 let userCaloriesBurned = 0;
 // const returnServin  gs = {};
 
 function requestFood(caloriesBurned) {
     userCaloriesBurned = caloriesBurned;
     console.log(`User logged ${userCaloriesBurned} calories burned.`);
-    return fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${userFood.name}&detailed=true&branded=false`,
-    {
-        headers: {
-            'x-app-key': '537d92da8786ace37bbf7c591100dfdc',
-            'x-app-id': '39f9cd3c',
-            'x-remote-user-id': '0',
-        }
+    let foodPromises = []
+    userFood.forEach(foodItem => {
+        console.log(`User selected ${foodItem.name}.`)
+        let foodPromise = fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${foodItem.name}&detailed=true&branded=false`,
+                            {
+                                headers: {
+                                    'x-app-key': '537d92da8786ace37bbf7c591100dfdc',
+                                    'x-app-id': '39f9cd3c',
+                                    'x-remote-user-id': '0'
+                                }
+                            })
+                            .then(convertToJSON)
+                            // .then(extractFood)
+                            // .then(drawFood)
+                            .then(extractFood)
+                            .catch(reason => console.log("Could not receive food because" + reason))
+        foodPromises.push(foodPromise)
     })
-    .then(convertToJSON)
-    // .then(extractFood)
-    // .then(drawFood)
-    .then(extractFood)
-    .catch(() => console.log("Could not receive food."));
+    // create array of fetch promises for each userFood
+
+    
+    // wait for all userFood fetch requests to return
+    return Promise.all(foodPromises)
+        .then(convertCalToNumServings)
 }
 
 function convertToJSON(r) {
@@ -49,27 +65,44 @@ function convertToJSON(r) {
 }
 
 function extractFood(resultsList) {
-    let foodResult = foodDict[0]
+    // declare foodResult variable
+    let foodResult
     const foodName = resultsList.common[0].food_name;
     const foodCalories = resultsList.common[0].full_nutrients[4].value;
     console.log('Food result received. Name: ' + foodName + ' Calories: ' + foodCalories);
-    foodServings = convertCalToNumServings(foodCalories, userCaloriesBurned);
-    for (let food of foodDict) {
-        if (food.name === foodName) {
-            foodResult = food
+    // get food object out of food dictionary
+    for (let food in foodDict) {
+        // console.log(`Found ${foodDict[food]['name']} in foodDict`)
+        if (foodDict[food]['name'] === foodName) {
+            foodResult = foodDict[food]
             break
         }
     }
-    foodResult.servings = foodServings
-    console.log(`Burned equivalent of ${foodResult.servings} of ${foodResult.name}`);
+    // converts foodResult to array of food items
+    foodResult.calories = foodCalories
+    // foodResult = convertCalToNumServings(foodResult, foodCalories)
+    // if (foodResult.length > 0) {
+    //     console.log(`Burned equivalent of ${foodResult.length} of ${foodResult[0].name}`);
+    // }
     return foodResult;
 }
 
-function convertCalToNumServings(foodCalories, caloriesBurned) {
+function convertCalToNumServings(foodArray) {
     console.log('Converting calories to servings...')
-    let servings = 0;
-    while (foodCalories * servings < caloriesBurned) {
-        servings++;
-    }
+    let servings = [];
+    userCalories = userCaloriesBurned
+    // sort food items by calories
+    foodArray.sort((foodItem1, foodItem2) => foodItem1.calories < foodItem2.calories)
+    // add servings
+    foodArray.forEach(foodItem => {
+        while (foodItem.calories < userCalories) {
+            console.log(foodItem.calories, userCalories)
+            console.log(`Adding serving of ${foodItem.name}`)
+            servings.push(foodItem);
+            userCalories -= foodItem.calories
+        }
+        console.log(userCalories + ' user calories remaining.')
+    })
+    // return array with number of servings of food object in it
     return servings;
 }
