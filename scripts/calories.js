@@ -9,7 +9,11 @@ const foodDict = {
     // candyBar: {name:'candy bar', src: "https://png.icons8.com/color/40/000000/chocolate-bar.png"},
     beer: {name:'beer', src: "https://png.icons8.com/color/40/000000/beer.png"},
     taco: {name:'taco', src: "https://png.icons8.com/color/40/000000/taco.png"},
-    // cupCake: {name:'cupcake', src: "https://png.icons8.com/color/40/000000/cupcake.png"}   
+    // cupCake: {name:'cupcake', src: "https://png.icons8.com/color/40/000000/cupcake.png"},   
+    candy: {name:'candy', src: "https://png.icons8.com/color/40/000000/cupcake.png"},   
+    chocolate: {name:'chocolate', src: "https://png.icons8.com/color/40/000000/chocolate-bar.png"},   
+    apple: {name:'apple', src: "https://png.icons8.com/color/40/000000/nachos.png"},   
+
 }
 
 // create and return a random food choice 
