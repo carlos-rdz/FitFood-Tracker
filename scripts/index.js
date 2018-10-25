@@ -13,7 +13,6 @@ let liftingIcon = document.querySelector("[data-lifting]")
 let allIcons= document.querySelector("[data-achievmentImages]")
 let slider= document.querySelector("[data-slider]")
 let sliderDisplay= document.querySelector("[data-sliderDisplay]")
-
 // =============================================
 // Adds an event listener to determine 
 // date range
@@ -39,6 +38,9 @@ slider.addEventListener("click", e => {
     console.log(parsedDate);
     console.log(parsedEndDate);
 
+    // let activities = ['activityCalories','distance']
+
+    // fetchExcerciseData(activities[0],parsedEndDate,parsedDate);
     fetchExcerciseData(parsedEndDate,parsedDate);
     
 })
@@ -106,6 +108,7 @@ function fetchExcerciseData(date1,date2){
     if (!j.ok) {
         throw new Error('network response not ok');
     }
+   
     return j.json()
 })
 .catch(returnStubData)
@@ -120,7 +123,9 @@ function fetchExcerciseData(date1,date2){
 // =============================================
 function extractExerciseData(info){
     
-    let calorieDataArray = info['activities-tracker-activityCalories']
+    // if (info[0] === 'activityCalories') {
+    console.log(info)
+    let calorieDataArray = info["activities-tracker-activityCalories"]
     let totalCalories = 0
 
     calorieDataArray.forEach(function(element){
@@ -129,11 +134,25 @@ function extractExerciseData(info){
     });
     
     let calorieMessage = `Calories: ${totalCalories}`;
-    let displayData = [calorieMessage];
     
-    writeExerciseData(displayData)
+    writeExerciseData(calorieMessage)
+// } else {
+//     let distanceDataArray = info[1]['activities-tracker-distance']
+//     let totalDistance = 0
 
-    return totalCalories
+//     distanceDataArray.forEach(function(element){
+
+//         totalDistance += parseInt(element.value)
+//     });
+    
+//     let distanceMessage = `Distance: ${totalDistance}`;
+//     writeExerciseData(distanceMessage)
+    
+
+   
+// }
+
+return totalCalories
 }
 // =============================================
 // helper function that writes data to the 
@@ -141,12 +160,12 @@ function extractExerciseData(info){
 // =============================================
 function writeExerciseData(message){
    
-    message.forEach(element => {
+    // message.forEach(element => {
         // elementDisplay = document.createElement('div');
-        fitDisplay.textContent = element;
+        fitDisplay.textContent = message;
         // fitDisplay.appendChild(elementDisplay);
 
-    });
+   
 }
 fetchProfileData();
 takeDateRange();
