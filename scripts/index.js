@@ -216,10 +216,12 @@ function creatDropDown(foodDict) {
 function getFoodChoices(foodSelector) {
     userFood = []
     const selectedOptions = foodSelector.selectedOptions
+    console.log(selectedOptions)
     // take selected indexes and add corresponding foodDict to userFood
-    for (let option of selectedOptions) {
-        userFood.push(foodDict[option.value])
-        console.log('Selecting ' + option.value)
+    for (let index in selectedOptions) {
+        let foodOption = selectedOptions[index].value
+        userFood.push(foodDict[foodOption])
+        console.log('Selecting ' + foodOption)
     }
     // requestFood(userCaloriesBurned).then(servingImageDisplay)
 }
