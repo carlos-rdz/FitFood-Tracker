@@ -1,12 +1,26 @@
+html body {
+display: flex;
+flex-direction: row;
+font-family: 'Raleway', sans-serif;
+font-size: 18px;
+height: 100%;
+width: 100%;
 
-.topcontainer {
+}
+.profilecontainer {
     display: flex;
     flex-direction: column;
-   outline: 3px dotted black;
-   font-family: 'Londrina Solid', cursive;
-   font-size: 20px;
-}
+   /* outline: 3px dotted black; */
+   /* font-family: 'Londrina Solid', cursive; */
+   /* font-size: 20px; */
+   background-color: #66b9bf;
+   width: 100%;
 
+}
+.displaycontainer {
+    width: 100%;
+    background-color: #eeaa7b;
+}
 /* The slider itself */
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
@@ -20,24 +34,18 @@
 }
 
 .achievments {
-
     display: flex;
-
 }
 
 .achievmentImages img{
     height: 30px;
 }
 
-
-
 .currentAchievment{
-
 background-color: #00B0B9;
-
 }
 
-@import url(https://fonts.googleapis.com/css?family=Raleway);
+/* @import url(https://fonts.googleapis.com/css?family=Raleway); */
 
 
 
