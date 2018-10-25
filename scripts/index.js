@@ -99,12 +99,7 @@ function fetchExcerciseData(date1,date2){
 
 }
 )
-.then(j => {
-    if (!j.ok) {
-        throw new Error('network response not ok');
-    }
-    return j.json()
-})
+.then(extractJSON)
 .catch(returnStubData)
 .then(extractExerciseData)
 .then(requestFood)
@@ -114,6 +109,13 @@ function fetchExcerciseData(date1,date2){
 // strips the data to individual componenets and
 // returns the # of calories burnt as an integer
 // =============================================
+
+function extractJSON(j) {
+        if (!j.ok) {
+        throw new Error('network response not ok');
+    }
+    return j.json()
+}
 
 function extractExerciseData(info){
     let calorieDataArray = info['activities-tracker-activityCalories']
