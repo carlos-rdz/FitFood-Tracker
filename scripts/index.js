@@ -23,9 +23,8 @@ let submitButton = document.getElementById('submitButton')
 // add an event listener to 
 // determine date range
 // =============================================
-// dateSlider.addEventListener("click", getDateRange)
 submitButton.addEventListener('click', () => {
-    console.log('Input submitted')
+    console.log('Submit button clicked.')
     
     getFoodChoices(foodSelector)
     getDateRange(dateSlider)
@@ -199,7 +198,7 @@ return calories
 function creatDropDown(foodDict) {
     // create dropdown element
     let dropDown = document.createElement('select');
-    dropDown.addEventListener('change', getFoodChoices)
+    // dropDown.addEventListener('change', getFoodChoices)
     dropDown.multiple = true
     // add options
     for (let foodItem in foodDict) {
@@ -216,10 +215,9 @@ function creatDropDown(foodDict) {
 function getFoodChoices(foodSelector) {
     userFood = []
     const selectedOptions = foodSelector.selectedOptions
-    console.log(selectedOptions)
     // take selected indexes and add corresponding foodDict to userFood
-    for (let index in selectedOptions) {
-        let foodOption = selectedOptions[index].value
+    for (let index of selectedOptions) {
+        let foodOption = index.value
         userFood.push(foodDict[foodOption])
         console.log('Selecting ' + foodOption)
     }
