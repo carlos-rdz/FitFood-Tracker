@@ -1,24 +1,26 @@
 let topContainer = document.getElementsByClassName("topcontainer")[0]
 let fitDisplay = document.querySelector("[data-displayInfo]");
 let profileHeader = document.querySelector("[data-profileHeader]");
-let dateSlider = document.querySelector("[data-slider]")
+let dateSlider = document.querySelector("input.slider")
+let submitButton = document.getElementById('submitButton')
 
 // =============================================
-// function that adds an event listener to 
+// add an event listener to 
 // determine date range
 // =============================================
+// dateSlider.addEventListener("click", getDateRange)
+submitButton.addEventListener('click', () => {
+    getDateRange(dateSlider)
+    getFoodChoices(foodSelector)
+})
 
-function takeDateRange(){
-
-dateSlider.addEventListener("click", e => {
-    
-    console.log(e.target.value)
+function getDateRange(dateSlider) {
 
     let todaysDate = new Date()
     let parsedDate = `${todaysDate.getFullYear()}-${('0' + (todaysDate.getMonth()+1)).slice(-2)}-${('0' + todaysDate.getDate()).slice(-2)}`;
     
     let endDate = new Date()
-    endDate.setDate(endDate.getDate()-e.target.value)
+    endDate.setDate(endDate.getDate()-dateSlider.value)
 
     let parsedEndDate = `${endDate.getFullYear()}-${('0' + (endDate.getMonth()+1)).slice(-2)}-${('0' + endDate.getDate()).slice(-2)}`;
 
@@ -28,12 +30,7 @@ dateSlider.addEventListener("click", e => {
 
     fetchExcerciseData(parsedEndDate,parsedDate);
     
-})
-
-
 }
-takeDateRange();
-
 
 // =============================================
 // function that fetches Profle data and 
@@ -148,34 +145,32 @@ function writeExerciseData(message){
 }
 
 fetchProfileData();
-takeDateRange();
+// takeDateRange();
 // fetchExcerciseData();
 
 // =====================================================================================================================================================================================================
 
 function creatDropDown(foodDict) {
-        let dropDown = document.createElement('select');
-        dropDown.classList.add('foodSelector')
-        foodDict.forEach(foodItem => {
+    let dropDown = document.createElement('select');
+    dropDown.classList.add('foodSelector')
+    foodDict.forEach(foodItem => {
         let option = document.createElement("option");
         option.value = foodItem['name']
         option.textContent =  foodItem['name']
         dropDown.appendChild(option);
-    console.log(option.value)
+        console.log(option.value)
     })
 
-    dropDown.addEventListener('change', e => {
-        console.log(foodDict[e.target.selectedIndex].name + ' selected.')
-        // const foodImages = document.querySelectorAll('img')
-        // foodImages.forEach(foodImage => {
-        // foodImage.src = foodDict[e.target.selectedIndex].src
-        // console.log(foodImages)
-        userFood = foodDict[e.target.selectedIndex];
-        requestFood(userCaloriesBurned).then(servingImageDisplay)
-      })
+    dropDown.addEventListener('change', getFoodChoices)
     topContainer.appendChild(dropDown)   
     return dropDown
 };
+
+function getFoodChoices(foodSelector) {
+    console.log(foodDict[foodSelector.selectedIndex].name + ' selected.')
+    userFood = foodDict[foodSelector.selectedIndex];
+    requestFood(userCaloriesBurned).then(servingImageDisplay)
+}
 
 const theBody = document.querySelector("body");
 const theFood = document.getElementById('foodResult')
