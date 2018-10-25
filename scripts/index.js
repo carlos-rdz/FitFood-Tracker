@@ -4,7 +4,6 @@
 // // =============================================
 let fitDisplay = document.querySelector("[data-displayInfo]");
 let profileHeader = document.querySelector("[data-profileHeader]");
-let dateSlider = document.querySelector("[data-slider]")
 let fatIcon = document.querySelector("[data-fat]")
 let slouchIcon = document.querySelector("[data-slouch]")
 let standingIcon = document.querySelector("[data-standing]")
@@ -16,21 +15,28 @@ let sliderDisplay= document.querySelector("[data-sliderDisplay]")
 // =============================================
 // Adds an event listener to determine 
 // date range
+let topContainer = document.getElementsByClassName("topcontainer")[0]
+let dateSlider = document.getElementById("range-slider")
+let submitButton = document.getElementById('submitButton')
+
 // =============================================
+// add an event listener to 
+// determine date range
+// =============================================
+// dateSlider.addEventListener("click", getDateRange)
+submitButton.addEventListener('click', () => {
+    getDateRange(dateSlider)
+    getFoodChoices(foodSelector)
+})
 
-function takeDateRange(){
-
-slider.addEventListener("click", e => {
-    console.log(e.target.value)
-    sliderDisplay.textContent = e.target.value
-
+function getDateRange(dateSlider) {
     let todaysDate = new Date()
     let parsedDate = `${todaysDate.getFullYear()}-${('0' + (todaysDate.getMonth()+1)).slice(-2)}-${('0' + todaysDate.getDate()).slice(-2)}`;
     
 
     // check this
     let endDate = new Date()
-    endDate.setDate(endDate.getDate()-e.target.value)
+    endDate.setDate(endDate.getDate()-dateSlider.value)
 
     let parsedEndDate = `${endDate.getFullYear()}-${('0' + (endDate.getMonth()+1)).slice(-2)}-${('0' + endDate.getDate()).slice(-2)}`;
 
@@ -43,9 +49,8 @@ slider.addEventListener("click", e => {
     // fetchExcerciseData(activities[0],parsedEndDate,parsedDate);
     fetchExcerciseData(parsedEndDate,parsedDate);
     
-})
 }
-takeDateRange();
+
 // =============================================
 // function that fetches profile data and 
 // runs the promise chain
@@ -156,11 +161,8 @@ function writeExerciseData(message) {
 }
 
 fetchProfileData();
-takeDateRange();
-// =============================================
-// determines achievment level and adds a class
-// that highlights current status
-// =============================================
+// takeDateRange();
+// fetchExcerciseData();
 
 function achievments(calories){
 
@@ -201,33 +203,19 @@ function creatDropDown(foodDict) {
         option.value = foodItem
         option.textContent =  foodDict[foodItem]['name']
         dropDown.appendChild(option);
-        // console.log(option.value)
+        console.log(option.value)
     }
-    // modify dropdown
-    dropDown.classList.add('foodSelector')
-    dropDown.multiple = true
-    dropDown.addEventListener('change', selectFoodTypes)
-    // append to body
-    theBody.appendChild(dropDown)   
-    // return reference to dropdown for later use
+
+    dropDown.addEventListener('change', getFoodChoices)
+    topContainer.appendChild(dropDown)   
     return dropDown
 };
 
-// event listener for dropdown
-function selectFoodTypes(e) {
-    // reset userFood value
-    userFood = []
-    const selectedOptions = e.target.selectedOptions
-    // take selected indexes and add corresponding foodDict to userFood
-    for (let option of selectedOptions) {
-        userFood.push(foodDict[option.value])
-        console.log('Selecting' + option.value)
-    }
-    // for (let i = 0; i < selectedOptions.length; i++) {
-    //     let option = selectedOptions[i].text
-    //     userFood.push(foodDict[])
-    // }
-    console.log(userFood)
+function getFoodChoices(foodSelector) {
+    const selectedOptions = foodSelector.selectedOptions
+    
+    console.log(foodDict[foodSelector.selectedIndex].name + ' selected.')
+    userFood = foodDict[foodSelector.selectedIndex];
     requestFood(userCaloriesBurned).then(servingImageDisplay)
 }
 
