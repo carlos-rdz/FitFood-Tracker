@@ -36,27 +36,33 @@ let userCaloriesBurned = 0;
 
 function requestFood(caloriesBurned) {
     userCaloriesBurned = caloriesBurned;
-    userFood.forEach(foodItem => console.log(`User selected ${foodItem.name}.`))
     console.log(`User logged ${userCaloriesBurned} calories burned.`);
-    // create array of fetch promises for each userFood
-    let foodPromises = userFood.map(foodItem => {
-        fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${foodItem.name}&detailed=true&branded=false`,
-            {
-                headers: {
-                    'x-app-key': '537d92da8786ace37bbf7c591100dfdc',
-                    'x-app-id': '39f9cd3c',
-                    'x-remote-user-id': '0'
-                }
-        })
-        .then(convertToJSON)
-        // .then(extractFood)
-        // .then(drawFood)
-        .then(extractFood)
-        .catch(() => console.log("Could not receive food."));
+    let foodPromises = []
+    userFood.forEach(foodItem => {
+        console.log(`User selected ${foodItem.name}.`)
+        let foodPromise = fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${userFood[0].name}&detailed=true&branded=false`,
+                            {
+                                headers: {
+                                    'x-app-key': '537d92da8786ace37bbf7c591100dfdc',
+                                    'x-app-id': '39f9cd3c',
+                                    'x-remote-user-id': '0'
+                                }
+                            })
+                            .then(convertToJSON)
+                            // .then(extractFood)
+                            // .then(drawFood)
+                            .then(extractFood)
+                            .catch(() => console.log("Could not receive food."))
+        foodPromises.push(foodPromise)
     })
+    // create array of fetch promises for each userFood
+
     
     // wait for all userFood fetch requests to return
-    return Promise.all(foodPromises).then(j => console.log(j))
+    return Promise.all(foodPromises)
+        .then(foodArray => {
+            return foodArray.flat()
+        })
 }
 
 function convertToJSON(r) {
@@ -77,6 +83,7 @@ function extractFood(resultsList) {
             break
         }
     }
+    // converts foodResult to array of food items
     foodResult = convertCalToNumServings(foodResult, foodCalories);
     console.log(`Burned equivalent of ${foodResult.length} of ${foodResult[0].name}`);
     return foodResult;

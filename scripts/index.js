@@ -161,7 +161,7 @@ function creatDropDown(foodDict) {
     // add options
     for (let foodItem in foodDict) {
         let option = document.createElement("option");
-        option.value = foodDict[foodItem]['name']
+        option.value = foodItem
         option.textContent =  foodDict[foodItem]['name']
         dropDown.appendChild(option);
         console.log(option.value)
