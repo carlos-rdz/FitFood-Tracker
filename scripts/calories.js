@@ -40,7 +40,7 @@ function requestFood(caloriesBurned) {
     let foodPromises = []
     userFood.forEach(foodItem => {
         console.log(`User selected ${foodItem.name}.`)
-        let foodPromise = fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${userFood[0].name}&detailed=true&branded=false`,
+        let foodPromise = fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${foodItem.name}&detailed=true&branded=false`,
                             {
                                 headers: {
                                     'x-app-key': '537d92da8786ace37bbf7c591100dfdc',
