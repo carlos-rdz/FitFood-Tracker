@@ -111,7 +111,7 @@ function fetchExcerciseData(date1,date2){
 // =============================================
 
 function extractJSON(j) {
-        if (!j.ok) {
+    if (!j.ok) {
         throw new Error('network response not ok');
     }
     return j.json()
@@ -132,7 +132,8 @@ function extractExerciseData(info){
     
     writeExerciseData(displayData)
 
-    return totalCalories
+    // return stub data for testing
+    return 1000
 }
 // =============================================
 // helper function that writes data to the 

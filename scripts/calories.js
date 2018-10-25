@@ -1,14 +1,3 @@
-// get references to html elements for displaying food data
-// const foodName = document.getElementById("food_name");
-// const servingSize = document.getElementById("serving_size");
-// const servingAmount = document.getElementById("serving_amount");
-// const caloriesCount = document.getElementById("calories_count");
-// const foodPhoto = document.getElementById("food_photo");
-
-// create variables to store food terms and result from API call
-// const CALORIES_BURNED = 500;
-// const FOOD_CHOICES = ['pizza', 'hamburger', 'iceCream', 'fries', 'celery', 'chips', 'candyBar', 'beer', 'taco', 'cupCake']
-// Will replace with html form selection
 // creates food dictionary
 const foodDict = [
     { name:'pizza', src: "https://png.icons8.com/color/50/000000/pizza.png"},
@@ -22,14 +11,23 @@ const foodDict = [
     { name:'taco', src: "https://png.icons8.com/color/40/000000/taco.png"},
     { name:'cupcake', src: "https://png.icons8.com/color/40/000000/cupcake.png"}   
 ]
-let userFood = foodDict[Math.floor(Math.random() * foodDict.length)];
+// create and return a random food choice 
+function randomFoodChoice() {
+    return foodDict[Math.floor(Math.random() * foodDict.length)];
+}
+// store user's food choices here
+// two random food choices
+let userFood = [randomFoodChoice(), randomFoodChoice()]
+// store user's calories burned here
+// could use array like food choices
 let userCaloriesBurned = 0;
 // const returnServin  gs = {};
 
 function requestFood(caloriesBurned) {
     userCaloriesBurned = caloriesBurned;
+    console.log(`User selected ${userFood[0].name}.`)
     console.log(`User logged ${userCaloriesBurned} calories burned.`);
-    return fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${userFood.name}&detailed=true&branded=false`,
+    return fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${userFood[0].name}&detailed=true&branded=false`,
     {
         headers: {
             'x-app-key': '537d92da8786ace37bbf7c591100dfdc',
