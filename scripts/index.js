@@ -1,3 +1,4 @@
+let topContainer = document.getElementsByClassName("topcontainer")[0]
 let fitDisplay = document.querySelector("[data-displayInfo]");
 let profileHeader = document.querySelector("[data-profileHeader]");
 let dateSlider = document.querySelector("[data-slider]")
@@ -153,7 +154,6 @@ takeDateRange();
 // =====================================================================================================================================================================================================
 
 function creatDropDown(foodDict) {
-
         let dropDown = document.createElement('select');
         dropDown.classList.add('foodSelector')
         foodDict.forEach(foodItem => {
@@ -173,7 +173,7 @@ function creatDropDown(foodDict) {
         userFood = foodDict[e.target.selectedIndex];
         requestFood(userCaloriesBurned).then(servingImageDisplay)
       })
-    theBody.appendChild(dropDown)   
+    topContainer.appendChild(dropDown)   
     return dropDown
 };
 
