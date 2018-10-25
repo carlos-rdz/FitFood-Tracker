@@ -93,9 +93,9 @@ function convertCalToNumServings(foodItem, foodCalories) {
     // return array with number of servings of food object in it
     console.log('Converting calories to servings...')
     let servings = [];
-    do {
+    while (foodCalories < userCaloriesBurned) {
         servings.push(foodItem);
         userCaloriesBurned -= foodCalories
-    } while (foodCalories < userCaloriesBurned)
+    } 
     return servings;
 }

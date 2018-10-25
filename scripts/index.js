@@ -57,24 +57,20 @@ function fetchProfileData(){
     .catch(returnStubData)
     .then(getUserInfo)
     .then(writeUserInfo)
-    
 }
 
 function getUserInfo(info){
-    
-    return ` Welcome ${info['user']["fullName"]}`
-    
+    return ` Welcome ${info['user']["fullName"]}` 
 }
 
-function writeUserInfo(name){
-    
+function writeUserInfo(name){  
     profileDisplay = document.createElement('div');
     profileDisplay.textContent = name;
     profileHeader.appendChild(profileDisplay);
 }
 
-function returnStubData() {
-    console.log('Returning stub data')
+function returnStubData(reason) {
+    console.log('Returning stub data. Request rejected because: ' + reason)
     const data =  {user: {fullName: 'Stub User'}, activityCalories: 2000,
             summary: {activityCalories: 2000, distances: [, , , {distance: 25}]}}
     console.log(data)
@@ -85,11 +81,9 @@ function returnStubData() {
 // function that fetches excercise data and 
 // runs the promise chain
 // =============================================
-
+// only called when slider is clicked
 function fetchExcerciseData(date1,date2){
     
-
-
     fetch(`https://api.fitbit.com/1/user/-/activities/tracker/activityCalories/date/${date2}/${date1}.json`,
     {
         headers: {
@@ -120,27 +114,24 @@ function extractJSON(j) {
 function extractExerciseData(info){
     let calorieDataArray = info['activities-tracker-activityCalories']
     
-    let totalCalories = 0
+    let totalCalories = 1000
 
-    calorieDataArray.forEach(function(element){
+    // calorieDataArray.forEach(function(element){
 
-        totalCalories += parseInt(element["value"])
-    });
+    //     totalCalories += parseInt(element["value"])
+    // });
     
     let calorieMessage = `Calories: ${totalCalories}`;
     let displayData = [calorieMessage];
-    
     writeExerciseData(displayData)
-
     // return stub data for testing
-    return 1000
+    return totalCalories
 }
 // =============================================
 // helper function that writes data to the 
 // document
 // =============================================
 function writeExerciseData(message){
-   
     message.forEach(element => {
         // elementDisplay = document.createElement('div');
         fitDisplay.textContent = element;
@@ -164,7 +155,7 @@ function creatDropDown(foodDict) {
         option.value = foodItem
         option.textContent =  foodDict[foodItem]['name']
         dropDown.appendChild(option);
-        console.log(option.value)
+        // console.log(option.value)
     }
     // modify dropdown
     dropDown.classList.add('foodSelector')
