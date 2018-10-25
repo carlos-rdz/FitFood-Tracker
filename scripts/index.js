@@ -207,15 +207,15 @@ function addPizza(foodImageSrc) {
 // prints mulitple pizza icons within a range
 
 function servingImageDisplay(foodObj){
-    console.log('Serving image received: ' + foodObj.name)
-    foodSelector.selectedIndex = foodDict.indexOf(foodObj)
+    // receives array of foodobj
+    console.log('Serving image received')
+    // foodSelector.selectedIndex = foodDict.indexOf(foodObj)
     // clear old foodImages
-    // debugger
     while (theFood.childNodes.length > 0) {
         theFood.childNodes[0].remove()
     }
-    for (let i = 0; i < foodObj.servings; i ++) {
-        addPizza(foodObj.src);
+    for (let i = 0; i < foodObj.length; i ++) {
+        addPizza(foodObj[i].src);
     }
     console.log('Food served.')
 }
