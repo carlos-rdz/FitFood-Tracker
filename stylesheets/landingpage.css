@@ -1,9 +1,27 @@
 
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
 html, body {
     width: 100%;
     height: 100%;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main {
+    flex:1;
+}
 
 
 #canvas-image-blending {
@@ -35,7 +53,7 @@ html, body {
     padding:8px 12px;
     display: flex;
     justify-content: flex-end;
-    position: fixed;
+    
     
     
 }
