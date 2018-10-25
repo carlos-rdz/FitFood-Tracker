@@ -12,6 +12,7 @@ let liftingIcon = document.querySelector("[data-lifting]")
 let allIcons= document.querySelector("[data-achievmentImages]")
 let slider= document.querySelector("[data-slider]")
 let sliderDisplay= document.querySelector("[data-sliderDisplay]")
+let dropdownDisplay= document.querySelector("[data-dropdown")
 // =============================================
 // Adds an event listener to determine 
 // date range
@@ -24,6 +25,9 @@ let submitButton = document.getElementById('submitButton')
 // determine date range
 // =============================================
 // dateSlider.addEventListener("click", getDateRange)
+
+dateSlider.addEventListener("click", e => 
+    sliderDisplay.textContent = e.target.value)
 submitButton.addEventListener('click', () => {
     getDateRange(dateSlider)
     getFoodChoices(foodSelector)
@@ -208,7 +212,7 @@ function creatDropDown(foodDict) {
         console.log(option.value)
     }
 
-    topContainer.appendChild(dropDown)   
+    dropdownDisplay.appendChild(dropDown)   
     return dropDown
 };
 
@@ -250,6 +254,7 @@ function servingImageDisplay(foodObj){
     }
     console.log('Food served.')
 }
+
 
 const foodSelector = creatDropDown(foodDict);
 

@@ -13,13 +13,13 @@ width: 100%;
    /* outline: 3px dotted black; */
    /* font-family: 'Londrina Solid', cursive; */
    /* font-size: 20px; */
-   background-color: #66b9bf;
+   background-color: #BDEDE0;
    width: 100%;
 
 }
 .displaycontainer {
     width: 100%;
-    background-color: #eeaa7b;
+    background-color: #B6B8D6;
 }
 /* The slider itself */
 .slider {
@@ -46,9 +46,31 @@ background-color: #00B0B9;
 }
 
 /* @import url(https://fonts.googleapis.com/css?family=Raleway); */
+.optionsContainer{
+    outline: 1px solid red;
+    display: flex;
+   align-items: flex-start;
+   justify-content: flex-start;
+   flex-direction: row;
+   text-align: center;
+   /* width: 50% */
+}
+
+.rangeContainer{
+    width: 50%;
 
 
+}
+.dropdown {
+    width: 50%;
+}
 
+.dropdown select{
+
+    width: 100px;
+    height: 100px;
+    background-color: #B6B8D6
+}
 #wrapper {
     background: white;
     width: 90%;
@@ -72,7 +94,7 @@ h1, h2 {
     font-size: 15px;
 }
 #range-slider {
-    width: 200px;
+    width: 150px;
 }
 #range-slider::-moz-range-thumb {
     padding: 3px;
