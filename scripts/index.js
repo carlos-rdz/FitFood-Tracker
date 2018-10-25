@@ -197,6 +197,7 @@ function creatDropDown(foodDict) {
     let dropDown = document.createElement('select');
     // dropDown.addEventListener('change', getFoodChoices)
     dropDown.multiple = true
+    dropDown.size = 5
     // add options
     for (let foodItem in foodDict) {
         let option = document.createElement("option");
