@@ -167,6 +167,7 @@ function creatDropDown(foodDict) {
     return dropDown
 };
 
+// event listener for dropdown
 function selectFoodTypes(e) {
     // reset userFood value
     userFood = []
@@ -174,7 +175,7 @@ function selectFoodTypes(e) {
     // take selected indexes and add corresponding foodDict to userFood
     for (let option of selectedOptions) {
         userFood.push(foodDict[option.value])
-        console.log(option.value + ' selected.')
+        console.log('Selecting' + option.value)
     }
     // for (let i = 0; i < selectedOptions.length; i++) {
     //     let option = selectedOptions[i].text

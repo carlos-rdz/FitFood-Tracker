@@ -14,17 +14,14 @@ const foodDict = {
 
 // create and return a random food choice 
 function randomFoodChoice() {
-    const randomNumber = Math.floor(Math.random() * foodDict.length)
-    let foodChoice = foodDict['pizza']
+    const randomNumber = Math.floor(Math.random() * Object.keys(foodDict).length)
     let i = 0
     for (let foodItem in foodDict) {
-        if (i > randomNumber) {
-            break
+        if (i == randomNumber) {
+            return foodDict[foodItem]
         }
-        foodChoice = foodDict[foodItem]
         i++
     }
-    return foodChoice
 }
 // store user's food choices here
 // two random food choices
@@ -52,7 +49,7 @@ function requestFood(caloriesBurned) {
                             // .then(extractFood)
                             // .then(drawFood)
                             .then(extractFood)
-                            .catch(() => console.log("Could not receive food."))
+                            .catch(reason => console.log("Could not receive food because" + reason))
         foodPromises.push(foodPromise)
     })
     // create array of fetch promises for each userFood
@@ -60,9 +57,7 @@ function requestFood(caloriesBurned) {
     
     // wait for all userFood fetch requests to return
     return Promise.all(foodPromises)
-        .then(foodArray => {
-            return foodArray.flat()
-        })
+        .then(convertCalToNumServings)
 }
 
 function convertToJSON(r) {
@@ -84,18 +79,30 @@ function extractFood(resultsList) {
         }
     }
     // converts foodResult to array of food items
-    foodResult = convertCalToNumServings(foodResult, foodCalories);
-    console.log(`Burned equivalent of ${foodResult.length} of ${foodResult[0].name}`);
+    foodResult.calories = foodCalories
+    // foodResult = convertCalToNumServings(foodResult, foodCalories)
+    // if (foodResult.length > 0) {
+    //     console.log(`Burned equivalent of ${foodResult.length} of ${foodResult[0].name}`);
+    // }
     return foodResult;
 }
 
-function convertCalToNumServings(foodItem, foodCalories) {
-    // return array with number of servings of food object in it
+function convertCalToNumServings(foodArray) {
     console.log('Converting calories to servings...')
     let servings = [];
-    while (foodCalories < userCaloriesBurned) {
-        servings.push(foodItem);
-        userCaloriesBurned -= foodCalories
-    } 
+    userCalories = userCaloriesBurned
+    // sort food items by calories
+    foodArray.sort((foodItem1, foodItem2) => foodItem1.calories < foodItem2.calories)
+    // add servings
+    foodArray.forEach(foodItem => {
+        while (foodItem.calories < userCalories) {
+            console.log(foodItem.calories, userCalories)
+            console.log(`Adding serving of ${foodItem.name}`)
+            servings.push(foodItem);
+            userCalories -= foodItem.calories
+        }
+        console.log(userCalories + ' user calories remaining.')
+    })
+    // return array with number of servings of food object in it
     return servings;
 }
