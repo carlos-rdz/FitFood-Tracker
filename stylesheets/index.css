@@ -48,6 +48,11 @@ option {
     flex-direction: column-reverse;
 }
 
+.foodImageDiv {
+    display: flex;
+    flex-direction: column;
+}
+
 #wrapper {
     background: white;
     width: 90%;
