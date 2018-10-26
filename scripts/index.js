@@ -25,8 +25,10 @@ dateSlider.addEventListener("click", e =>
     sliderDisplay.textContent = e.target.value)
 
 submitButton.addEventListener('click', () => {
-    getDateRange(dateSlider)
+    console.log('Submit button clicked.')
+    
     getFoodChoices(foodSelector)
+    getDateRange(dateSlider)
 })
 
 function getDateRange(dateSlider) {
@@ -47,7 +49,7 @@ function getDateRange(dateSlider) {
     // let activities = ['activityCalories','distance']
 
     // fetchExcerciseData(activities[0],parsedEndDate,parsedDate);
-    fetchExcerciseData(parsedEndDate,parsedDate);
+    fetchExerciseData(parsedEndDate,parsedDate);
     
 }
 
@@ -98,7 +100,7 @@ function returnStubData(reason) {
 // runs the promise chain
 // =============================================
 // only called when slider is clicked
-function fetchExcerciseData(date1,date2){
+function fetchExerciseData(date1,date2){
     
     fetch(`https://api.fitbit.com/1/user/-/activities/tracker/activityCalories/date/${date2}/${date1}.json`,
     {
@@ -114,7 +116,6 @@ function fetchExcerciseData(date1,date2){
 .then(extractExerciseData)
 .then(achievments)
 .then(requestFood)
-.then(servingImageDisplay)
 }
 // =============================================
 // strips the data to individual componenets and
@@ -129,22 +130,24 @@ function extractJSON(j) {
 }
 
 function extractExerciseData(info){
-    
-    // if (info[0] === 'activityCalories') {
-    console.log(info)
-    let calorieDataArray = info["activities-tracker-activityCalories"]
+    // calorie data array contains date and value for every day in range
+    let calorieDataArray = [
+        {date: '10-31-18', value: 290},
+        {date: '10-30-18', value: 350},
+        {date: '10-29-18', value: 100}
+    ]
+    console.log(info["activities-tracker-activityCalories"])
     let totalCalories = 0
-
     calorieDataArray.forEach(function(element){
 
         totalCalories += parseInt(element["value"])
     });
     
-    let calorieMessage = `Calories: ${totalCalories}`;
+    let calorieMessage = `Total Calories: ${totalCalories}`;
     let displayData = [calorieMessage];
     writeExerciseData(displayData)
     // return stub data for testing
-    return totalCalories
+    return calorieDataArray
 }
 // =============================================
 // helper function that writes data to the 
@@ -188,17 +191,18 @@ function achievments(calories){
         
     }else if (200000 < calories < 500000){
         liftingIcon.classList.add("currentAchievment")
-
+        
     }
-return calories
+    return calories
 }
 // =====================================================================================================================================================================================================
 
 function creatDropDown(foodDict) {
     // create dropdown element
     let dropDown = document.createElement('select');
-    dropDown.addEventListener('change', getFoodChoices)
+    // dropDown.addEventListener('change', getFoodChoices)
     dropDown.multiple = true
+    dropDown.size = 5
     // add options
     for (let foodItem in foodDict) {
         let option = document.createElement("option");
@@ -211,47 +215,49 @@ function creatDropDown(foodDict) {
     return dropDown
 };
 
+const foodSelector = creatDropDown(foodDict);
+
 function getFoodChoices(foodSelector) {
     userFood = []
     const selectedOptions = foodSelector.selectedOptions
     // take selected indexes and add corresponding foodDict to userFood
-    for (let option of selectedOptions) {
-        userFood.push(foodDict[option.value])
-        console.log('Selecting ' + option.value)
+    for (let index of selectedOptions) {
+        let foodOption = index.value
+        userFood.push(foodDict[foodOption])
+        console.log('Selecting ' + foodOption)
     }
-    requestFood(userCaloriesBurned).then(servingImageDisplay)
 }
 
 const theBody = document.querySelector("body");
-const theFood = document.getElementById('foodResult')
 
-// let foodImage = "https://png.icons8.com/color/50/000000/pizza.png"
-function addPizza(foodImageSrc) {
+
+const theFood = document.getElementById('foodResult')
+// Draw new food results display
+function drawFoodImages(foodObj, date){
+    // receives array of foodobj
+    console.log('Serving image received')
+    console.log(foodObj)
+    // create new div
+    const newImgDiv = document.createElement('div')
+    newImgDiv.classList.add('foodImageDiv')
+    const dateLabel = document.createElement('h6')
+    dateLabel.textContent = date
+    newImgDiv.appendChild(dateLabel)
+    for (let i = 0; i < foodObj.length; i ++) {
+        newImgDiv.appendChild(addFoodImage(foodObj[i].src))
+    }
+    theFood.appendChild(newImgDiv)
+    console.log('Food served.')
+}
+// creates food icon
+function addFoodImage(foodImageSrc) {
     // creates new images element
     const newImg = document.createElement("img");
     // adds the pizza icon
     newImg.src = foodImageSrc;
-    theFood.appendChild(newImg);
+    return newImg
 };
-// prints mulitple pizza icons within a range
 
-function servingImageDisplay(foodObj){
-    console.log(foodObj)
-    // receives array of foodobj
-    console.log('Serving image received')
-    // foodSelector.selectedIndex = foodDict.indexOf(foodObj)
-    // clear old foodImages
-    while (theFood.childNodes.length > 0) {
-        theFood.childNodes[0].remove()
-    }
-    for (let i = 0; i < foodObj.length; i ++) {
-        addPizza(foodObj[i].src);
-    }
-    console.log('Food served.')
-}
-
-
-const foodSelector = creatDropDown(foodDict);
 
 
 

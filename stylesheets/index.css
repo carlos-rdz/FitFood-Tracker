@@ -70,10 +70,26 @@ background-color: #00B0B9;
     background-color: #B6B8D6;
     text-align: center;
 }
+
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+
+option {
+    text-align: center;
+}
+
+#foodResult {
+    display: flex;
+    flex-direction: row;
+}
+
+.foodImageDiv {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
 #wrapper {
     background: white;
     width: 90%;
-    min-height: 300px;
     margin: 40px auto;
     padding: 15px;
     border-radius: 5px;
@@ -84,7 +100,7 @@ h1, h2 {
     font-size: 16px;
 }
 #output {
-    width: 30px;
+    width: 50px;
     display: inline-block;
     margin: 0 15px 0 0;
     padding: 6px 8px;
