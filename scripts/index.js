@@ -130,7 +130,11 @@ function extractJSON(j) {
 
 function extractExerciseData(info){
     // calorie data array contains date and value for every day in range
-    let calorieDataArray = [{date: '', value: 290}, {date: '', value: 350}, {date: '', value: 100}]
+    let calorieDataArray = [
+        {date: '10-31-18', value: 290},
+        {date: '10-30-18', value: 350},
+        {date: '10-29-18', value: 100}
+    ]
     // info["activities-tracker-activityCalories"]
     let totalCalories = 0
     calorieDataArray.forEach(function(element){
@@ -228,13 +232,16 @@ const theBody = document.querySelector("body");
 
 const theFood = document.getElementById('foodResult')
 // Draw new food results display
-function drawFoodImages(foodObj){
+function drawFoodImages(foodObj, date){
     // receives array of foodobj
     console.log('Serving image received')
     console.log(foodObj)
     // create new div
     const newImgDiv = document.createElement('div')
     newImgDiv.classList.add('foodImageDiv')
+    const dateLabel = document.createElement('h6')
+    dateLabel.textContent = date
+    newImgDiv.appendChild(dateLabel)
     for (let i = 0; i < foodObj.length; i ++) {
         newImgDiv.appendChild(addFoodImage(foodObj[i].src))
     }

@@ -45,12 +45,12 @@ option {
 
 #foodResult {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: row;
 }
 
 .foodImageDiv {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
 }
 
 #wrapper {
