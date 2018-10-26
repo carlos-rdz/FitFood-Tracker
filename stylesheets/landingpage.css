@@ -25,8 +25,14 @@ body {
     flex:1;
 }
 
+
+
 p {
     text-align: center;
+    font-family: 'Mali', cursive;
+    font-size: 18px;
+
+
 }
 
 
@@ -64,6 +70,18 @@ p {
     
     
 }
+
+.pf {
+    
+    margin-right: 75%;
+}
+
+.foot p {
+    color:white;
+    text-align: left;
+    
+
+}
 .foot .fab,
 .foot .fas {
 
@@ -98,7 +116,7 @@ p {
 
 }
 .click-link{
-    background-color: Crimson;  
+    background-color: crimson;  
     border-radius: 5px;
     color: white;
     padding: .5em;
@@ -110,7 +128,7 @@ p {
 .click-link:focus,
 .click-link:hover {
   background-color: FireBrick;
-  color: White;
+  color: white;
 }
 
 
