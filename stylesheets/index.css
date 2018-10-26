@@ -1,7 +1,9 @@
 html{
     height: 100%;
 }
-
+html, body {
+    box-sizing: border-box;
+}
 body {
 display: flex;
 flex-direction: row;
@@ -12,7 +14,7 @@ width: 100%;
 margin: 0;
 border: 0;
 outline: 1px solid red;
-overflow-x: hidden;
+overflow: hidden;
 
 }
 .profilecontainer {
@@ -29,6 +31,11 @@ overflow-x: hidden;
     background-color: #cfe0e8;
     overflow-x: scroll;
 }
+
+.displayInfo {
+    position: fixed;
+}
+
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
@@ -82,14 +89,17 @@ option {
 #foodResult {
     display: flex;
     flex-direction: row;
+    padding: 10px;
+    height: 95%;
+    margin-top: 2%;
 }
 
 .foodImageDiv {
     display: flex;
     flex-direction: column-reverse;
-    margin: 5px;
-    padding: 5px;
-    border: solid red 1px;
+    /* margin: 5px; */
+    padding: 15px;
+    border: dashed plum 1px;
     border-radius: 10px;
 }
 
