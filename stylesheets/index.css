@@ -1,7 +1,9 @@
 html{
     height: 100%;
 }
-
+html, body {
+    box-sizing: border-box;
+}
 body {
 display: flex;
 flex-direction: row;
@@ -26,10 +28,19 @@ border: 0;
     
 }
 .displaycontainer {
-    width: 100%;
+    width: 75%;
     background-color: #cfe0e8;
     padding: 20px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
+
+.displayInfo {
+    text-align: right;
+    /* position: fixed; */
+}
+
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
@@ -120,11 +131,35 @@ option {
 #foodResult {
     display: flex;
     flex-direction: row;
+    padding: 10px;
+    height: 100%;
+    overflow-x: scroll;
+}
+
+.foodDataDiv {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.foodDate {
+    border: dashed plum 1px;
+    border-radius: 10px;
+    margin: 0;
+    padding: 10px;
 }
 
 .foodImageDiv {
     display: flex;
     flex-direction: column-reverse;
+    padding: 15px;
+    border: dashed plum 1px;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+.foodImage {
+    display: block;
 }
 
 #wrapper {

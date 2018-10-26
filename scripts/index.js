@@ -127,7 +127,7 @@ function extractJSON(j) {
         throw new Error('network response not ok');
     }
     return j.json()
-}
+} 
 
 function extractExerciseData(info){
     // calorie data array contains date and value for every day in range
@@ -267,15 +267,19 @@ function drawFoodImages(foodObj, date){
     console.log('Serving image received')
     console.log(foodObj)
     // create new div
-    const newImgDiv = document.createElement('div')
-    newImgDiv.classList.add('foodImageDiv')
+    const foodDataDiv = document.createElement('div')
+    foodDataDiv.classList.add('foodDataDiv')
+    const foodImgDiv = document.createElement('div')
+    foodImgDiv.classList.add('foodImageDiv')
     const dateLabel = document.createElement('h6')
+    dateLabel.classList.add('foodDate')
     dateLabel.textContent = date
-    newImgDiv.appendChild(dateLabel)
+    foodDataDiv.appendChild(dateLabel)
     for (let i = 0; i < foodObj.length; i ++) {
-        newImgDiv.appendChild(addFoodImage(foodObj[i].src))
+        foodImgDiv.appendChild(addFoodImage(foodObj[i].src))
     }
-    theFood.appendChild(newImgDiv)
+    foodDataDiv.appendChild(foodImgDiv)
+    theFood.appendChild(foodDataDiv)
     console.log('Food served.')
 }
 // creates food icon
@@ -284,6 +288,8 @@ function addFoodImage(foodImageSrc) {
     const newImg = document.createElement("img");
     // adds the pizza icon
     newImg.src = foodImageSrc;
+    newImg.classList.add('foodImage')
+    // newImg.display = block;
     return newImg
 };
 
