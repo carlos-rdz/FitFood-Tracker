@@ -22,18 +22,21 @@ overflow: hidden;
     flex-direction: column;
     /* align-content: space-between; */
     background-color: #b7d7e8;
-    width: 33%;
+    width: 25%;
     height: 100%;
     /* position: fixed; */
 }
 .displaycontainer {
-    width: 100%;
+    width: 75%;
     background-color: #cfe0e8;
-    overflow-x: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .displayInfo {
-    position: fixed;
+    text-align: right;
+    /* position: fixed; */
 }
 
 .slider {
@@ -90,17 +93,34 @@ option {
     display: flex;
     flex-direction: row;
     padding: 10px;
-    height: 95%;
-    margin-top: 2%;
+    height: 100%;
+    overflow-x: scroll;
+}
+
+.foodDataDiv {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.foodDate {
+    border: dashed plum 1px;
+    border-radius: 10px;
+    margin: 0;
+    padding: 10px;
 }
 
 .foodImageDiv {
     display: flex;
     flex-direction: column-reverse;
-    /* margin: 5px; */
     padding: 15px;
     border: dashed plum 1px;
     border-radius: 10px;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+.foodImage {
+    display: block;
 }
 
 #wrapper {
