@@ -17,8 +17,17 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    
-    
+    background-image: linear-gradient(to bottom, rgba(255,255,0,0.5), rgba(0,0,255,0.5)),
+url('../images/runner_lg.jpg');
+    background-size: cover;    
+    transition: background-position, 5s;
+}
+
+@media screen and (max-width: 500px) {
+    body {
+        background-position: -200px;
+        transition: background-position, 5s;
+    }
 }
 
 .main {

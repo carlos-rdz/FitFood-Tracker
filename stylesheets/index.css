@@ -51,12 +51,12 @@ border: 0;
     opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
     
 }
-.achievmentFooter{
+/* .achievmentFooter{
     
     
-    /* border: 1px solid red ; */
+    border: 1px solid red ;
     
-}
+} */
 .achievments{
     text-align: center;
 }
