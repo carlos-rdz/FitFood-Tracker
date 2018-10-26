@@ -135,7 +135,7 @@ function extractExerciseData(info){
         {date: '10-30-18', value: 350},
         {date: '10-29-18', value: 100}
     ]
-    // info["activities-tracker-activityCalories"]
+    console.log(info["activities-tracker-activityCalories"])
     let totalCalories = 0
     calorieDataArray.forEach(function(element){
 
