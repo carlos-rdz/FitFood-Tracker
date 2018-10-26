@@ -6,10 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FitFoodTracker</title>
     <link rel="stylesheet" href="stylesheets/index.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Londrina+Solid" rel="stylesheet">
 </head>
 <body>
-    <div class='topcontainer'>
+    <div class='profilecontainer'>
         
         <div class='fitbit' data-profileHeader></div>
         
@@ -27,20 +28,30 @@
             
         </div>
         
-        <div id="wrapper">
+        <div class="optionsContainer">
+            <div class="rangeContainer">   
                 <h1>Choose Day Range</h1>
                 <output data-sliderDisplay id="output" value=0></output>
                 <input data-slider id="range-slider" type="range" min="0" max="365">
-                </div><!--end wrapper -->
-        <div data-profileHeader></div>
+                <!-- </div>end wrapper -->
+                <input id="submitButton" type="submit" value="Submit">
+            </div>
 
+            <div class="dropdown" data-dropdown>
+
+
+            </div>
+        
+
+        </div>
+        <div data-profileHeader></div>
+    </div>
+    <div class="displaycontainer">
         <div class="displayInfo" data-displayInfo>
         </div>
-        <input id="submitButton" type="submit" value="Submit">
-    </div>
     
     <div id="foodResult"></div>
-   
+    </div>
      <!-- <canvas id="canvas-basic"></canvas> 
     <script src="scripts/granim.min.js"></script>
     
@@ -63,7 +74,7 @@
                 ['#DA22FF', '#9733EE']
             ]
         }
-    }
+    }`
 });
     </script> -->
     <script src="scripts/calories.js"></script>

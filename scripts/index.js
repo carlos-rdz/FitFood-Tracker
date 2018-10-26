@@ -12,18 +12,18 @@ let liftingIcon = document.querySelector("[data-lifting]")
 let allIcons= document.querySelector("[data-achievmentImages]")
 let slider= document.querySelector("[data-slider]")
 let sliderDisplay= document.querySelector("[data-sliderDisplay]")
-// =============================================
-// Adds an event listener to determine 
-// date range
+let dropdownDisplay= document.querySelector("[data-dropdown")
 let topContainer = document.getElementsByClassName("topcontainer")[0]
 let dateSlider = document.getElementById("range-slider")
 let submitButton = document.getElementById('submitButton')
-
 // =============================================
 // add an event listener to 
 // determine date range
 // =============================================
-// dateSlider.addEventListener("click", getDateRange)
+
+dateSlider.addEventListener("click", e => 
+    sliderDisplay.textContent = e.target.value)
+
 submitButton.addEventListener('click', () => {
     getDateRange(dateSlider)
     getFoodChoices(foodSelector)
@@ -144,7 +144,7 @@ function extractExerciseData(info){
     let displayData = [calorieMessage];
     writeExerciseData(displayData)
     // return stub data for testing
-    return 1000
+    return totalCalories
 }
 // =============================================
 // helper function that writes data to the 
@@ -166,7 +166,7 @@ fetchProfileData();
 
 function achievments(calories){
 
-    allIcons.classList.remove("currentAchievment")
+    // allIcons.classList.remove("currentAchievment")
 
     let deleteHighlight = document.getElementsByClassName('currentAchievment')[0]
         
@@ -207,7 +207,7 @@ function creatDropDown(foodDict) {
         dropDown.appendChild(option);
     }
 
-    topContainer.appendChild(dropDown)   
+    dropdownDisplay.appendChild(dropDown)   
     return dropDown
 };
 
@@ -249,6 +249,7 @@ function servingImageDisplay(foodObj){
     }
     console.log('Food served.')
 }
+
 
 const foodSelector = creatDropDown(foodDict);
 

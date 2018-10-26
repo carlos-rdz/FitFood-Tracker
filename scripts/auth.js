@@ -24,3 +24,6 @@ function saveToLocalStorage(){
 saveToLocalStorage()
 
 window.location = "/display.html";
+
+
+
