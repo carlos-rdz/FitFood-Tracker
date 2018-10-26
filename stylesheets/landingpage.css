@@ -23,9 +23,23 @@ url('../images/jogging.png');
     background-position: right center;   
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 450px) {
+    body {
+        background-position: -650px;
+        transition: background-position, 3s;
+    }
+}
+
+@media screen and (max-width: 400px) {
     body {
         background-position: -550px;
+        transition: background-position, 3s;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    body {
+        background-position: -450px;
         transition: background-position, 3s;
     }
 }
