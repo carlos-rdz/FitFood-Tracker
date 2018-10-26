@@ -18,7 +18,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background-image: linear-gradient(to bottom, rgba(255,255,0,0.5), rgba(0,0,255,0.5)),
-url('../images/runner_lg.jpg');
+url('../images/jogging.png');
     background-size: cover;    
 }
 
