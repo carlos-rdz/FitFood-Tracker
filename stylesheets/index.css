@@ -12,6 +12,7 @@ width: 100%;
 margin: 0;
 border: 0;
 outline: 1px solid red;
+overflow-x: hidden;
 
 }
 .profilecontainer {
@@ -19,13 +20,14 @@ outline: 1px solid red;
     flex-direction: column;
     /* align-content: space-between; */
     background-color: #b7d7e8;
-    width: 100%;
+    width: 33%;
     height: 100%;
-
+    /* position: fixed; */
 }
 .displaycontainer {
     width: 100%;
     background-color: #cfe0e8;
+    overflow-x: scroll;
 }
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
@@ -85,6 +87,10 @@ option {
 .foodImageDiv {
     display: flex;
     flex-direction: column-reverse;
+    margin: 5px;
+    padding: 5px;
+    border: solid red 1px;
+    border-radius: 10px;
 }
 
 #wrapper {

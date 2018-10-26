@@ -127,14 +127,43 @@ function extractJSON(j) {
         throw new Error('network response not ok');
     }
     return j.json()
-}
+} 
 
 function extractExerciseData(info){
     // calorie data array contains date and value for every day in range
     let calorieDataArray = [
-        {date: '10-31-18', value: 290},
+        {date: '10-31-18', value: 500},
         {date: '10-30-18', value: 350},
-        {date: '10-29-18', value: 100}
+        {date: '10-29-18', value: 100},
+        {date: '10-28-18', value: 500},
+        {date: '10-27-18', value: 350},
+        {date: '10-26-18', value: 100},
+        {date: '10-25-18', value: 500},
+        {date: '10-24-18', value: 350},
+        {date: '10-23-18', value: 100},
+        {date: '10-22-18', value: 500},
+        {date: '10-21-18', value: 350},
+        {date: '10-20-18', value: 100},
+        {date: '10-19-18', value: 500},
+        {date: '10-18-18', value: 350},
+        {date: '10-17-18', value: 100},
+        {date: '10-16-18', value: 500},
+        {date: '10-15-18', value: 350},
+        {date: '10-14-18', value: 100},
+        {date: '10-13-18', value: 500},
+        {date: '10-12-18', value: 350},
+        {date: '10-11-18', value: 100},
+        {date: '10-10-18', value: 500},
+        {date: '10-9-18', value: 350},
+        {date: '10-8-18', value: 100},
+        {date: '10-7-18', value: 500},
+        {date: '10-6-18', value: 350},
+        {date: '10-5-18', value: 100},
+        {date: '10-4-18', value: 500},
+        {date: '10-3-18', value: 350},
+        {date: '10-2-18', value: 100},
+        {date: '10-1-18', value: 500},
+
     ]
     console.log(info["activities-tracker-activityCalories"])
     let totalCalories = 0
