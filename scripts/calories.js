@@ -106,6 +106,14 @@ function extractFood(resultsList) {
     return foodResult;
 }
 
+const dateDropDown = document.getElementById('dateDropDown')
+let userGraphChoice = 'day'
+dateDropDown.addEventListener('change', e => {
+    const option = e.target.selectedOptions[0]
+    userGraphChoice = option.value
+    console.log('User selected ' + userGraphChoice)
+})
+
 function drawUserCalData(foodArray) {
     // clear old foodImages
     console.log('Drawing user calorie data as food')
@@ -113,14 +121,18 @@ function drawUserCalData(foodArray) {
         theFood.childNodes[0].remove()
     }
     console.log(userCaloriesArray)
+    const userDataArray = formatUserData(userCaloriesArray);
     userCaloriesArray.forEach( calorieData => {
         let servings = convertCalToNumServings(foodArray, calorieData.value)
         console.log(servings)
         drawFoodImages(servings, calorieData.date)
-        // const br = document.createElement('br')
-        // theFood.appendChild(br)
     })
 }
+
+function formatUserData(caloriesArray) {
+    
+}
+
 function convertCalToNumServings(foodArray, userCaloriesBurned) {
     console.log('Converting calories to servings...')
     let servings = [];
