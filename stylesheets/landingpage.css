@@ -17,10 +17,16 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    
+    
 }
 
 .main {
     flex:1;
+}
+
+p {
+    text-align: center;
 }
 
 
@@ -41,7 +47,8 @@ body {
 
 .header {
     font-family: 'Rock Salt', cursive;
-    color: white;
+    color:black;
+    font-size: 50px;
 }
 
 
@@ -84,26 +91,30 @@ body {
 }
 
 
+.click-container {
+    display: flex;
+    justify-content: center;
+    font-family: 'Rock Salt', cursive;
 
-/* .bloc-logo {
-    position: relative;
-    width: 130px;
-    height: 49px;
-    float: left;
+}
+.click-link{
+    background-color: Crimson;  
+    border-radius: 5px;
+    color: white;
+    padding: .5em;
+    text-decoration: none;
+    font-size: 30px;
+    
 }
 
-.bloc-logo canvas,
-.bloc-logo .logo-mask {
-    display: block;
-    width: 1000px;
-    height: 1000px;
+.click-link:focus,
+.click-link:hover {
+  background-color: FireBrick;
+  color: White;
 }
 
-.bloc-logo .logo-mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-size: 130px;
-    background-image: url("images/logo-mask.png");
-    text-indent: -9999px;
-} */
+
+
+
+
+
