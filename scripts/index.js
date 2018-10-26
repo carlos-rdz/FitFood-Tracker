@@ -156,7 +156,7 @@ function extractExerciseData(info){
 function writeExerciseData(message) {
     message.forEach(element => {
         // elementDisplay = document.createElement('div');
-        sliderDisplay.textContent = element;
+        fitDisplay.textContent = element;
         // fitDisplay.appendChild(elementDisplay);
 
    
