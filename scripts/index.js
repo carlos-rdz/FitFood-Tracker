@@ -132,9 +132,37 @@ function extractJSON(j) {
 function extractExerciseData(info){
     // calorie data array contains date and value for every day in range
     let calorieDataArray = [
-        {date: '10-31-18', value: 290},
-        {date: '10-30-18', value: 350},
-        {date: '10-29-18', value: 100}
+        {date: '10-31-18', value: 30000},
+        {date: '10-30-18', value: 800},
+        {date: '10-29-18', value: 1000},
+        {date: '10-29-18', value: 1000},
+        {date: '10-29-18', value: 1000},
+        {date: '10-29-18', value: 1000},
+        {date: '10-29-18', value: 1000},
+        {date: '10-29-18', value: 1000},
+        {date: '10-29-18', value: 1000},
+        {date: '10-29-18', value: 1000},
+        {date: '10-29-18', value: 1000},
+        {date: '10-29-18', value: 2000},
+        {date: '10-29-18', value: 2000},
+        {date: '10-29-18', value: 2000},
+        {date: '10-29-18', value: 2000},
+        {date: '10-29-18', value: 3000},
+        {date: '10-29-18', value: 3000},
+        {date: '10-29-18', value: 3000},
+        {date: '10-29-18', value: 3000},
+        {date: '10-29-18', value: 3000},
+        {date: '10-29-18', value: 3000},
+        {date: '10-29-18', value: 3000},
+        {date: '10-29-18', value: 3000},
+        {date: '10-29-18', value: 3000},
+        {date: '10-29-18', value: 3000},
+        {date: '10-29-18', value: 3000},
+        {date: '10-29-18', value: 3000},
+        {date: '10-29-18', value: 3000},
+        {date: '10-29-18', value: 3000},
+        {date: '10-29-18', value: 3000},
+        {date: '10-29-18', value: 3000},
     ]
     console.log(info["activities-tracker-activityCalories"])
     let totalCalories = 0
