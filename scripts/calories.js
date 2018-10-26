@@ -116,7 +116,7 @@ function drawUserCalData(foodArray) {
     userCaloriesArray.forEach( calorieData => {
         let servings = convertCalToNumServings(foodArray, calorieData.value)
         console.log(servings)
-        drawFoodImages(servings, calorieData.date)
+        drawFoodImages(servings, calorieData.dateTime)
         // const br = document.createElement('br')
         // theFood.appendChild(br)
     })
