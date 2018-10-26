@@ -88,14 +88,15 @@ p {
     background-color: rgba(0,0,0,0.7);
     padding:8px 12px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     
     
     
 }
 
 .pf {
-    
+    position: sticky;
+    left: 0;
     margin-right: 75%;
 }
 
