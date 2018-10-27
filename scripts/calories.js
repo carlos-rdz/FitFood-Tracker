@@ -163,7 +163,7 @@ function formatUserData(caloriesArray) {
         }
         if (count >= userRange || i == caloriesArray.length - 1) {
             newDateTime.push(caloriesArray[i].dateTime)
-            calorieCount += caloriesArray[i].value
+            calorieCount += parseInt(caloriesArray[i].value)
             newCaloriesArray.push({dateTime: newDateTime.join(' - '), value: calorieCount})
             newDateTime = []
             calorieCount = 0

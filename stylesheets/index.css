@@ -37,12 +37,17 @@ overflow: hidden;
     flex-direction: column;
 }
 
-.displayInfo {
+#profileInfo {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* .displayInfo {
     text-align: center;
     position: sticky;
     border: groove silver 5px;
     border-radius: 10px;
-}
+} */
 
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
@@ -149,7 +154,7 @@ option {
     border-radius: 10px;
     margin: 0;
     padding: 10px;
-    white-space: nowrap;
+    /* white-space: nowrap; */
 }
 
 .foodImageDiv {
