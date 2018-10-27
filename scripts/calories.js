@@ -28,7 +28,7 @@ function randomFoodChoice() {
 }
 // store user's food choices here
 // two random food choices
-let userFood = [randomFoodChoice(), randomFoodChoice()]
+let userFood = []
 // store user's calories burned here
 // could use array like food choices
 let userCaloriesArray = [];
@@ -67,6 +67,7 @@ function drawFood(endDate) {
     }
     console.log(userCaloriesArray, userFood)
     // check what date range formatting user select
+
     const userDataArray = formatUserData(userCaloriesArray, endDate);
     
     userDataArray.forEach( calorieData => {
@@ -88,6 +89,9 @@ function convertToJSON(r) {
 
 function returnStubFood() {
     console.log('Returning stub food')
+    for (let foodItem in foodDict) {
+        foodDict[foodItem].calories = 250;
+    }
     const stubFood = {
         common: [
             {food_name: 'pizza', 
@@ -112,7 +116,7 @@ function extractFood(resultsList) {
             // foodResult = 
             foodDict[food].calories = foodCalories
             break
-        }
+        } 
     }
     // converts foodResult to array of food items
     // foodResult.
@@ -134,7 +138,7 @@ dateDropDown.addEventListener('change', e => {
 
 function formatUserData(caloriesArray, endDate) {
     const userDateRange = document.getElementById('dateDropDown').value
-    console.log(`User has selected to see data by ${userDateRange}`)
+    console.log(`User has selected to see data by ${userDateRange} with end date ${endDate}`)
     let userRange
     switch (userDateRange) {
         case 'day':
@@ -154,8 +158,13 @@ function formatUserData(caloriesArray, endDate) {
     let newDateTime = []
     let calorieCount = 0
     count = 1
+    endDate = dateTimeFormat(endDate)
     for (let i = 0; i < caloriesArray.length; i++) {
-        if (caloriesArray[i].dateTime == endDate) {
+
+        if (caloriesArray[i].dateTime == endDate) { // this will never be true
+            // dateTime format = 10-1-18
+            // endDate format = 2018-1-18
+            debugger
             break
         }
         if (count == 1 && userRange != 1) {
@@ -176,6 +185,16 @@ function formatUserData(caloriesArray, endDate) {
     return newCaloriesArray
 }
 
+function dateTimeFormat(dateString) {
+    // console.log(dateString)
+    // debugger
+    let newDateString = dateString.split('-')
+    let yearString = newDateString.shift()
+    yearString.split().splice(0, 2)
+    newDateString.push(yearString)
+    return newDateString.join('-')
+}
+
 function convertCalToNumServings(foodArray, userCaloriesBurned) {
     console.log('Converting calories to servings...' + userCaloriesBurned)
     let servings = [];
@@ -184,14 +203,14 @@ function convertCalToNumServings(foodArray, userCaloriesBurned) {
     foodArray.sort((foodItem1, foodItem2) => foodItem1.calories < foodItem2.calories)
     // add servings
     foodArray.forEach(foodItem => {
-        console.log(foodItem.name, foodItem.calories, userCaloriesBurned)
+        // console.log(foodItem.name, foodItem.calories, userCaloriesBurned)
         while (foodItem.calories <= userCaloriesBurned) {
-            console.log(foodItem.calories, userCaloriesBurned)
-            console.log(`Adding serving of ${foodItem.name}`)
+            // console.log(foodItem.calories, userCaloriesBurned)
+            // console.log(`Adding serving of ${foodItem.name}`)
             servings.push(foodItem);
             userCaloriesBurned -= foodItem.calories
         }
-        console.log(userCaloriesBurned + ' user calories remaining.')
+        // console.log(userCaloriesBurned + ' user calories remaining.')
     })
     console.log(servings)
     console.log(`Returning servings ${servings.map(item => item.name).join(', ')}`)

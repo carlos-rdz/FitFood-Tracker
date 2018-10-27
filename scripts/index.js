@@ -45,11 +45,10 @@ function getDateRange(dateSlider) {
     // check this
     let endDate = new Date()
     endDate.setDate(endDate.getDate()-dateSlider.value)
-
     let parsedEndDate = parseDate(endDate)
     // `${endDate.getFullYear()}-${('0' + (endDate.getMonth()+1)).slice(-2)}-${('0' + endDate.getDate()).slice(-2)}`;
-
-
+    
+    
     console.log(parsedDate);
     console.log(parsedEndDate);
 
@@ -60,6 +59,7 @@ function getDateRange(dateSlider) {
 }
 
 function parseDate(dateObject) {
+    console.log(`Parsing date ${dateObject}`)
     return `${dateObject.getFullYear()}-${('0' + (dateObject.getMonth()+1)).slice(-2)}-${('0' + dateObject.getDate()).slice(-2)}`;
 }
 
@@ -113,9 +113,11 @@ function returnStubData(reason) {
 // =============================================
 // only called when slider is clicked
 function fetchExerciseData(){
-    const date1 = currentDate
-    const date2 = new Date(currentDate.getFullYear - 1)
-    fetch(`https://api.fitbit.com/1/user/-/activities/tracker/activityCalories/date/${date2}/${date1}.json`,
+    const date1 = parseDate(currentDate)
+    const lastYear = new Date()
+    lastYear.setFullYear(currentDate.getFullYear() - 1) //.setDate(currentDate.getDate())
+    const date2 = parseDate(lastYear)
+    fetch(`https://api.fitbit.com/1/user/-/activities/calories/date/${date1}/${date2}.json`,
     {
         headers: {
             "Authorization": `Bearer ${localStorage.getItem("ourtoken")}`
@@ -129,7 +131,6 @@ function fetchExerciseData(){
 .then(extractExerciseData)
 .then(achievments)
 .then(getDateRange)
-.then(drawFood)
 }
 // =============================================
 // strips the data to individual componenets and
@@ -150,36 +151,37 @@ function extractExerciseData(info){
         {dateTime: '10-31-18', value: 3000},
         {dateTime: '10-30-18', value: 800},
         {dateTime: '10-29-18', value: 1000},
-        {dateTime: '10-29-18', value: 1000},
-        {dateTime: '10-29-18', value: 1000},
-        {dateTime: '10-29-18', value: 1000},
-        {dateTime: '10-29-18', value: 1000},
-        {dateTime: '10-29-18', value: 1000},
-        {dateTime: '10-29-18', value: 1000},
-        {dateTime: '10-29-18', value: 1000},
-        {dateTime: '10-29-18', value: 1000},
-        {dateTime: '10-29-18', value: 2000},
-        {dateTime: '10-29-18', value: 2000},
-        {dateTime: '10-29-18', value: 2000},
-        {dateTime: '10-29-18', value: 2000},
-        {dateTime: '10-29-18', value: 3000},
-        {dateTime: '10-29-18', value: 3000},
-        {dateTime: '10-29-18', value: 3000},
-        {dateTime: '10-29-18', value: 3000},
-        {dateTime: '10-29-18', value: 3000},
-        {dateTime: '10-29-18', value: 3000},
-        {dateTime: '10-29-18', value: 3000},
-        {dateTime: '10-29-18', value: 3000},
-        {dateTime: '10-29-18', value: 3000},
-        {dateTime: '10-29-18', value: 3000},
-        {dateTime: '10-29-18', value: 3000},
-        {dateTime: '10-29-18', value: 3000},
-        {dateTime: '10-29-18', value: 3000},
-        {dateTime: '10-29-18', value: 3000},
-        {dateTime: '10-29-18', value: 3000},
-        {dateTime: '10-29-18', value: 3000},
+        {dateTime: '10-28-18', value: 1000},
+        {dateTime: '10-27-18', value: 1000},
+        {dateTime: '10-26-18', value: 1000},
+        {dateTime: '10-25-18', value: 1000},
+        {dateTime: '10-24-18', value: 1000},
+        {dateTime: '10-23-18', value: 1000},
+        {dateTime: '10-22-18', value: 1000},
+        {dateTime: '10-21-18', value: 1000},
+        {dateTime: '10-20-18', value: 2000},
+        {dateTime: '10-19-18', value: 2000},
+        {dateTime: '10-18-18', value: 2000},
+        {dateTime: '10-17-18', value: 2000},
+        {dateTime: '10-16-18', value: 3000},
+        {dateTime: '10-15-18', value: 3000},
+        {dateTime: '10-14-18', value: 3000},
+        {dateTime: '10-13-18', value: 3000},
+        {dateTime: '10-12-18', value: 3000},
+        {dateTime: '10-11-18', value: 3000},
+        {dateTime: '10-10-18', value: 3000},
+        {dateTime: '10-9-18', value: 3000},
+        {dateTime: '10-8-18', value: 3000},
+        {dateTime: '10-7-18', value: 3000},
+        {dateTime: '10-6-18', value: 3000},
+        {dateTime: '10-5-18', value: 3000},
+        {dateTime: '10-4-18', value: 3000},
+        {dateTime: '10-3-18', value: 3000},
+        {dateTime: '10-2-18', value: 3000},
+        {dateTime: '10-1-18', value: 3000},
     ]
-    console.log(info["activities-tracker-activityCalories"])
+    console.log(info)
+        // ["activities-tracker-activityCalories"])
     let totalCalories = 0
     caloriesDataArray.forEach(function(element){
 
@@ -272,6 +274,8 @@ function getFoodChoices(foodSelector) {
         console.log('Selecting ' + foodOption)
     }
 }
+// run as soon as page loads
+getFoodChoices(foodSelector)
 
 // Draw new food results display
 function drawFoodImages(foodObj, date){
