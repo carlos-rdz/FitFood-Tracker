@@ -24,7 +24,7 @@ const theFood = document.getElementById('foodResult')
 // determine date range
 // =============================================
 const currentDate = new Date()
-dateSlider.addEventListener("click", getDateRange)
+dateSlider.addEventListener('change', getDateRange)
 foodSelector.addEventListener('change', e => {
     getFoodChoices(e.target)
 })
