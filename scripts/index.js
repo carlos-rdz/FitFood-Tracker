@@ -23,6 +23,7 @@ const theFood = document.getElementById('foodResult')
 // add an event listener to 
 // determine date range
 // =============================================
+const currentDate = new Date()
 
 dateSlider.addEventListener("click", e => {
     sliderDisplay.textContent = e.target.value
@@ -31,14 +32,18 @@ dateSlider.addEventListener("click", e => {
 foodSelector.addEventListener('change', e => {
     getFoodChoices(e.target)
 })
-submitButton.addEventListener('click', () => {
-    console.log('Submit button clicked.')
-    
-    // getFoodChoices(foodSelector)
-    // getDateRange(dateSlider)
-})
+// get user date drop down option selection
+const dateDropDown = document.getElementById('dateDropDown')
+let userGraphChoice = 'day'
+dateDropDown.addEventListener('change', getDateRange)
+// e => {
+//     const option = e.target.selectedOptions[0]
+//     userGraphChoice = option.value
+//     console.log('User selected ' + userGraphChoice)
 
-function getDateRange(dateSlider) {
+// })
+
+function getDateRange() {
     // let todaysDate = new Date()
     let parsedDate = parseDate(currentDate)
 
@@ -63,7 +68,7 @@ function parseDate(dateObject) {
     return `${dateObject.getFullYear()}-${('0' + (dateObject.getMonth()+1)).slice(-2)}-${('0' + dateObject.getDate()).slice(-2)}`;
 }
 
-const currentDate = new Date()
+fetchProfileData();
 fetchExerciseData()
 // =============================================
 // function that fetches profile data and 
@@ -210,7 +215,6 @@ function writeExerciseData(message) {
     })
 }
 
-fetchProfileData();
 // takeDateRange();
 // fetchExcerciseData();
 
@@ -240,8 +244,6 @@ function achievments(calories){
         liftingIcon.classList.add("currentAchievment")
         
     }
-
-    return dateSlider
 }
 // =====================================================================================================================================================================================================
 

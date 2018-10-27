@@ -127,15 +127,6 @@ function extractFood(resultsList) {
     // return foodResult;
 }
 
-// get user date drop down option selection
-const dateDropDown = document.getElementById('dateDropDown')
-let userGraphChoice = 'day'
-dateDropDown.addEventListener('change', e => {
-    const option = e.target.selectedOptions[0]
-    userGraphChoice = option.value
-    console.log('User selected ' + userGraphChoice)
-})
-
 function formatUserData(caloriesArray, endDate) {
     const userDateRange = document.getElementById('dateDropDown').value
     console.log(`User has selected to see data by ${userDateRange} with end date ${endDate}`)
