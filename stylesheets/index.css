@@ -77,19 +77,14 @@ overflow: hidden;
 }
 /* @import url(https://fonts.googleapis.com/css?family=Raleway); */
 .optionsContainer{
-    /* outline: 1px solid red; */
     display: flex;
-    /* align-items: flex-start; */
-    /* justify-content: flex-start; */
     flex-direction: row;
-    text-align: center;
-    align-items: center;
-    justify-content: space-around;
-    /* width: 50% */
+    justify-content: space-evenly;
 }
 
 #moreOptionsContainer {
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
 }
 .rangeContainer{
@@ -100,8 +95,15 @@ overflow: hidden;
     justify-content: space-between;
     height: 110px;
 }
+
+#dateDropDown {
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
 .dropdown {
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
 }
 .dropdown select{
     border: none;
@@ -109,12 +111,14 @@ overflow: hidden;
     background-color: #B6B8D6;
     text-align: center;
     padding: 5% 30%;
+    border-radius: 10px;
 }
 
-.button{
+#submitButton{
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
     font-family: 'Raleway', sans-serif;
     background-color: #b7d7e8;
+    border-radius: 10px;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Raleway);

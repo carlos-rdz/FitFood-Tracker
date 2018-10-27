@@ -125,7 +125,7 @@ function drawUserCalData(foodArray) {
     // check what date range formatting user select
     const userDataArray = formatUserData(userCaloriesArray);
     
-    userCaloriesArray.forEach( calorieData => {
+    userDataArray.forEach( calorieData => {
         console.log(calorieData)
         let servings = convertCalToNumServings(foodArray, calorieData.value)
         console.log(servings)
@@ -136,7 +136,44 @@ function drawUserCalData(foodArray) {
 }
 
 function formatUserData(caloriesArray) {
-    
+    const userDateRange = document.getElementById('dateDropDown').value
+    console.log(`User has selected to see data by ${userDateRange}`)
+    let userRange
+    switch (userDateRange) {
+        case 'day':
+        userRange = 1
+        break
+        case 'week':
+        userRange = 7
+        break
+        case 'month':
+        userRange = 30
+        break
+        case 'year':
+        userRange = 365
+        break
+    }
+    newCaloriesArray = []
+    let newDateTime = []
+    let calorieCount = 0
+    count = 1
+    for (let i = 0; i < caloriesArray.length; i++) {
+        if (count == 1 && userRange != 1) {
+            newDateTime.push(caloriesArray[i].dateTime)
+        }
+        if (count >= userRange || i == caloriesArray.length - 1) {
+            newDateTime.push(caloriesArray[i].dateTime)
+            calorieCount += caloriesArray[i].value
+            newCaloriesArray.push({dateTime: newDateTime.join(' - '), value: calorieCount})
+            newDateTime = []
+            calorieCount = 0
+            count = 1
+            continue
+        }
+        calorieCount += caloriesArray[i].value
+        count++
+    }
+    return newCaloriesArray
 }
 
 function convertCalToNumServings(foodArray, userCaloriesBurned) {
