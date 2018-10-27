@@ -51,8 +51,8 @@ function requestFood() {
                                 }
                             })
                             .then(convertToJSON)
-                            .catch(returnStubFood)
                             .then(extractFood)
+                            .catch(returnStubFood)
         // foodPromises.push(foodPromise)
     }
 }
@@ -89,23 +89,15 @@ function convertToJSON(r) {
 
 function returnStubFood() {
     console.log('Returning stub food')
+    let stubCalories = 550
     for (let foodItem in foodDict) {
-        foodDict[foodItem].calories = 250;
+        foodDict[foodItem].calories = stubCalories
+        stubCalories -= 50
     }
-    const stubFood = {
-        common: [
-            {food_name: 'pizza', 
-            full_nutrients: [
-                , , , , {value: 250}
-            ]}
-        ]
-    }
-    return stubFood
 }
 
 function extractFood(resultsList) {
     // declare foodResult variable
-    let foodResult
     const foodName = resultsList.common[0].food_name;
     const foodCalories = resultsList.common[0].full_nutrients[4].value;
     console.log('Food result received. Name: ' + foodName + ' Calories: ' + foodCalories);
