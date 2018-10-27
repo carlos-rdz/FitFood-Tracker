@@ -36,6 +36,7 @@ let userCaloriesArray = [];
 // const returnServin  gs = {};
 
 function requestFood(caloriesArray) {
+    console.log(caloriesArray, userFood)
     // capture user calories array
     userCaloriesArray = caloriesArray;
     let foodPromises = []
@@ -57,10 +58,10 @@ function requestFood(caloriesArray) {
     })
     // create array of fetch promises for each userFood
 
-    
+    console.log(foodPromises)
     // wait for all userFood fetch requests to return
     Promise.all(foodPromises)
-        .then(drawUserCalData)
+    .then(drawUserCalData)
 }
 
 function convertToJSON(r) {
@@ -120,9 +121,12 @@ function drawUserCalData(foodArray) {
     while (theFood.childNodes.length > 0) {
         theFood.childNodes[0].remove()
     }
-    console.log(userCaloriesArray)
+    console.log(userCaloriesArray, foodArray)
+    // check what date range formatting user select
     const userDataArray = formatUserData(userCaloriesArray);
+    
     userCaloriesArray.forEach( calorieData => {
+        console.log(calorieData)
         let servings = convertCalToNumServings(foodArray, calorieData.value)
         console.log(servings)
         drawFoodImages(servings, calorieData.dateTime)
@@ -136,21 +140,21 @@ function formatUserData(caloriesArray) {
 }
 
 function convertCalToNumServings(foodArray, userCaloriesBurned) {
-    console.log('Converting calories to servings...')
+    console.log('Converting calories to servings...' + userCaloriesBurned)
     let servings = [];
-    userCalories = userCaloriesBurned
     // sort food items by calories
+    console.log(foodArray)
     foodArray.sort((foodItem1, foodItem2) => foodItem1.calories < foodItem2.calories)
     // add servings
     foodArray.forEach(foodItem => {
-        console.log(foodItem.name, foodItem.calories, userCalories)
-        while (foodItem.calories <= userCalories) {
-            console.log(foodItem.calories, userCalories)
+        console.log(foodItem.name, foodItem.calories, userCaloriesBurned)
+        while (foodItem.calories <= userCaloriesBurned) {
+            console.log(foodItem.calories, userCaloriesBurned)
             console.log(`Adding serving of ${foodItem.name}`)
             servings.push(foodItem);
-            userCalories -= foodItem.calories
+            userCaloriesBurned -= foodItem.calories
         }
-        console.log(userCalories + ' user calories remaining.')
+        console.log(userCaloriesBurned + ' user calories remaining.')
     })
     console.log(servings)
     console.log(`Returning servings ${servings.map(item => item.name).join(', ')}`)

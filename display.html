@@ -11,9 +11,21 @@
 </head>
 <body>
     <div class='profilecontainer'>
-        
-        <div class='fitbit' data-profileHeader></div>
-        
+        <div class="achievmentFooter">
+            <div class="achievments">
+                Achievment Progress:
+            </div>
+            <div data-achievmentImages class="achievmentImages">    
+                
+                
+                <img data-fat src="images/icons8-fat-man-50.png" alt="">
+                <img data-slouch src="images/icons8-slouch-50.png" alt="">
+                <img data-standing src="images/icons8-standing-man-50.png" alt="">
+                <img data-running src="images/icons8-running-50.png" alt="">
+                <img data-lifting src="images/icons8-weightlifting-50.png" alt="">
+                
+            </div>
+        </div>
         <div class="optionsContainer">
             <div class="rangeContainer">   
                 <h1>Choose Day Range</h1>
@@ -22,40 +34,23 @@
                 <!-- </div>end wrapper -->
             </div>
             
-            <div class="dropdown" data-dropdown>
-                
-                
-                
-            </div>
-            
+            <div class="dropdown" data-dropdown></div>
+        </div>
+        <div id="moreOptionsContainer">  
+            <select id='dateDropDown'>
+                <option value="day">by day</option>
+                <option value="week">by week</option>
+                <option value="month">by month</option>
+                <option value="year">by year</option>
+            </select>
             <input id="submitButton" type="submit" value="Submit" class="button">
-            
         </div>
         <div data-profileHeader></div>
-        <div class="achievmentFooter">
-                    <div class="achievments">
-                        Achievment Progress:
-                    </div>
-                    <div data-achievmentImages class="achievmentImages">    
-                        
-                        
-                        <img data-fat src="images/icons8-fat-man-50.png" alt="">
-                        <img data-slouch src="images/icons8-slouch-50.png" alt="">
-                        <img data-standing src="images/icons8-standing-man-50.png" alt="">
-                        <img data-running src="images/icons8-running-50.png" alt="">
-                        <img data-lifting src="images/icons8-weightlifting-50.png" alt="">
-                        
-                    </div>
-        </div>
-        <select id='dateDropDown'>
-            <option value="day">by day</option>
-            <option value="week">by week</option>
-            <option value="month">by month</option>
-            <option value="year">by year</option>
-        </select>
+        <div class='fitbit' data-profileHeader></div>
     </div>
     <div class="displaycontainer">
         <div class="displayInfo" data-displayInfo>
+            Total Calories: 0
         </div>
     
     <div id="foodResult"></div>

@@ -131,40 +131,40 @@ function extractJSON(j) {
 
 function extractExerciseData(info){
     // calorie data array contains date and value for every day in range
-    let calorieDataArray = info["activities-tracker-activityCalories"]
-    // [
-    //     {date: '10-31-18', value: 3000},
-    //     {date: '10-30-18', value: 800},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 2000},
-    //     {date: '10-29-18', value: 2000},
-    //     {date: '10-29-18', value: 2000},
-    //     {date: '10-29-18', value: 2000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    // ]
+    let calorieDataArray = [
+        {dateTime: '10-31-18', value: 3000},
+        {dateTime: '10-30-18', value: 800},
+        {dateTime: '10-29-18', value: 1000},
+        {dateTime: '10-29-18', value: 1000},
+        // {dateTime: '10-29-18', value: 1000},
+        // {dateTime: '10-29-18', value: 1000},
+        // {dateTime: '10-29-18', value: 1000},
+        // {dateTime: '10-29-18', value: 1000},
+        // {dateTime: '10-29-18', value: 1000},
+        // {dateTime: '10-29-18', value: 1000},
+        // {dateTime: '10-29-18', value: 1000},
+        // {dateTime: '10-29-18', value: 2000},
+        // {dateTime: '10-29-18', value: 2000},
+        // {dateTime: '10-29-18', value: 2000},
+        // {dateTime: '10-29-18', value: 2000},
+        // {dateTime: '10-29-18', value: 3000},
+        // {dateTime: '10-29-18', value: 3000},
+        // {dateTime: '10-29-18', value: 3000},
+        // {dateTime: '10-29-18', value: 3000},
+        // {dateTime: '10-29-18', value: 3000},
+        // {dateTime: '10-29-18', value: 3000},
+        // {dateTime: '10-29-18', value: 3000},
+        // {dateTime: '10-29-18', value: 3000},
+        // {dateTime: '10-29-18', value: 3000},
+        // {dateTime: '10-29-18', value: 3000},
+        // {dateTime: '10-29-18', value: 3000},
+        // {dateTime: '10-29-18', value: 3000},
+        // {dateTime: '10-29-18', value: 3000},
+        // {dateTime: '10-29-18', value: 3000},
+        // {dateTime: '10-29-18', value: 3000},
+        // {dateTime: '10-29-18', value: 3000},
+    ]
+    // info["activities-tracker-activityCalories"]
     console.log(info["activities-tracker-activityCalories"])
     let totalCalories = 0
     calorieDataArray.forEach(function(element){
@@ -231,7 +231,7 @@ function creatDropDown(foodDict) {
     let dropDown = document.createElement('select');
     // dropDown.addEventListener('change', getFoodChoices)
     dropDown.multiple = true
-    dropDown.size = 5
+    dropDown.size = 9
     // add options
     for (let foodItem in foodDict) {
         let option = document.createElement("option");
