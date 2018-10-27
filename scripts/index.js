@@ -32,9 +32,23 @@ foodSelector.addEventListener('change', e => {
 const dateDropDown = document.getElementById('dateDropDown')
 let userGraphChoice = 'day'
 dateDropDown.addEventListener('change', getDateRange)
+// get user date from textarea
+sliderDisplay.addEventListener('input', () => {
+    let userDate = sliderDisplay.value.split('')
+    const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    for (let i = 0; i < userDate.length; i++) {
+        if (numbers.indexOf(userDate[i]) < 0) {
+            sliderDisplay.value = dateSlider.value
+            return
+        }
+    }
+    dateSlider.value = sliderDisplay.value
+    getDateRange()
+})
+
 
 function getDateRange() {
-    sliderDisplay.textContent = dateSlider.value
+    // sliderDisplay.value = dateSlider.value
     const parsedDate = parseDate(currentDate)
     let endDate = new Date() 
     endDate.setDate(endDate.getDate()-dateSlider.value)

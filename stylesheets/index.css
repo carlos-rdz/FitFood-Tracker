@@ -29,6 +29,11 @@ overflow: hidden;
     padding: 5px 0;
 }
 
+textarea {
+    resize: none;
+    /* height: 20px; */
+}
+
 .displaycontainer {
     flex: 1;
     background-color: #cfe0e8;
