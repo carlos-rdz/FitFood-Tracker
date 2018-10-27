@@ -35,9 +35,8 @@ dateDropDown.addEventListener('change', getDateRange)
 
 function getDateRange() {
     sliderDisplay.textContent = dateSlider.value
-    let parsedDate = parseDate(currentDate)
-
-    let endDate = new Date()
+    const parsedDate = parseDate(currentDate)
+    let endDate = new Date() 
     endDate.setDate(endDate.getDate()-dateSlider.value)
     let parsedEndDate = parseDate(endDate)
 
@@ -137,10 +136,10 @@ function extractExerciseData(info){
     // calorie data array contains date and value for every day in range
     // info["activities-tracker-activityCalories"]
     let caloriesDataArray = [
-        {dateTime: '10-31-18', value: 3000},
-        {dateTime: '10-30-18', value: 800},
-        {dateTime: '10-29-18', value: 1000},
-        {dateTime: '10-28-18', value: 1000},
+        // {dateTime: '10-31-18', value: 3000},
+        // {dateTime: '10-30-18', value: 800},
+        // {dateTime: '10-29-18', value: 1000},
+        // {dateTime: '10-28-18', value: 1000},
         {dateTime: '10-27-18', value: 1000},
         {dateTime: '10-26-18', value: 1000},
         {dateTime: '10-25-18', value: 1000},

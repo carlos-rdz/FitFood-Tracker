@@ -143,23 +143,31 @@ function formatUserData(caloriesArray, endDate) {
     let calorieCount = 0
     count = 1
     endDate = dateTimeFormat(endDate)
-    for (let i = 0; i < caloriesArray.length; i++) {         
-        if (caloriesArray[i].dateTime == endDate) { // this will never be true
+    for (let i = 0; i < caloriesArray.length; i++) {   
+        calorieCount += caloriesArray[i].value
+        if (caloriesArray[i].dateTime == endDate || i == caloriesArray.length - 1) {
+            // if we have reached the determined end date, quit collecting data
+            // or if we have reached the end of the calorie data
+            newDateTime.push(caloriesArray[i].dateTime)
+            // calorieCount += caloriesArray[i].value
+            newCaloriesArray.push({dateTime: newDateTime.join(' - '), value: calorieCount})
+            // console.log(caloriesArray[i].dateTime, endDate)
+            // debugger
             break
-        }
-        if (count == 1 && userRange != 1) {
+        } else if (count == 1 && userDateRange != 'day') {
+            // if this is the first data point for this row     
+            // don't add first date string for daily report
             newDateTime.push(caloriesArray[i].dateTime)
-        }
-        if (count >= userRange || i == caloriesArray.length - 1) {
+        // if this is the last data point for this row
+        } else if (count >= userRange) {
             newDateTime.push(caloriesArray[i].dateTime)
-            calorieCount += parseInt(caloriesArray[i].value)
+            calorieCount += caloriesArray[i].value
             newCaloriesArray.push({dateTime: newDateTime.join(' - '), value: calorieCount})
             newDateTime = []
             calorieCount = 0
             count = 1
             continue
         }
-        calorieCount += caloriesArray[i].value
         count++
     }
     return newCaloriesArray
