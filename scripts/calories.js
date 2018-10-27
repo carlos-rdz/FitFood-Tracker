@@ -40,7 +40,7 @@ function requestFood() {
     // request calorie info for all food choices
     // userFood.forEach(foodItem => {
     for (let foodItem in foodDict) {   
-        console.log(`User selected ${foodDict[foodItem].name}.`)
+        console.log(`Requesting food calorie info ${foodDict[foodItem].name}.`)
         // let foodPromise = 
         fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${foodDict[foodItem].name}&detailed=true&branded=false`,
                             {
@@ -132,7 +132,7 @@ dateDropDown.addEventListener('change', e => {
     console.log('User selected ' + userGraphChoice)
 })
 
-function formatUserData(caloriesArray) {
+function formatUserData(caloriesArray, endDate) {
     const userDateRange = document.getElementById('dateDropDown').value
     console.log(`User has selected to see data by ${userDateRange}`)
     let userRange

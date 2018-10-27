@@ -16,6 +16,9 @@ let dropdownDisplay= document.querySelector("[data-dropdown")
 let topContainer = document.getElementsByClassName("topcontainer")[0]
 let dateSlider = document.getElementById("range-slider")
 let submitButton = document.getElementById('submitButton')
+const foodSelector = creatDropDown(foodDict);
+const theBody = document.querySelector("body");
+const theFood = document.getElementById('foodResult')
 // =============================================
 // add an event listener to 
 // determine date range
@@ -43,7 +46,7 @@ function getDateRange(dateSlider) {
     let endDate = new Date()
     endDate.setDate(endDate.getDate()-dateSlider.value)
 
-    let parsedEndDate = parsedDate(endDate)
+    let parsedEndDate = parseDate(endDate)
     // `${endDate.getFullYear()}-${('0' + (endDate.getMonth()+1)).slice(-2)}-${('0' + endDate.getDate()).slice(-2)}`;
 
 
@@ -143,7 +146,7 @@ function extractJSON(j) {
 function extractExerciseData(info){
     // calorie data array contains date and value for every day in range
     // info["activities-tracker-activityCalories"]
-    let calorieDataArray = [
+    let caloriesDataArray = [
         {dateTime: '10-31-18', value: 3000},
         {dateTime: '10-30-18', value: 800},
         {dateTime: '10-29-18', value: 1000},
@@ -178,7 +181,7 @@ function extractExerciseData(info){
     ]
     console.log(info["activities-tracker-activityCalories"])
     let totalCalories = 0
-    calorieDataArray.forEach(function(element){
+    caloriesDataArray.forEach(function(element){
 
         totalCalories += parseInt(element["value"])
     });
@@ -235,7 +238,8 @@ function achievments(calories){
         liftingIcon.classList.add("currentAchievment")
         
     }
-    return calories
+
+    return dateSlider
 }
 // =====================================================================================================================================================================================================
 
@@ -250,14 +254,13 @@ function creatDropDown(foodDict) {
         let option = document.createElement("option");
         option.value = foodItem
         option.textContent =  foodDict[foodItem]['name']
+        option.selected = 'selected'
         dropDown.appendChild(option);
     }
 
     dropdownDisplay.appendChild(dropDown)   
     return dropDown
 };
-
-const foodSelector = creatDropDown(foodDict);
 
 function getFoodChoices(foodSelector) {
     userFood = []
@@ -270,10 +273,6 @@ function getFoodChoices(foodSelector) {
     }
 }
 
-const theBody = document.querySelector("body");
-
-
-const theFood = document.getElementById('foodResult')
 // Draw new food results display
 function drawFoodImages(foodObj, date){
     // receives array of foodobj
