@@ -37,7 +37,7 @@ border: 0;
 }
 
 .displayInfo {
-    text-align: right;
+    text-align: center;
     /* position: fixed; */
 }
 
@@ -66,6 +66,7 @@ border: 0;
     /* align-content: space-between; */
     justify-content: center;
     width: 100%;
+    padding: 20px 0 0 0;
 }
 .achievmentImages img{
     padding: 0 5px 0 5px;
@@ -84,7 +85,7 @@ border: 0;
     flex-direction: column;
     text-align: center;
     align-items: center;
-    height: 300px;
+    height: 400px;
     justify-content: space-between;
     /* width: 50% */
 }
@@ -160,6 +161,12 @@ option {
 
 .foodImage {
     display: block;
+}
+
+#dateDropDown {
+
+    background-color: #B6B8D6;
+    width: 50%;
 }
 
 #wrapper {

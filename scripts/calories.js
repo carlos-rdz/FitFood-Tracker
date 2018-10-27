@@ -37,7 +37,7 @@ let userCaloriesArray = [];
 
 function requestFood(caloriesArray) {
     // capture user calories array
-    userCaloriesArray = caloriesArray;
+    userCaloriesArray = caloriesArray[1];
     let foodPromises = []
     // request calorie info for users selected food choices
     userFood.forEach(foodItem => {

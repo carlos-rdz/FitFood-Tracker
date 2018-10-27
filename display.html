@@ -28,6 +28,12 @@
                 
             </div>
             
+            <select id='dateDropDown' >
+                <option value="day">by day</option>
+                <option value="week">by week</option>
+                <option value="month">by month</option>
+                <option value="year">by year</option>
+            </select>
             <input id="submitButton" type="submit" value="Submit" class="button">
             
         </div>
@@ -47,20 +53,14 @@
                         
                     </div>
         </div>
-        <select id='dateDropDown'>
-            <option value="day">by day</option>
-            <option value="week">by week</option>
-            <option value="month">by month</option>
-            <option value="year">by year</option>
-        </select>
     </div>
     <div class="displaycontainer">
         <div class="displayInfo" data-displayInfo>
         </div>
-    
-    <div id="foodResult"></div>
+        
+        <div id="foodResult"></div>
     </div>
- 
+    
     <script src="scripts/calories.js"></script>
     <script src="scripts/index.js"></script>
 </body>

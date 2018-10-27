@@ -132,39 +132,7 @@ function extractJSON(j) {
 function extractExerciseData(info){
     // calorie data array contains date and value for every day in range
     let calorieDataArray = info["activities-tracker-activityCalories"]
-    // [
-    //     {date: '10-31-18', value: 3000},
-    //     {date: '10-30-18', value: 800},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 1000},
-    //     {date: '10-29-18', value: 2000},
-    //     {date: '10-29-18', value: 2000},
-    //     {date: '10-29-18', value: 2000},
-    //     {date: '10-29-18', value: 2000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    //     {date: '10-29-18', value: 3000},
-    // ]
+
     console.log(info["activities-tracker-activityCalories"])
     let totalCalories = 0
     calorieDataArray.forEach(function(element){
@@ -176,7 +144,7 @@ function extractExerciseData(info){
     let displayData = [calorieMessage];
     writeExerciseData(displayData)
     // return stub data for testing
-    return calorieDataArray
+    return [totalCalories,calorieDataArray]
 }
 // =============================================
 // helper function that writes data to the 
@@ -206,19 +174,19 @@ function achievments(calories){
             deleteHighlight.classList.remove("currentAchievment");
         }
 
-    if (calories <= 1000){
+    if (calories[0] <= 1000){
         fatIcon.classList.add("currentAchievment")
         
-    } else if ( 1000 < calories < 50000){
+    } else if ( 1000 < calories[0] < 50000){
         slouchIcon.classList.add("currentAchievment")
         
-    } else if ( 50000 < calories < 100000){
+    } else if ( 50000 < calories[0] < 100000){
         standingIcon.classList.add("currentAchievment")
         
-    }else if ( 100000 < calories < 200000){
+    }else if ( 100000 < calories[0] < 200000){
         runningIcon.classList.add("currentAchievment")
         
-    }else if (200000 < calories < 500000){
+    }else if (200000 < calories[0] < 500000){
         liftingIcon.classList.add("currentAchievment")
         
     }
