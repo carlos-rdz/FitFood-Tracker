@@ -13,7 +13,6 @@ const foodDict = {
     candy: {name:'candy', src: "https://png.icons8.com/color/40/000000/cupcake.png"},   
     chocolate: {name:'chocolate', src: "https://png.icons8.com/color/40/000000/chocolate-bar.png"},   
     apple: {name:'apple', src: "https://png.icons8.com/color/40/000000/nachos.png"},   
-
 }
 
 // create and return a random food choice 
@@ -35,15 +34,15 @@ let userFood = [randomFoodChoice(), randomFoodChoice()]
 let userCaloriesArray = [];
 // const returnServin  gs = {};
 
-function requestFood(caloriesArray) {
-    console.log(caloriesArray, userFood)
-    // capture user calories array
-    userCaloriesArray = caloriesArray;
-    let foodPromises = []
-    // request calorie info for users selected food choices
-    userFood.forEach(foodItem => {
-        console.log(`User selected ${foodItem.name}.`)
-        let foodPromise = fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${foodItem.name}&detailed=true&branded=false`,
+// fetch foodData as soon as page loads
+function requestFood() {
+    // let foodPromises = []
+    // request calorie info for all food choices
+    // userFood.forEach(foodItem => {
+    for (let foodItem in foodDict) {   
+        console.log(`User selected ${foodDict[foodItem].name}.`)
+        // let foodPromise = 
+        fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${foodDict[foodItem].name}&detailed=true&branded=false`,
                             {
                                 headers: {
                                     'x-app-key': '51c9ea63eedf0df881f39c24017f15db',
@@ -54,14 +53,30 @@ function requestFood(caloriesArray) {
                             .then(convertToJSON)
                             .catch(returnStubFood)
                             .then(extractFood)
-        foodPromises.push(foodPromise)
-    })
-    // create array of fetch promises for each userFood
+        // foodPromises.push(foodPromise)
+    }
+}
+// call function to get calorie data for food options
+requestFood()
 
-    console.log(foodPromises)
-    // wait for all userFood fetch requests to return
-    Promise.all(foodPromises)
-    .then(drawUserCalData)
+function drawFood(endDate) {
+    // clear old foodImages
+    console.log('Drawing user calorie data as food')
+    while (theFood.childNodes.length > 0) {
+        theFood.childNodes[0].remove()
+    }
+    console.log(userCaloriesArray, userFood)
+    // check what date range formatting user select
+    const userDataArray = formatUserData(userCaloriesArray, endDate);
+    
+    userDataArray.forEach( calorieData => {
+        console.log(calorieData)
+        let servings = convertCalToNumServings(userFood, calorieData.value)
+        console.log(servings)
+        drawFoodImages(servings, calorieData.dateTime)
+        // const br = document.createElement('br')
+        // theFood.appendChild(br)
+    })
 }
 
 function convertToJSON(r) {
@@ -94,19 +109,21 @@ function extractFood(resultsList) {
     for (let food in foodDict) {
         // console.log(`Found ${foodDict[food]['name']} in foodDict`)
         if (foodDict[food]['name'] === foodName) {
-            foodResult = foodDict[food]
+            // foodResult = 
+            foodDict[food].calories = foodCalories
             break
         }
     }
     // converts foodResult to array of food items
-    foodResult.calories = foodCalories
+    // foodResult.
     // foodResult = convertCalToNumServings(foodResult, foodCalories)
     // if (foodResult.length > 0) {
     //     console.log(`Burned equivalent of ${foodResult.length} of ${foodResult[0].name}`);
     // }
-    return foodResult;
+    // return foodResult;
 }
 
+// get user date drop down option selection
 const dateDropDown = document.getElementById('dateDropDown')
 let userGraphChoice = 'day'
 dateDropDown.addEventListener('change', e => {
@@ -114,26 +131,6 @@ dateDropDown.addEventListener('change', e => {
     userGraphChoice = option.value
     console.log('User selected ' + userGraphChoice)
 })
-
-function drawUserCalData(foodArray) {
-    // clear old foodImages
-    console.log('Drawing user calorie data as food')
-    while (theFood.childNodes.length > 0) {
-        theFood.childNodes[0].remove()
-    }
-    console.log(userCaloriesArray, foodArray)
-    // check what date range formatting user select
-    const userDataArray = formatUserData(userCaloriesArray);
-    
-    userDataArray.forEach( calorieData => {
-        console.log(calorieData)
-        let servings = convertCalToNumServings(foodArray, calorieData.value)
-        console.log(servings)
-        drawFoodImages(servings, calorieData.dateTime)
-        // const br = document.createElement('br')
-        // theFood.appendChild(br)
-    })
-}
 
 function formatUserData(caloriesArray) {
     const userDateRange = document.getElementById('dateDropDown').value
@@ -158,6 +155,9 @@ function formatUserData(caloriesArray) {
     let calorieCount = 0
     count = 1
     for (let i = 0; i < caloriesArray.length; i++) {
+        if (caloriesArray[i].dateTime == endDate) {
+            break
+        }
         if (count == 1 && userRange != 1) {
             newDateTime.push(caloriesArray[i].dateTime)
         }

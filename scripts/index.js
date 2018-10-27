@@ -21,26 +21,30 @@ let submitButton = document.getElementById('submitButton')
 // determine date range
 // =============================================
 
-dateSlider.addEventListener("click", e => 
-    sliderDisplay.textContent = e.target.value)
-
+dateSlider.addEventListener("click", e => {
+    sliderDisplay.textContent = e.target.value
+    getDateRange(e.target)
+})
+foodSelector.addEventListener('change', e => {
+    getFoodChoices(e.target)
+})
 submitButton.addEventListener('click', () => {
     console.log('Submit button clicked.')
     
-    getFoodChoices(foodSelector)
-    getDateRange(dateSlider)
+    // getFoodChoices(foodSelector)
+    // getDateRange(dateSlider)
 })
 
 function getDateRange(dateSlider) {
-    let todaysDate = new Date()
-    let parsedDate = `${todaysDate.getFullYear()}-${('0' + (todaysDate.getMonth()+1)).slice(-2)}-${('0' + todaysDate.getDate()).slice(-2)}`;
-    
+    // let todaysDate = new Date()
+    let parsedDate = parseDate(currentDate)
 
     // check this
     let endDate = new Date()
     endDate.setDate(endDate.getDate()-dateSlider.value)
 
-    let parsedEndDate = `${endDate.getFullYear()}-${('0' + (endDate.getMonth()+1)).slice(-2)}-${('0' + endDate.getDate()).slice(-2)}`;
+    let parsedEndDate = parsedDate(endDate)
+    // `${endDate.getFullYear()}-${('0' + (endDate.getMonth()+1)).slice(-2)}-${('0' + endDate.getDate()).slice(-2)}`;
 
 
     console.log(parsedDate);
@@ -49,10 +53,15 @@ function getDateRange(dateSlider) {
     // let activities = ['activityCalories','distance']
 
     // fetchExcerciseData(activities[0],parsedEndDate,parsedDate);
-    fetchExerciseData(parsedEndDate,parsedDate);
-    
+    drawFood(parsedEndDate)
 }
 
+function parseDate(dateObject) {
+    return `${dateObject.getFullYear()}-${('0' + (dateObject.getMonth()+1)).slice(-2)}-${('0' + dateObject.getDate()).slice(-2)}`;
+}
+
+const currentDate = new Date()
+fetchExerciseData()
 // =============================================
 // function that fetches profile data and 
 // runs the promise chain
@@ -100,8 +109,9 @@ function returnStubData(reason) {
 // runs the promise chain
 // =============================================
 // only called when slider is clicked
-function fetchExerciseData(date1,date2){
-    
+function fetchExerciseData(){
+    const date1 = currentDate
+    const date2 = new Date(currentDate.getFullYear - 1)
     fetch(`https://api.fitbit.com/1/user/-/activities/tracker/activityCalories/date/${date2}/${date1}.json`,
     {
         headers: {
@@ -115,7 +125,8 @@ function fetchExerciseData(date1,date2){
 .catch(returnStubData)
 .then(extractExerciseData)
 .then(achievments)
-.then(requestFood)
+.then(getDateRange)
+.then(drawFood)
 }
 // =============================================
 // strips the data to individual componenets and
@@ -131,39 +142,40 @@ function extractJSON(j) {
 
 function extractExerciseData(info){
     // calorie data array contains date and value for every day in range
-    let calorieDataArray =info["activities-tracker-activityCalories"]
-        // {dateTime: '10-31-18', value: 3000},
-        // {dateTime: '10-30-18', value: 800},
-        // {dateTime: '10-29-18', value: 1000},
-        // {dateTime: '10-29-18', value: 1000},
-        // {dateTime: '10-29-18', value: 1000},
-        // {dateTime: '10-29-18', value: 1000},
-        // {dateTime: '10-29-18', value: 1000},
-        // {dateTime: '10-29-18', value: 1000},
-        // {dateTime: '10-29-18', value: 1000},
-        // {dateTime: '10-29-18', value: 1000},
-        // {dateTime: '10-29-18', value: 1000},
-        // {dateTime: '10-29-18', value: 2000},
-        // {dateTime: '10-29-18', value: 2000},
-        // {dateTime: '10-29-18', value: 2000},
-        // {dateTime: '10-29-18', value: 2000},
-        // {dateTime: '10-29-18', value: 3000},
-        // {dateTime: '10-29-18', value: 3000},
-        // {dateTime: '10-29-18', value: 3000},
-        // {dateTime: '10-29-18', value: 3000},
-        // {dateTime: '10-29-18', value: 3000},
-        // {dateTime: '10-29-18', value: 3000},
-        // {dateTime: '10-29-18', value: 3000},
-        // {dateTime: '10-29-18', value: 3000},
-        // {dateTime: '10-29-18', value: 3000},
-        // {dateTime: '10-29-18', value: 3000},
-        // {dateTime: '10-29-18', value: 3000},
-        // {dateTime: '10-29-18', value: 3000},
-        // {dateTime: '10-29-18', value: 3000},
-        // {dateTime: '10-29-18', value: 3000},
-        // {dateTime: '10-29-18', value: 3000},
-        // {dateTime: '10-29-18', value: 3000},
-    
+    // info["activities-tracker-activityCalories"]
+    let calorieDataArray = [
+        {dateTime: '10-31-18', value: 3000},
+        {dateTime: '10-30-18', value: 800},
+        {dateTime: '10-29-18', value: 1000},
+        {dateTime: '10-29-18', value: 1000},
+        {dateTime: '10-29-18', value: 1000},
+        {dateTime: '10-29-18', value: 1000},
+        {dateTime: '10-29-18', value: 1000},
+        {dateTime: '10-29-18', value: 1000},
+        {dateTime: '10-29-18', value: 1000},
+        {dateTime: '10-29-18', value: 1000},
+        {dateTime: '10-29-18', value: 1000},
+        {dateTime: '10-29-18', value: 2000},
+        {dateTime: '10-29-18', value: 2000},
+        {dateTime: '10-29-18', value: 2000},
+        {dateTime: '10-29-18', value: 2000},
+        {dateTime: '10-29-18', value: 3000},
+        {dateTime: '10-29-18', value: 3000},
+        {dateTime: '10-29-18', value: 3000},
+        {dateTime: '10-29-18', value: 3000},
+        {dateTime: '10-29-18', value: 3000},
+        {dateTime: '10-29-18', value: 3000},
+        {dateTime: '10-29-18', value: 3000},
+        {dateTime: '10-29-18', value: 3000},
+        {dateTime: '10-29-18', value: 3000},
+        {dateTime: '10-29-18', value: 3000},
+        {dateTime: '10-29-18', value: 3000},
+        {dateTime: '10-29-18', value: 3000},
+        {dateTime: '10-29-18', value: 3000},
+        {dateTime: '10-29-18', value: 3000},
+        {dateTime: '10-29-18', value: 3000},
+        {dateTime: '10-29-18', value: 3000},
+    ]
     console.log(info["activities-tracker-activityCalories"])
     let totalCalories = 0
     calorieDataArray.forEach(function(element){
@@ -175,7 +187,9 @@ function extractExerciseData(info){
     let displayData = [calorieMessage];
     writeExerciseData(displayData)
     // return stub data for testing
-    return calorieDataArray
+    // store user calorie data
+    userCaloriesArray = caloriesDataArray;
+    return totalCalories
 }
 // =============================================
 // helper function that writes data to the 
