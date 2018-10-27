@@ -24,11 +24,7 @@ const theFood = document.getElementById('foodResult')
 // determine date range
 // =============================================
 const currentDate = new Date()
-
-dateSlider.addEventListener("click", e => {
-    sliderDisplay.textContent = e.target.value
-    getDateRange(e.target)
-})
+dateSlider.addEventListener("click", getDateRange)
 foodSelector.addEventListener('change', e => {
     getFoodChoices(e.target)
 })
@@ -36,30 +32,18 @@ foodSelector.addEventListener('change', e => {
 const dateDropDown = document.getElementById('dateDropDown')
 let userGraphChoice = 'day'
 dateDropDown.addEventListener('change', getDateRange)
-// e => {
-//     const option = e.target.selectedOptions[0]
-//     userGraphChoice = option.value
-//     console.log('User selected ' + userGraphChoice)
-
-// })
 
 function getDateRange() {
-    // let todaysDate = new Date()
+    sliderDisplay.textContent = dateSlider.value
     let parsedDate = parseDate(currentDate)
 
-    // check this
     let endDate = new Date()
     endDate.setDate(endDate.getDate()-dateSlider.value)
     let parsedEndDate = parseDate(endDate)
-    // `${endDate.getFullYear()}-${('0' + (endDate.getMonth()+1)).slice(-2)}-${('0' + endDate.getDate()).slice(-2)}`;
-    
-    
+
     console.log(parsedDate);
     console.log(parsedEndDate);
-
-    // let activities = ['activityCalories','distance']
-
-    // fetchExcerciseData(activities[0],parsedEndDate,parsedDate);
+    
     drawFood(parsedEndDate)
 }
 
@@ -258,6 +242,7 @@ function creatDropDown(foodDict) {
         let option = document.createElement("option");
         option.value = foodItem
         option.textContent =  foodDict[foodItem]['name']
+        // pre-select all options
         option.selected = 'selected'
         dropDown.appendChild(option);
     }

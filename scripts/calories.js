@@ -65,9 +65,9 @@ function drawFood(endDate) {
     while (theFood.childNodes.length > 0) {
         theFood.childNodes[0].remove()
     }
-    console.log(userCaloriesArray, userFood)
+    console.log(userCaloriesArray, userFood, endDate)
     // check what date range formatting user select
-
+    
     const userDataArray = formatUserData(userCaloriesArray, endDate);
     
     userDataArray.forEach( calorieData => {
@@ -118,13 +118,6 @@ function extractFood(resultsList) {
             break
         } 
     }
-    // converts foodResult to array of food items
-    // foodResult.
-    // foodResult = convertCalToNumServings(foodResult, foodCalories)
-    // if (foodResult.length > 0) {
-    //     console.log(`Burned equivalent of ${foodResult.length} of ${foodResult[0].name}`);
-    // }
-    // return foodResult;
 }
 
 function formatUserData(caloriesArray, endDate) {
@@ -150,12 +143,8 @@ function formatUserData(caloriesArray, endDate) {
     let calorieCount = 0
     count = 1
     endDate = dateTimeFormat(endDate)
-    for (let i = 0; i < caloriesArray.length; i++) {
-
+    for (let i = 0; i < caloriesArray.length; i++) {         
         if (caloriesArray[i].dateTime == endDate) { // this will never be true
-            // dateTime format = 10-1-18
-            // endDate format = 2018-1-18
-            debugger
             break
         }
         if (count == 1 && userRange != 1) {
@@ -180,9 +169,9 @@ function dateTimeFormat(dateString) {
     // console.log(dateString)
     // debugger
     let newDateString = dateString.split('-')
-    let yearString = newDateString.shift()
-    yearString.split().splice(0, 2)
-    newDateString.push(yearString)
+    let yearString = newDateString.shift().split('')
+    yearString.splice(0, 2)
+    newDateString.push(yearString.join(''))
     return newDateString.join('-')
 }
 
