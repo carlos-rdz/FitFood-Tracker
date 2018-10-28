@@ -49,7 +49,7 @@ sliderDisplay.addEventListener('input', () => {
 
 
 function getDateRange() {
-    // sliderDisplay.value = dateSlider.value
+    sliderDisplay.value = dateSlider.value
     const parsedDate = parseDate(currentDate)
     let endDate = new Date() 
     endDate.setDate(endDate.getDate()-dateSlider.value)
