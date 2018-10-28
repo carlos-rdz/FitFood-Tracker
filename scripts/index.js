@@ -149,34 +149,12 @@ function extractJSON(j) {
 
 function extractExerciseData(info){
     // calorie data array contains date and value for every day in range
-    // let caloriesDataArray = info["activities-tracker-activityCalories"]
+    let caloriesDataArray = info["activities-tracker-activityCalories"]
 
-    // console.log(info["activities-tracker-activityCalories"])
-    let caloriesDataArray = function() {
-        let newCalArray = []
-        let month = new Date().getMonth() + 1
-        let day = currentDate.getDate()
-        let year = currentDate.getFullYear().toString().split('').splice(2, 2).join('')
-        for (let i = 0; i < 365; i++) {
-            let newCalEntry = {}
-            // create random calories per day up to 500
-            const randomCalories = Math.floor(Math.random() * 500)
-            const dateString = `${month}-${day}-${year}`
-            newCalEntry.dateTime = dateString
-            newCalEntry.value = randomCalories
-            newCalArray.push(newCalEntry)
-            day--
-            if (day < 0) {
-                month--
-                day = 30
-                if (month < 0) {
-                    year--
-                    month = 12
-                }
-            }
-        }
-        return newCalArray
-    }()
+    console.log(info["activities-tracker-activityCalories"])
+
+    // let caloriesDataArray = stubCaloriesData()
+    
     console.log(info)
     let totalCalories = 0
     caloriesDataArray.forEach(function(element){
@@ -191,6 +169,32 @@ function extractExerciseData(info){
     // store user calorie data
     userCaloriesArray = caloriesDataArray;
     return totalCalories
+}
+
+function stubCaloriesData() {
+    let newCalArray = []
+    let month = new Date().getMonth() + 1
+    let day = currentDate.getDate()
+    let year = currentDate.getFullYear().toString().split('').splice(2, 2).join('')
+    for (let i = 0; i < 365; i++) {
+        let newCalEntry = {}
+        // create random calories per day up to 500
+        const randomCalories = Math.floor(Math.random() * 500)
+        const dateString = `${month}-${day}-${year}`
+        newCalEntry.dateTime = dateString
+        newCalEntry.value = randomCalories
+        newCalArray.push(newCalEntry)
+        day--
+        if (day < 0) {
+            month--
+            day = 30
+            if (month < 0) {
+                year--
+                month = 12
+            }
+        }
+    }
+    return newCalArray
 }
 // =============================================
 // helper function that writes data to the 
