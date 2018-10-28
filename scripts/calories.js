@@ -144,7 +144,6 @@ function formatUserData(caloriesArray, endDate) {
             // calorieCount += caloriesArray[i].value
             newCaloriesArray.push({dateTime: newDateTime.join('\n - \n'), value: calorieCount})
             console.log(newCaloriesArray[newCaloriesArray.length - 1].dateTime)
-            debugger
             break
         } else if (count == 1 && userDateRange != 'day') {
             // if this is the first data point for this row     
