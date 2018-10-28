@@ -16,43 +16,58 @@ let dropdownDisplay= document.querySelector("[data-dropdown")
 let topContainer = document.getElementsByClassName("topcontainer")[0]
 let dateSlider = document.getElementById("range-slider")
 let submitButton = document.getElementById('submitButton')
+const foodSelector = creatDropDown(foodDict);
+const theBody = document.querySelector("body");
+const theFood = document.getElementById('foodResult')
 // =============================================
 // add an event listener to 
 // determine date range
 // =============================================
-
-dateSlider.addEventListener("click", e => 
-    sliderDisplay.textContent = e.target.value)
-
-submitButton.addEventListener('click', () => {
-    console.log('Submit button clicked.')
-    
-    getFoodChoices(foodSelector)
-    getDateRange(dateSlider)
+const currentDate = new Date()
+dateSlider.addEventListener('change', getDateRange)
+foodSelector.addEventListener('change', e => {
+    getFoodChoices(e.target)
+    getDateRange()
+})
+// get user date drop down option selection
+const dateDropDown = document.getElementById('dateDropDown')
+let userGraphChoice = 'day'
+dateDropDown.addEventListener('change', getDateRange)
+// get user date from textarea
+sliderDisplay.addEventListener('input', () => {
+    let userDate = sliderDisplay.value.split('')
+    const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    for (let i = 0; i < userDate.length; i++) {
+        if (numbers.indexOf(userDate[i]) < 0) {
+            sliderDisplay.value = dateSlider.value
+            return
+        }
+    }
+    dateSlider.value = sliderDisplay.value
+    getDateRange()
 })
 
-function getDateRange(dateSlider) {
-    let todaysDate = new Date()
-    let parsedDate = `${todaysDate.getFullYear()}-${('0' + (todaysDate.getMonth()+1)).slice(-2)}-${('0' + todaysDate.getDate()).slice(-2)}`;
-    
 
-    // check this
-    let endDate = new Date()
+function getDateRange() {
+    sliderDisplay.value = dateSlider.value
+    const parsedDate = parseDate(currentDate)
+    let endDate = new Date() 
     endDate.setDate(endDate.getDate()-dateSlider.value)
-
-    let parsedEndDate = `${endDate.getFullYear()}-${('0' + (endDate.getMonth()+1)).slice(-2)}-${('0' + endDate.getDate()).slice(-2)}`;
-
+    let parsedEndDate = parseDate(endDate)
 
     console.log(parsedDate);
     console.log(parsedEndDate);
-
-    // let activities = ['activityCalories','distance']
-
-    // fetchExcerciseData(activities[0],parsedEndDate,parsedDate);
-    fetchExerciseData(parsedEndDate,parsedDate);
     
+    drawFood(parsedEndDate)
 }
 
+function parseDate(dateObject) {
+    console.log(`Parsing date ${dateObject}`)
+    return `${dateObject.getFullYear()}-${('0' + (dateObject.getMonth()+1)).slice(-2)}-${('0' + dateObject.getDate()).slice(-2)}`;
+}
+
+fetchProfileData();
+fetchExerciseData()
 // =============================================
 // function that fetches profile data and 
 // runs the promise chain
@@ -100,9 +115,12 @@ function returnStubData(reason) {
 // runs the promise chain
 // =============================================
 // only called when slider is clicked
-function fetchExerciseData(date1,date2){
-    
-    fetch(`https://api.fitbit.com/1/user/-/activities/tracker/activityCalories/date/${date2}/${date1}.json`,
+function fetchExerciseData(){
+    const date1 = parseDate(currentDate)
+    const lastYear = new Date()
+    lastYear.setFullYear(currentDate.getFullYear() - 1) //.setDate(currentDate.getDate())
+    const date2 = parseDate(lastYear)
+    fetch(`https://api.fitbit.com/1/user/-/activities/calories/date/${date1}/${date2}.json`,
     {
         headers: {
             "Authorization": `Bearer ${localStorage.getItem("ourtoken")}`
@@ -115,7 +133,7 @@ function fetchExerciseData(date1,date2){
 .catch(returnStubData)
 .then(extractExerciseData)
 .then(achievments)
-.then(requestFood)
+.then(getDateRange)
 }
 // =============================================
 // strips the data to individual componenets and
@@ -131,11 +149,37 @@ function extractJSON(j) {
 
 function extractExerciseData(info){
     // calorie data array contains date and value for every day in range
-    let calorieDataArray = info["activities-tracker-activityCalories"]
+    // let caloriesDataArray = info["activities-tracker-activityCalories"]
 
-    console.log(info["activities-tracker-activityCalories"])
+    // console.log(info["activities-tracker-activityCalories"])
+    let caloriesDataArray = function() {
+        let newCalArray = []
+        let month = new Date().getMonth() + 1
+        let day = currentDate.getDate()
+        let year = currentDate.getFullYear().toString().split('').splice(2, 2).join('')
+        for (let i = 0; i < 365; i++) {
+            let newCalEntry = {}
+            // create random calories per day up to 500
+            const randomCalories = Math.floor(Math.random() * 500)
+            const dateString = `${month}-${day}-${year}`
+            newCalEntry.dateTime = dateString
+            newCalEntry.value = randomCalories
+            newCalArray.push(newCalEntry)
+            day--
+            if (day < 0) {
+                month--
+                day = 30
+                if (month < 0) {
+                    year--
+                    month = 12
+                }
+            }
+        }
+        return newCalArray
+    }()
+    console.log(info)
     let totalCalories = 0
-    calorieDataArray.forEach(function(element){
+    caloriesDataArray.forEach(function(element){
 
         totalCalories += parseInt(element["value"])
     });
@@ -144,7 +188,9 @@ function extractExerciseData(info){
     let displayData = [calorieMessage];
     writeExerciseData(displayData)
     // return stub data for testing
-    return [totalCalories,calorieDataArray]
+    // store user calorie data
+    userCaloriesArray = caloriesDataArray;
+    return totalCalories
 }
 // =============================================
 // helper function that writes data to the 
@@ -160,7 +206,6 @@ function writeExerciseData(message) {
     })
 }
 
-fetchProfileData();
 // takeDateRange();
 // fetchExcerciseData();
 
@@ -190,7 +235,6 @@ function achievments(calories){
         liftingIcon.classList.add("currentAchievment")
         
     }
-    return calories
 }
 // =====================================================================================================================================================================================================
 
@@ -199,20 +243,20 @@ function creatDropDown(foodDict) {
     let dropDown = document.createElement('select');
     // dropDown.addEventListener('change', getFoodChoices)
     dropDown.multiple = true
-    dropDown.size = 5
+    dropDown.size = 9
     // add options
     for (let foodItem in foodDict) {
         let option = document.createElement("option");
         option.value = foodItem
         option.textContent =  foodDict[foodItem]['name']
+        // pre-select all options
+        option.selected = 'selected'
         dropDown.appendChild(option);
     }
 
     dropdownDisplay.appendChild(dropDown)   
     return dropDown
 };
-
-const foodSelector = creatDropDown(foodDict);
 
 function getFoodChoices(foodSelector) {
     userFood = []
@@ -224,11 +268,9 @@ function getFoodChoices(foodSelector) {
         console.log('Selecting ' + foodOption)
     }
 }
+// run as soon as page loads
+getFoodChoices(foodSelector)
 
-const theBody = document.querySelector("body");
-
-
-const theFood = document.getElementById('foodResult')
 // Draw new food results display
 function drawFoodImages(foodObj, date){
     // receives array of foodobj
