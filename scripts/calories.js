@@ -142,9 +142,9 @@ function formatUserData(caloriesArray, endDate) {
             // or if we have reached the end of the calorie data
             newDateTime.push(caloriesArray[i].dateTime)
             // calorieCount += caloriesArray[i].value
-            newCaloriesArray.push({dateTime: newDateTime.join(' - '), value: calorieCount})
-            // console.log(caloriesArray[i].dateTime, endDate)
-            // debugger
+            newCaloriesArray.push({dateTime: newDateTime.join('\n - \n'), value: calorieCount})
+            console.log(newCaloriesArray[newCaloriesArray.length - 1].dateTime)
+            debugger
             break
         } else if (count == 1 && userDateRange != 'day') {
             // if this is the first data point for this row     
@@ -154,7 +154,7 @@ function formatUserData(caloriesArray, endDate) {
         } else if (count >= userRange) {
             newDateTime.push(caloriesArray[i].dateTime)
             calorieCount += caloriesArray[i].value
-            newCaloriesArray.push({dateTime: newDateTime.join(' - '), value: calorieCount})
+            newCaloriesArray.push({dateTime: newDateTime.join('\n - \n'), value: calorieCount})
             newDateTime = []
             calorieCount = 0
             count = 1
