@@ -42,20 +42,20 @@ textarea {
     flex-direction: column;
 }
 
-/* .displayInfo {
-    text-align: center;
-    position: fixed; */
+.displayInfo {
+    border: groove silver 5px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.profileHeader {
+    flex: 1;
+}
+
 #profileInfo {
     display: flex;
     justify-content: space-evenly;
 }
-
-/* .displayInfo {
-    text-align: center;
-    position: sticky;
-    border: groove silver 5px;
-    border-radius: 10px;
-} */
 
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */

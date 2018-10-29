@@ -45,7 +45,10 @@
             <div class="dropdown" data-dropdown></div>
         </div>
         <div id="profileInfo">
-            <div data-profileHeader></div>
+            <div class="displayInfo" data-distanceInfo>
+                Total Distance: 0
+            </div>
+            <div class="displayInfo profileHeader" data-profileHeader></div>
             <div class="displayInfo" data-displayInfo>
                 Total Calories: 0
             </div>
@@ -53,10 +56,13 @@
         
         <!-- <div class='fitbit' data-profileHeader></div> -->
     </div>
-    <div class="displaycontainer">
 
-    
-    <div id="foodResult"></div>
+    <div class="displaycontainer">
+        <div id="foodResult"></div>
+    </div>
+
+    <div class="mapContainer">
+        <!-- hook up the google map here to take up the whole space -->
     </div>
     
     <script src="scripts/calories.js"></script>
