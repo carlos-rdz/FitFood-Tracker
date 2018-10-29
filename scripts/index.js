@@ -1,6 +1,5 @@
 // // =============================================
 // // Defines HTML elements
-// // 
 // // =============================================
 let fitDisplay = document.querySelector("[data-displayInfo]");
 let profileHeader = document.querySelector("[data-profileHeader]");
