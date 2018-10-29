@@ -73,19 +73,19 @@ textarea {
     border: 1px solid red ;
     
 } */
-.achievments{
+.achievements{
     text-align: center;
 }
-.achievmentImages {
+.achievementImages {
     display: flex;
     justify-content: space-around;
 }
-.achievmentImages img{
+.achievementImages img{
     padding: 0 5px 0 5px;
     
     height: 30px;
 }
-.currentAchievment{
+.currentAchievement{
     background-color: #00B0B9;
 }
 /* @import url(https://fonts.googleapis.com/css?family=Raleway); */
