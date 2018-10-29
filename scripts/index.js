@@ -119,7 +119,7 @@ function fetchExerciseData(){
     const lastYear = new Date()
     lastYear.setFullYear(currentDate.getFullYear() - 1) //.setDate(currentDate.getDate())
     const date2 = parseDate(lastYear)
-    fetch(`https://api.fitbit.com/1/user/-/activities/calories/date/${date1}/${date2}.json`,
+    fetch(`https://api.fitbit.com/1/user/-/activities/calories/date/${date2}/${date1}.json`,
     {
         headers: {
             "Authorization": `Bearer ${localStorage.getItem("ourtoken")}`
@@ -132,6 +132,7 @@ function fetchExerciseData(){
 .catch(returnStubData)
 .then(extractExerciseData)
 .then(achievments)
+.then(requestFood)
 .then(getDateRange)
 }
 // =============================================
@@ -147,8 +148,6 @@ function extractJSON(j) {
 } 
 
 function extractExerciseData(info){
-    debugger
-
     // calorie data array contains date and value for every day in range
     let caloriesDataArray = info["activities-calories"]
 
@@ -215,9 +214,7 @@ function writeExerciseData(message) {
 
 function achievments(calories){
     
-    // allIcons.classList.remove("currentAchievment")
-    debugger;
-    
+    // allIcons.classList.remove("currentAchievment")    
     let deleteHighlight = document.getElementsByClassName('currentAchievment')[0]
     
     if (deleteHighlight){

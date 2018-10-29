@@ -36,13 +36,12 @@ let userCaloriesArray = [];
 
 // fetch foodData as soon as page loads
 function requestFood() {
-    // let foodPromises = []
+    let foodPromises = []
     // request calorie info for all food choices
     // userFood.forEach(foodItem => {
     for (let foodItem in foodDict) {   
         console.log(`Requesting food calorie info ${foodDict[foodItem].name}.`)
-        // let foodPromise = 
-        fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${foodDict[foodItem].name}&detailed=true&branded=false`,
+        let foodPromise = fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${foodDict[foodItem].name}&detailed=true&branded=false`,
                             {
                                 headers: {
                                     'x-app-key': '51c9ea63eedf0df881f39c24017f15db',
@@ -53,12 +52,13 @@ function requestFood() {
                             .then(convertToJSON)
                             .then(extractFood)
                             .catch(returnStubFood)
-                            .then(getFoodChoices)
-        // foodPromises.push(foodPromise)
+                            // .then(getFoodChoices)
+        foodPromises.push(foodPromise)
     }
+    return Promise.all(foodPromises)
 }
 // call function to get calorie data for food options
-requestFood()
+// requestFood()
 
 function drawFood(endDate) {
     // clear old foodImages
@@ -72,7 +72,6 @@ function drawFood(endDate) {
     const userDataArray = formatUserData(userCaloriesArray, endDate);
     userDataArray.forEach( calorieData => {
         console.log(calorieData)
-        debugger;
         let servings = convertCalToNumServings(userFood, calorieData.value)
         console.log(servings)
         drawFoodImages(servings, calorieData.dateTime)
@@ -99,7 +98,6 @@ function returnStubFood() {
 
 function extractFood(resultsList) {
     // declare foodResult variable
-    debugger
     const foodName = resultsList.common[0].food_name;
     const foodCalories = resultsList.common[0].full_nutrients[4].value;
     console.log('Food result received. Name: ' + foodName + ' Calories: ' + foodCalories);
@@ -112,7 +110,6 @@ function extractFood(resultsList) {
             break
         } 
     }
-    debugger
 }
 
 function formatUserData(caloriesArray, endDate) {
@@ -138,7 +135,6 @@ function formatUserData(caloriesArray, endDate) {
     let calorieCount = 0
     count = 1
     endDate = dateTimeFormat(endDate)
-    debugger
     for (let i = 0; i < caloriesArray.length; i++) {   
         calorieCount += parseInt(caloriesArray[i].value)
         if (caloriesArray[i].dateTime == endDate || i == caloriesArray.length - 1) {
@@ -180,7 +176,6 @@ function dateTimeFormat(dateString) {
 
 function convertCalToNumServings(foodArray, userCaloriesBurned) {
     console.log('Converting calories to servings...' + userCaloriesBurned)
-    debugger
     let servings = [];
     // sort food items by calories
     console.log(foodArray)
