@@ -259,7 +259,7 @@ function creatDropDown(foodDict) {
     return dropDown
 };
 
-function getFoodChoices(foodSelector) {
+function getFoodChoices() {
     userFood = []
     const selectedOptions = foodSelector.selectedOptions
     // take selected indexes and add corresponding foodDict to userFood
