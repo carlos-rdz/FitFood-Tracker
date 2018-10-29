@@ -80,7 +80,6 @@ function drawFood(endDate) {
         // theFood.appendChild(br)
     })
     console.log('Page loaded, requested...')
-    debugger
 }
 
 function convertToJSON(r) {
