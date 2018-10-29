@@ -147,23 +147,24 @@ function extractJSON(j) {
 } 
 
 function extractExerciseData(info){
+    debugger
+
     // calorie data array contains date and value for every day in range
-    let caloriesDataArray = info["activities-tracker-activityCalories"]
+    let caloriesDataArray = info["activities-calories"]
 
-    console.log(info["activities-tracker-activityCalories"])
-
+    console.log(info["activities-calories"])
     // let caloriesDataArray = stubCaloriesData()
     
     console.log(info)
     let totalCalories = 0
     caloriesDataArray.forEach(function(element){
-
+        
         totalCalories += parseInt(element["value"])
     });
     
     let calorieMessage = `Total Calories: ${totalCalories}`;
-    let displayData = [calorieMessage];
-    writeExerciseData(displayData)
+    // let displayData = [calorieMessage;
+    writeExerciseData(calorieMessage)
     // return stub data for testing
     // store user calorie data
     userCaloriesArray = caloriesDataArray;
@@ -200,41 +201,42 @@ function stubCaloriesData() {
 // document
 // =============================================
 function writeExerciseData(message) {
-    message.forEach(element => {
+    // message.forEach(element => {
         // elementDisplay = document.createElement('div');
-        fitDisplay.textContent = element;
+        fitDisplay.textContent = message;
         // fitDisplay.appendChild(elementDisplay);
+        
+        
+    }
 
-   
-    })
-}
 
 // takeDateRange();
 // fetchExcerciseData();
 
 function achievments(calories){
-
+    
     // allIcons.classList.remove("currentAchievment")
-
+    debugger;
+    
     let deleteHighlight = document.getElementsByClassName('currentAchievment')[0]
-        
+    
     if (deleteHighlight){
-            deleteHighlight.classList.remove("currentAchievment");
-        }
-
-    if (calories[0] <= 1000){
+        deleteHighlight.classList.remove("currentAchievment");
+    }
+    
+    if (calories <= 1000){
         fatIcon.classList.add("currentAchievment")
         
-    } else if ( 1000 < calories[0] < 50000){
+    } else if ( calories > 1000 && calories < 50000){
         slouchIcon.classList.add("currentAchievment")
         
-    } else if ( 50000 < calories[0] < 100000){
+    } else if ( calories > 50000 && calories < 100000){
         standingIcon.classList.add("currentAchievment")
         
-    }else if ( 100000 < calories[0] < 200000){
+    }else if ( calories > 100000 && calories < 200000){
         runningIcon.classList.add("currentAchievment")
         
-    }else if (200000 < calories[0] < 500000){
+    }else if (200000 < calories){
         liftingIcon.classList.add("currentAchievment")
         
     }

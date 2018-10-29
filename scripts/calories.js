@@ -53,6 +53,7 @@ function requestFood() {
                             .then(convertToJSON)
                             .then(extractFood)
                             .catch(returnStubFood)
+                            .then(getFoodChoices)
         // foodPromises.push(foodPromise)
     }
 }
@@ -69,9 +70,9 @@ function drawFood(endDate) {
     // check what date range formatting user select
     
     const userDataArray = formatUserData(userCaloriesArray, endDate);
-    
     userDataArray.forEach( calorieData => {
         console.log(calorieData)
+        debugger;
         let servings = convertCalToNumServings(userFood, calorieData.value)
         console.log(servings)
         drawFoodImages(servings, calorieData.dateTime)
@@ -98,6 +99,7 @@ function returnStubFood() {
 
 function extractFood(resultsList) {
     // declare foodResult variable
+    debugger
     const foodName = resultsList.common[0].food_name;
     const foodCalories = resultsList.common[0].full_nutrients[4].value;
     console.log('Food result received. Name: ' + foodName + ' Calories: ' + foodCalories);
@@ -110,6 +112,7 @@ function extractFood(resultsList) {
             break
         } 
     }
+    debugger
 }
 
 function formatUserData(caloriesArray, endDate) {
@@ -135,8 +138,9 @@ function formatUserData(caloriesArray, endDate) {
     let calorieCount = 0
     count = 1
     endDate = dateTimeFormat(endDate)
+    debugger
     for (let i = 0; i < caloriesArray.length; i++) {   
-        calorieCount += caloriesArray[i].value
+        calorieCount += parseInt(caloriesArray[i].value)
         if (caloriesArray[i].dateTime == endDate || i == caloriesArray.length - 1) {
             // if we have reached the determined end date, quit collecting data
             // or if we have reached the end of the calorie data
@@ -152,7 +156,7 @@ function formatUserData(caloriesArray, endDate) {
         // if this is the last data point for this row
         } else if (count >= userRange) {
             newDateTime.push(caloriesArray[i].dateTime)
-            calorieCount += caloriesArray[i].value
+            // calorieCount += caloriesArray[i].value
             newCaloriesArray.push({dateTime: newDateTime.join('\n - \n'), value: calorieCount})
             newDateTime = []
             calorieCount = 0
@@ -176,6 +180,7 @@ function dateTimeFormat(dateString) {
 
 function convertCalToNumServings(foodArray, userCaloriesBurned) {
     console.log('Converting calories to servings...' + userCaloriesBurned)
+    debugger
     let servings = [];
     // sort food items by calories
     console.log(foodArray)
