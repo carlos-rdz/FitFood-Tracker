@@ -1,3 +1,13 @@
+/* 
+HEX: #96ceb4
+
+HEX: #ffeead
+
+HEX: #ffcc5c
+
+HEX: #ff6f69 */
+
+
 html{
     height: 100%;
 }
@@ -19,7 +29,7 @@ overflow: hidden;
 .profilecontainer {
     display: flex;
     flex-direction: column;
-    background-color: #b7d7e8;
+    background-color: lightblue;
     justify-content: space-around;
     text-align: center;
     border: groove gold 5px;
@@ -36,7 +46,7 @@ textarea {
 
 .displaycontainer {
     flex: 1;
-    background-color: #cfe0e8;
+    /* background-color: #ffcc5c; */
     /* padding-top: 10px; */
     display: flex;
     flex-direction: column;
