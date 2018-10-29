@@ -203,11 +203,7 @@ function writeExerciseData(message) {
         // fitDisplay.appendChild(elementDisplay);
         
         
-    }
-
-
-// takeDateRange();
-// fetchExcerciseData();
+}
 
 function achievements(calories){
     

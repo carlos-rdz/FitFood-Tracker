@@ -79,6 +79,8 @@ function drawFood(endDate) {
         // const br = document.createElement('br')
         // theFood.appendChild(br)
     })
+    console.log('Page loaded, requested...')
+    debugger
 }
 
 function convertToJSON(r) {
