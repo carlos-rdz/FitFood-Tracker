@@ -57,8 +57,6 @@ function requestFood() {
     }
     return Promise.all(foodPromises)
 }
-// call function to get calorie data for food options
-// requestFood()
 
 function drawFood(endDate) {
     // clear old foodImages
@@ -200,7 +198,6 @@ function convertCalToNumServings(foodArray, userCaloriesBurned) {
     // return array with number of servings of food object in it
     return servings;
 }
-
 
 function calculateTotalCalories(rangeData){
 
