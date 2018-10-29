@@ -25,7 +25,7 @@ const theFood = document.getElementById('foodResult')
 const currentDate = new Date()
 dateSlider.addEventListener('change', getDateRange)
 foodSelector.addEventListener('change', e => {
-    getFoodChoices(e.target)
+    getFoodChoices()
     getDateRange()
 })
 // get user date drop down option selection
@@ -56,7 +56,6 @@ function getDateRange() {
 
     console.log(parsedDate);
     console.log(parsedEndDate);
-    
     drawFood(parsedEndDate)
 }
 

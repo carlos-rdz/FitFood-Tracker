@@ -70,6 +70,7 @@ function drawFood(endDate) {
     // check what date range formatting user select
     
     const userDataArray = formatUserData(userCaloriesArray, endDate);
+    
     userDataArray.forEach( calorieData => {
         console.log(calorieData)
         let servings = convertCalToNumServings(userFood, calorieData.value)
@@ -134,10 +135,10 @@ function formatUserData(caloriesArray, endDate) {
     let newDateTime = []
     let calorieCount = 0
     count = 1
-    endDate = dateTimeFormat(endDate)
-    for (let i = 0; i < caloriesArray.length; i++) {   
+    // endDate = dateTimeFormat(endDate)
+    for (let i = caloriesArray.length - 1; i < caloriesArray.length; i--) {  
         calorieCount += parseInt(caloriesArray[i].value)
-        if (caloriesArray[i].dateTime == endDate || i == caloriesArray.length - 1) {
+        if (caloriesArray[i].dateTime === endDate || i == 0) {
             // if we have reached the determined end date, quit collecting data
             // or if we have reached the end of the calorie data
             newDateTime.push(caloriesArray[i].dateTime)
