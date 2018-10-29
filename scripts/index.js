@@ -203,11 +203,7 @@ function writeExerciseData(message) {
         // fitDisplay.appendChild(elementDisplay);
         
         
-    }
-
-
-// takeDateRange();
-// fetchExcerciseData();
+}
 
 function achievements(calories){
     
@@ -285,19 +281,21 @@ function drawFoodImages(foodObj, date){
     dateLabel.textContent = date
     foodDataDiv.appendChild(dateLabel)
     for (let i = 0; i < foodObj.length; i ++) {
-        foodImgDiv.appendChild(addFoodImage(foodObj[i].src))
+        foodImgDiv.appendChild(addFoodImage(foodObj[i]))
     }
     foodDataDiv.appendChild(foodImgDiv)
     theFood.appendChild(foodDataDiv)
     console.log('Food served.')
 }
 // creates food icon
-function addFoodImage(foodImageSrc) {
+function addFoodImage(foodObj) {
     // creates new images element
     const newImg = document.createElement("img");
     // adds the pizza icon
-    newImg.src = foodImageSrc;
+    newImg.src = foodObj.src
+    newImg.alt = foodObj.name
     newImg.classList.add('foodImage')
+
     // newImg.display = block;
     return newImg
 };

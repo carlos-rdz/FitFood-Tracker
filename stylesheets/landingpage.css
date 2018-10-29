@@ -3,6 +3,7 @@
 html {
   box-sizing: border-box;
 }
+
 *, *:before, *:after {
   box-sizing: inherit;
 }
@@ -15,64 +16,73 @@ html, body {
 
 body {
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
-    min-height: 100vh;
-    background-image: linear-gradient(to bottom, rgba(255,255,0,0.5), rgba(0,0,255,0.5)),
-url('../images/jogging.png');
+    /* background-image: linear-gradient(to bottom, rgba(255,255,0,0.5), rgba(0,0,255,0.5)),
+url('../images/jogging.png'); */
+    background-image: url('../images/jogging.png');
+    background-color: linear-gradient(to bottom, rgba(255,255,0,0.5), rgba(0,0,255,0.5));
     background-size: cover; 
-    background-position: right center;   
+    background-position: right -100px center; 
+    background-attachment: fixed;  
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (min-width: 900px) {
     body {
-        background-position: -650px;
-        transition: background-position, 3s;
+        background-position: right center;
+        /* transition: background-position, 3s; */
     }
 }
 
+@media screen and (max-width: 450px) {
+    /* body {
+        background-position: -650px;
+        transition: background-position, 3s;
+    } */
+    .info > p {
+        visibility: hidden;
+        position: absolute;
+    }
+}
+
+
 @media screen and (max-width: 400px) {
+    body {
+        background-position: -550px;
+        transition: background-position, 3s;
+        height: 175%;
+    }
+}
+
+@media screen and (max-width: 350px) {
     body {
         background-position: -550px;
         transition: background-position, 3s;
     }
 }
 
-@media screen and (max-width: 350px) {
-    body {
-        background-position: -450px;
-        transition: background-position, 3s;
-    }
-}
-
-.main {
-    flex:1;
-}
-
-
-
-p {
-    text-align: center;
-    font-family: 'Mali', cursive;
-    font-size: 18px;
-
-
-}
-
-
-#canvas-image-blending {
+.gradient {
     position: absolute;
-    display: block;
-    width: 100%;
     height: 100%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    /* puts cavas in the actual background */
-    z-index: -9999;
-    
+    width: 100%;
+    /* opacity: .25; */
+    background-image: linear-gradient(to bottom,
+                                    rgba(0, 0, 255, 0.5),
+                                    rgba(255, 255, 0, 0.5),
+                                    rgba(0, 0, 255, 0.5)
+                                    );
+    animation: profileGradient 10s linear 0s infinite alternate none;
+    background-size: 100% 400%;
+    z-index: -1;
 }
 
+@keyframes profileGradient {
+    /* from {background-color: rgba(0,0,255,0.5)}
+    to {background-color: rgba(255,255,0,0.5)} */
+    0%{background-position: 0% 4%}
+    50%{background-position: 100% 97%}
+    100%{background-position: 0% 4%}
+}
 
 .header {
     font-family: 'Rock Salt', cursive;
@@ -80,24 +90,54 @@ p {
     font-size: 50px;
 }
 
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex: 1;
+}
 
+.click-container {
+    display: flex;
+    justify-content: center;
+    font-family: 'Rock Salt', cursive;
 
+}
+
+.click-link{
+    background-color: rgba(255, 0, 0, .5);  
+    border-radius: 10px;
+    color: white;
+    padding: .5em;
+    text-decoration: none;
+    font-size: 30px;
+    border: red groove 5px;
+    margin: 0 auto;
+}
+
+.click-link:focus,
+.click-link:hover {
+    background-color: rgba(255, 0, 0, 0.75);
+    color: white;
+}
+
+p {
+    text-align: left;
+    font-family: 'Mali', cursive;
+    font-size: 18px;
+    margin: 0 40% 0 5%;
+}
 
 .foot {
-
     background-color: rgba(0,0,0,0.7);
     padding:8px 12px;
     display: flex;
-    justify-content: space-between;
-    
-    
-    
+    justify-content: space-between; 
 }
 
 .pf {
     position: sticky;
     left: 0;
-    margin-right: 75%;
 }
 
 .foot p {
@@ -133,33 +173,5 @@ p {
 }
 
 
-.click-container {
-    display: flex;
-    justify-content: center;
-    font-family: 'Rock Salt', cursive;
-
-}
-.click-link{
-    background-color: crimson;  
-    border-radius: 5px;
-    color: white;
-    padding: .5em;
-    text-decoration: none;
-    font-size: 30px;
-    
-}
-
-.click-link:focus,
-.click-link:hover {
-  background-color: FireBrick;
-  color: white;
-}
-
-
-
-.ourimage{
-
-    background-size: contain;
-}
 
 
