@@ -8,7 +8,7 @@ let slouchIcon = document.querySelector("[data-slouch]")
 let standingIcon = document.querySelector("[data-standing]")
 let runningIcon = document.querySelector("[data-running]")
 let liftingIcon = document.querySelector("[data-lifting]")
-let allIcons= document.querySelector("[data-achievmentImages]")
+let allIcons= document.querySelector("[data-achievementImages]")
 let slider= document.querySelector("[data-slider]")
 let sliderDisplay= document.querySelector("[data-sliderDisplay]")
 let dropdownDisplay= document.querySelector("[data-dropdown")
@@ -130,7 +130,7 @@ function fetchExerciseData(){
 .then(extractJSON)
 .catch(returnStubData)
 .then(extractExerciseData)
-.then(achievments)
+// .then(achievements)
 .then(requestFood)
 .then(getDateRange)
 }
@@ -150,10 +150,8 @@ function extractExerciseData(info){
     // calorie data array contains date and value for every day in range
     let caloriesDataArray = info["activities-calories"]
 
-    console.log(info["activities-calories"])
-    // let caloriesDataArray = stubCaloriesData()
+    console.log(caloriesDataArray)
     
-    console.log(info)
     let totalCalories = 0
     caloriesDataArray.forEach(function(element){
         
@@ -166,7 +164,7 @@ function extractExerciseData(info){
     // return stub data for testing
     // store user calorie data
     userCaloriesArray = caloriesDataArray;
-    return totalCalories
+    // return totalCalories
 }
 
 function stubCaloriesData() {
@@ -211,29 +209,29 @@ function writeExerciseData(message) {
 // takeDateRange();
 // fetchExcerciseData();
 
-function achievments(calories){
+function achievements(calories){
     
     // allIcons.classList.remove("currentAchievment")    
-    let deleteHighlight = document.getElementsByClassName('currentAchievment')[0]
+    let deleteHighlight = document.getElementsByClassName('currentAchievement')[0]
     
     if (deleteHighlight){
-        deleteHighlight.classList.remove("currentAchievment");
+        deleteHighlight.classList.remove("currentAchievement");
     }
     
     if (calories <= 1000){
-        fatIcon.classList.add("currentAchievment")
+        fatIcon.classList.add("currentAchievement")
         
     } else if ( calories > 1000 && calories < 50000){
-        slouchIcon.classList.add("currentAchievment")
+        slouchIcon.classList.add("currentAchievement")
         
     } else if ( calories > 50000 && calories < 100000){
-        standingIcon.classList.add("currentAchievment")
+        standingIcon.classList.add("currentAchievement")
         
     }else if ( calories > 100000 && calories < 200000){
-        runningIcon.classList.add("currentAchievment")
+        runningIcon.classList.add("currentAchievement")
         
     }else if (200000 < calories){
-        liftingIcon.classList.add("currentAchievment")
+        liftingIcon.classList.add("currentAchievement")
         
     }
 }

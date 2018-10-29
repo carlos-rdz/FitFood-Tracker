@@ -70,6 +70,8 @@ function drawFood(endDate) {
     // check what date range formatting user select
     
     const userDataArray = formatUserData(userCaloriesArray, endDate);
+
+    calculateTotalCalories(userDataArray);
     
     userDataArray.forEach( calorieData => {
         console.log(calorieData)
@@ -112,6 +114,7 @@ function extractFood(resultsList) {
         } 
     }
 }
+
 
 function formatUserData(caloriesArray, endDate) {
     const userDateRange = document.getElementById('dateDropDown').value
@@ -196,4 +199,21 @@ function convertCalToNumServings(foodArray, userCaloriesBurned) {
     console.log(`Returning servings ${servings.map(item => item.name).join(', ')}`)
     // return array with number of servings of food object in it
     return servings;
+}
+
+
+function calculateTotalCalories(rangeData){
+
+    let totalCalories = 0
+    rangeData.forEach(function(element){
+        
+        totalCalories += parseInt(element["value"])
+    });
+    
+    let calorieMessage = `Total Calories: ${totalCalories}`;
+    // let displayData = [calorieMessage;
+    writeExerciseData(calorieMessage)
+
+    achievements(totalCalories)
+    // return totalCalories
 }
