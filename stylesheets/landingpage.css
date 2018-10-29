@@ -39,7 +39,7 @@ url('../images/jogging.png');
 
 @media screen and (max-width: 350px) {
     body {
-        background-position: -450px;
+        background-position: -4 50px;
         transition: background-position, 3s;
     }
 }
@@ -59,7 +59,7 @@ p {
 }
 
 
-#canvas-image-blending {
+/* #canvas-image-blending {
     position: absolute;
     display: block;
     width: 100%;
@@ -68,10 +68,10 @@ p {
     right: 0;
     bottom: 0;
     left: 0;
-    /* puts cavas in the actual background */
+    puts cavas in the actual background
     z-index: -9999;
     
-}
+} */
 
 
 .header {
@@ -140,7 +140,7 @@ p {
 
 }
 .click-link{
-    background-color: crimson;  
+    background-color: rgba(255, 0, 0, .5);  
     border-radius: 5px;
     color: white;
     padding: .5em;
@@ -151,7 +151,7 @@ p {
 
 .click-link:focus,
 .click-link:hover {
-  background-color: FireBrick;
+  background-color: rgba(255, 0, 0, 0.75);
   color: white;
 }
 
