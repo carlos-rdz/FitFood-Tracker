@@ -90,10 +90,10 @@ function convertToJSON(r) {
 
 function returnStubFood() {
     console.log('Returning stub food')
-    let stubCalories = 550
+    let stubCalories = 680
     for (let foodItem in foodDict) {
         foodDict[foodItem].calories = stubCalories
-        stubCalories -= 50
+        stubCalories -= 75
     }
 }
 
