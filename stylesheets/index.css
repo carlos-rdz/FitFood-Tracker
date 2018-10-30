@@ -17,7 +17,8 @@ html, body {
 body {
 display: flex;
 flex-direction: column;
-font-family: 'Raleway', sans-serif;
+font-family: 'Noto Sans JP', sans-serif;
+font-weight: 100;
 font-size: 18px;
 height: 100%;
 width: 100%;
@@ -29,11 +30,12 @@ overflow: hidden;
 .profilecontainer {
     display: flex;
     flex-direction: column;
-    background-color: lightblue;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 255, 0.5), rgba(255,255,0,0.5), rgba(0,0,255,0.5));
+    background-color: #fffff2
+    /* background-color: lightblue; */
+    /* background-image: linear-gradient(to bottom, rgba(0, 0, 255, 0.5), rgba(255,255,0,0.5), rgba(0,0,255,0.5)); */
     justify-content: space-around;
     text-align: center;
-    border: groove gold 5px;
+    /* border: groove gold 5px; */
     border-radius: 10px;
     animation: profileGradient 10s linear 0s infinite alternate none;
     background-size: 400% 400%;
@@ -65,17 +67,18 @@ textarea {
 }
 
 .displayInfo {
-    border: groove silver 5px;
+    /* border: groove silver 5px; */
     border-radius: 10px;
     padding: 10px;
 }
 
 .profileHeader {
-    flex: 1;
+    /* flex: 1; */
 }
 
 #profileInfo {
     display: flex;
+    /* flex-direction: row; */
     justify-content: space-evenly;
 }
 
@@ -89,32 +92,65 @@ textarea {
     opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
     
 }
-/* .achievmentFooter{
-    
-    
-    border: 1px solid red ;
+.achievementFooter{
+    margin: 0;
+    /* border: 1px solid red; */
+    /* background-color: #f9f1f1 */
+    padding: 0;
+    /* background-color: #00B0B9; */
     
 } */
 .achievements{
     text-align: center;
+    /* outline: 1px solid red; */
 }
 .achievementImages {
     display: flex;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: center;
+
+    /* justify-content: space-around; */
 }
 .achievementImages img{
-    padding: 0 5px 0 5px;
-    
-    height: 30px;
+    padding: 0 50px 0 50px;
+    height: 35px;
+    /* width: 20%; */
+    /* padding: 1%; */
 }
 .currentAchievement{
-    background-color: #00B0B9;
+    color: white;
+    background-color: #b3fbff;
 }
 /* @import url(https://fonts.googleapis.com/css?family=Raleway); */
 .optionsContainer{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    background-color: #f9f9f9
+}
+.instructions{
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    /* align-content: center; */
+    align-items: center;
+    justify-content: center;
+
+    /* text-align: end; */
+    /* text-align: left; */
+
+}
+
+.instructions span{
+   padding: 5px;
+
+}
+.profileInfo{
+    /* background-color: #4abdac; */
+    color: black;
+    /* background-color: gainsboro; */
+    /* display: flex;
+    flex-direction: r */
 }
 
 #moreOptionsContainer {
@@ -127,8 +163,12 @@ textarea {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 110px;
+}
+.rangeContainer h1{
+    font-size: 13px;
+
 }
 
 #dateDropDown {
@@ -136,22 +176,33 @@ textarea {
     font-size: 1rem;
 }
 
+.sliderDisplay{
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 100;
+    font-size: 13px;
+    border: #D3D3D3;
+}
+/* .sliderDisplay value{ */
+    
+}
 .dropdown {
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
+    /* box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4); */
+    /* border-radius: 10px; */
 }
 .dropdown select{
+    /* all: none; */
     border: none;
-    font-family: 'Raleway', sans-serif;
-    background-color: #B6B8D6;
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #f9f9f9;
     text-align: center;
-    padding: 5% 30%;
+    /* padding: 5% 30%; */
     border-radius: 10px;
 }
 
 #submitButton{
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
+    /* font-family: 'Raleway', sans-serif; */
     background-color: #b7d7e8;
     border-radius: 10px;
 }
@@ -165,10 +216,10 @@ option {
 #foodResult {
     /* display: flex; */
     /* flex-direction: column; */
-    padding: 10px;
+    /* padding: 10px; */
     overflow-y: scroll;
-    border: groove greenyellow 5px;
-    border-radius: 10px;
+    /* border: groove greenyellow 5px; */
+    /* border-radius: 10px; */
     /* flex: 1; */
     margin: 0;
     height: 100%;
@@ -177,21 +228,27 @@ option {
 .foodDataDiv {
     display: flex;
     min-height: 40px;
+    text-align: center;
+    
 }
 
 .foodDate {
-    border: dashed plum 1px;
-    border-radius: 10px;
+    border-top: solid #D3D3D3 .5px;
+    background-color: #f9f9f9;
+    /* border-radius: 10px; */
     margin: 0;
     padding: 10px;
+    font-weight: 100;
+    width: 100px;
     /* white-space: nowrap; */
 }
 
 .foodImageDiv {
     display: flex;
     flex-direction: row;
-    border: dashed plum 1px;
-    border-radius: 10px;
+    border-top: solid #D3D3D3 .5px;
+    background-color: #f9f9f9;
+    /* border-radius: 10px; */
     flex-wrap: wrap;
     width: 100%;
     margin: 0;
@@ -203,8 +260,10 @@ option {
 
 #dateDropDown {
 
-    background-color: #B6B8D6;
+    background-color: #f9f9f9;
     width: 50%;
+    border: none;
+    font-size: 13px;
 }
 
 #wrapper {
@@ -227,7 +286,7 @@ h1, h2 {
     text-align: center;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
-    font-size: 15px;
+    font-size: 13px;
 }
 #range-slider {
     width: 150px;
