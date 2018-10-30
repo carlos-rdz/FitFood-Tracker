@@ -14,7 +14,7 @@ return ourtoken
 
 
 function saveToLocalStorage(){
-    debugger
+
     localStorage.setItem('ourtoken',getToken())
 
 
