@@ -99,7 +99,7 @@ textarea {
     /* background-color: #f9f1f1 */
     padding: 0;
     /* background-color: #00B0B9; */
-    
+    width: 100%;
 } */
 .achievements{
     text-align: center;
@@ -108,12 +108,12 @@ textarea {
 .achievementImages {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 
     /* justify-content: space-around; */
 }
 .achievementImages img{
-    padding: 0 50px 0 50px;
+    /* padding: 0 50px 0 50px; */
     height: 35px;
     /* width: 20%; */
     /* padding: 1%; */
