@@ -17,7 +17,7 @@ html, body {
 body {
 display: flex;
 flex-direction: column;
-font-family: 'Noto Sans JP', sans-serif;
+font-family: 'Gloria Hallelujah';
 font-weight: 100;
 font-size: 18px;
 height: 100%;
@@ -80,6 +80,7 @@ textarea {
     display: flex;
     /* flex-direction: row; */
     justify-content: space-evenly;
+    font-size: 17px;
 }
 
 .slider {
@@ -126,7 +127,8 @@ textarea {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    background-color: #f9f9f9
+    background-color: #f9f9f9;
+
 }
 .instructions{
     display: flex;
@@ -157,6 +159,28 @@ textarea {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    width: 150px;
+    align-items: center;
+
+    
+}
+
+#dateDropDown option{
+    
+    /* outline: 1px solid red; */
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 100;
+    font-family: 'Gloria Hallelujah';
+
+    
+}
+
+#dateDropDown option:focus{
+    
+    background-color: lightgrey;
+
+
 }
 .rangeContainer{
     /* width: 50%; */
@@ -177,8 +201,12 @@ textarea {
     font-size: 1rem;
 }
 
+#dateDropDown:focus{
+    outline: 0;
+}
+
 .sliderDisplay{
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: 'Gloria Hallelujah';
     font-weight: 100;
     font-size: 13px;
     border: #D3D3D3;
@@ -189,20 +217,32 @@ textarea {
 .dropdown {
     /* box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4); */
     /* border-radius: 10px; */
+    background-color: #f9f9f9;
+    
 }
 .dropdown select{
     /* all: none; */
+    /* outline: 1px solid red; */
     border: none;
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: 'Gloria Hallelujah';
     background-color: #f9f9f9;
     text-align: center;
     /* padding: 5% 30%; */
     /* border-radius: 10px; */
 }
 
+.dropdown select option{
+    border-radius: 10px;
+    
+}
+
+.dropdown select:focus{
+    outline: 0;
+}
+
 #submitButton{
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: 'Gloria Hallelujah';
     /* font-family: 'Raleway', sans-serif; */
     background-color: #b7d7e8;
     border-radius: 10px;
@@ -257,6 +297,7 @@ option {
 
 .foodImage {
     display: block;
+    height: 50px;
 }
 
 #dateDropDown {
