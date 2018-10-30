@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FitFoodTracker</title>
     <link rel="stylesheet" href="stylesheets/index.css">
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Londrina+Solid" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+
 </head>
 <body>
     <div class='profilecontainer'>
@@ -27,15 +27,20 @@
             </div>
         </div>
         <div class="optionsContainer">
+            <div class="instructions">
+                <span>1. Choose Day Range</span>
+                <span>2. Choose Date Frequency</span>
+                <span>3. Choose Food to Display</span>
+            </div>
             <div class="rangeContainer">   
-                <h1>Choose Day Range</h1>
-                <textarea data-sliderDisplay id="output" value=0 maxlength="3" rows="1">180</textarea>
+                <!-- <h1>Choose Day Range</h1> -->
+                <textarea data-sliderDisplay class="sliderDisplay" id="output" value=0 maxlength="3" rows="1">180</textarea>
                 <input data-slider id="range-slider" type="range" min="0" max="365" value="180">
                 <!-- </div>end wrapper -->
             </div>
             
             <div id="moreOptionsContainer">  
-                <select id='dateDropDown'>
+                <select id='dateDropDown' size="4">
                     <option value="day">by day</option>
                     <option value="week">by week</option>
                     <option value="month">by month</option>
@@ -44,11 +49,11 @@
             </div>
             <div class="dropdown" data-dropdown></div>
         </div>
-        <div id="profileInfo">
+        <div id="profileInfo" class="profileInfo">
+            <div class="displayInfo profileHeader" data-profileHeader></div>
             <div class="displayInfo" data-distanceInfo>
                 Total Distance: 0
             </div>
-            <div class="displayInfo profileHeader" data-profileHeader></div>
             <div class="displayInfo" data-displayInfo>
                 Total Calories: 0
             </div>
